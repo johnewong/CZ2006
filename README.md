@@ -18,7 +18,7 @@ This is the repository for backend
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
-    - This version of IntelliJ has already contain Tomcat, Spring, Maveb plugins
+    - This version of IntelliJ has already contain Tomcat, Spring, Maven plugins
 - Please download [Java JDK 15](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html) and install it
 
 ## How to start a Java SpringBoot project in IntelliJ?
