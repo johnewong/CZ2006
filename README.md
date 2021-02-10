@@ -25,4 +25,4 @@ This is the repository for backend
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
-- Please download [Java JDK 15] (https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html)
+- Please download [Java JDK 15](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html)
