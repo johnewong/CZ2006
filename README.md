@@ -4,8 +4,7 @@ This is the repository for backend
 
 ## Tech Stack
 ### Language
-- Java
-- Openjdk-15
+- Java 
 ### Frameworks
 - Spring 
 - Spring MVC
@@ -25,4 +24,7 @@ This is the repository for backend
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
-- Please download [Java JDK 15](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html)
+- Please download [Java JDK 15](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html) and install it
+
+## How to start a Java spring project in IntelliJ?
+Please follow this [tutorial](https://www.jetbrains.com/help/idea/your-first-spring-application.html#what-next)
