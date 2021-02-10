@@ -24,7 +24,7 @@ This is the repository for backend
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
-    This version of IntelliJ has already contain Tomcat and Spring plugin 
+    - This version of IntelliJ has already contain Tomcat and Spring plugin 
 - Please download [Java JDK 15](https://www.oracle.com/java/technologies/javase/jdk15-archive-downloads.html) and install it
 
 ## How to start a Java spring project in IntelliJ?
