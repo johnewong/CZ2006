@@ -14,6 +14,7 @@ This is the repository for backend
 - Apache-tomcat-9
 - Mysql 
 - Intellij IDEA 2020.3
+- Maven - package management tool
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
