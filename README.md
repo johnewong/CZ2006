@@ -1,6 +1,6 @@
 # CZ2006-Backend
 To develop an online appointment making system for dental clinics which consists of end user mobile applications and an admin portal for clinics.
-This is the repository for backend 
+This is the repository for backend providing APIs 
 
 ## Tech Stack
 ### Language
