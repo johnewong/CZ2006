@@ -2,6 +2,18 @@
 To develop an online appointment making system for dental clinics which consists of end user mobile applications and an admin portal for clinics.
 This is the repository for backend providing APIs 
 
+## Code structure
+- controller - provide apis
+- dao - provide functions to interact with db
+- pojo - entity classes
+- service - function logic
+
+## 
+- scripts - sql scripts for table creation and data intialization
+- application.properties - project config
+- pom.xml - maven package config
+
+
 ## Tech Stack
 ### Language
 - Java 
