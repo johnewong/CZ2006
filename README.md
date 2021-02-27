@@ -8,7 +8,8 @@ This is the repository for backend providing APIs
 
 ### Frameworks
 - SpringBoot 
-- Hi
+#### Database acess
+Jpa (Java Persistence API)
 
 ### Others
 - Apache-tomcat-9
@@ -25,7 +26,10 @@ This is the repository for backend providing APIs
 Please follow this [tutorial](https://www.jetbrains.com/help/idea/your-first-spring-application.html#what-next)
 
 ## How to setup mysql?
-https://docs.google.com/document/d/1I5FBhkh0cMp_Y8Kzfcjd3w0s0cVusiLwKWlvDnPdQ-Q/edit
+https://docs.google.com/document/d/1I5FBhkh0cMp_Y8Kzfcjd3w0s0cVusiLwKWlvDnPdQ-Q/edit?usp=sharing
+
+## How to use JPA?
+https://www.cnblogs.com/ityouknow/p/5891443.html
 
 ## Team Members
 - Weng Yifei  (U1920094F)
