@@ -20,7 +20,7 @@ This is the repository for backend providing APIs
 
 ### Frameworks
 - SpringBoot 
-#### Database acess
+#### Database access
 Jpa (Java Persistence API)
 
 ### Others
