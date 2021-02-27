@@ -7,8 +7,8 @@ This is the repository for backend providing APIs
 - Java 
 
 ### Frameworks
-- Spring 
-- Spring MVC
+- SpringBoot 
+- Hi
 
 ### Others
 - Apache-tomcat-9
@@ -23,6 +23,9 @@ This is the repository for backend providing APIs
 
 ## How to start a Java SpringBoot project in IntelliJ?
 Please follow this [tutorial](https://www.jetbrains.com/help/idea/your-first-spring-application.html#what-next)
+
+## How to setup mysql?
+https://docs.google.com/document/d/1I5FBhkh0cMp_Y8Kzfcjd3w0s0cVusiLwKWlvDnPdQ-Q/edit
 
 ## Team Members
 - Weng Yifei  (U1920094F)
