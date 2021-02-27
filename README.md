@@ -4,7 +4,7 @@ This is the repository for backend providing APIs
 
 ## Code structure
 - controller - provide apis
-- dao - provide functions to interact with db
+- dao - provide functions to interact with db (CRUD)
 - pojo - entity classes
 - service - function logic
 
