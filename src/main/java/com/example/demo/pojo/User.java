@@ -9,28 +9,29 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "userid")
+    private int userID;
 
-    private String name;
+    @Column(name = "username")
+    private String userName;
 
     public int getId() {
-        return id;
+        return userID;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int userID) {
+        this.userID = userID;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String userName) {
+        this.userName = userName;
     }
 }

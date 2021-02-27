@@ -14,6 +14,10 @@ public class UserService {
     @Autowired UserDAO userDAO;
 
     public List<User> list() {
-        return userDAO.findAll(Sort.by(Sort.Direction.DESC, "id"));
+        return userDAO.findAll(Sort.by(Sort.Direction.DESC, "userID"));
+    }
+
+    public void add(User user){
+        userDAO.save(user);
     }
 }
