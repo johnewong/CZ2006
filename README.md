@@ -29,6 +29,7 @@ Jpa (Java Persistence API)
 - Intellij IDEA 2020.3
 - Maven - package management tool
 - Swagger - api documentation
+     http://localhost:8080/swagger-ui.html#/
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
