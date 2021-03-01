@@ -21,17 +21,17 @@ public class User {
     @Column(name = "username")
     private String userName;
 
-    public int getId() {
+    public int getUserID() {
         return userID;
     }
-    public void setId(int userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
     public String getUserName() {
         return userName;
     }
-    public void setName(String userName) {
+    public void setUserName(String userName) {
         this.userName = userName;
     }
 }
