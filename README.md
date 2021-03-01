@@ -28,6 +28,7 @@ Jpa (Java Persistence API)
 - Mysql 
 - Intellij IDEA 2020.3
 - Maven - package management tool
+- Swagger - api documentation
 
 ## Installation
 - Please go follow link to download Intellij [IDEA 2020.3](https://www.jetbrains.com/idea/download/other.html)
