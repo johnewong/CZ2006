@@ -21,8 +21,8 @@ public class DentistWorkingScheduleController {
 
     @ApiOperation(value = "api to get working schedule by dentistid", notes = "", response = DentistWorkingSchedule.class)
     @GetMapping("/dentistworkingschedule/{dentistid}")
-    public DentistWorkingSchedule get(@PathVariable("dentistid") Integer dentistid) throws Exception {
-        DentistWorkingSchedule dentistWorkingSchedule = dentistWorkingScheduleService.getbydentistid(dentistid);
+    public List<DentistWorkingSchedule> getbydentistid(@PathVariable("dentistid") Integer dentistid) throws Exception {
+        List<DentistWorkingSchedule> dentistWorkingSchedule = dentistWorkingScheduleService.getbydentistid(dentistid);
         return dentistWorkingSchedule;
     }
 }

@@ -20,16 +20,16 @@ public class DentistWorkingSchedule {
     private Integer dayOfWeek;
 
     @Column(name = "starttime")
-    private String startTime;
+    private Date startTime;
 
     @Column(name = "endtime")
-    private String endTime;
+    private Date endTime;
 
     @Column(name = "breakstarttime")
-    private String breakStartTime;
+    private Date breakStartTime;
 
     @Column(name = "breakendtime")
-    private String breakEndTime;
+    private Date breakEndTime;
 
     @Column(name = "createdby")
     private Integer createdBy;
@@ -70,35 +70,35 @@ public class DentistWorkingSchedule {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return this.startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return this.endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
-    public String getBreakStartTime() {
+    public Date getBreakStartTime() {
         return this.breakStartTime;
     }
 
-    public void setBreakStartTime(String breakStartTime) {
+    public void setBreakStartTime(Date breakStartTime) {
         this.breakStartTime = breakStartTime;
     }
 
-    public String getBreakEndTime() {
+    public Date getBreakEndTime() {
         return this.breakEndTime;
     }
 
-    public void setBreakEndTime(String breakEndTime) {
+    public void setBreakEndTime(Date breakEndTime) {
         this.breakEndTime = breakEndTime;
     }
 

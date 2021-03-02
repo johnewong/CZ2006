@@ -16,7 +16,7 @@ public class DentistWorkingScheduleService {
     DentistWorkingScheduleDAO dentistWorkingScheduleDAO;
 
 
-    public DentistWorkingSchedule getbydentistid(Integer dentistID) {
+    public List<DentistWorkingSchedule> getbydentistid(Integer dentistID) {
         return dentistWorkingScheduleDAO.findByDentistID(dentistID);
     }
 }

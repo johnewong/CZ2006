@@ -1,10 +1,12 @@
 package com.example.demo.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.pojo.DentistWorkingSchedule;
 
 public interface DentistWorkingScheduleDAO extends JpaRepository<DentistWorkingSchedule,Integer>{
 
-    public DentistWorkingSchedule findByDentistID(Integer dentistID);
+    public List<DentistWorkingSchedule> findByDentistID(Integer dentistID);
 }
