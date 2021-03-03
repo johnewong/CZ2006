@@ -8,5 +8,5 @@ import com.example.demo.pojo.DentistWorkingSchedule;
 
 public interface DentistWorkingScheduleDAO extends JpaRepository<DentistWorkingSchedule,Integer>{
 
-    public List<DentistWorkingSchedule> findByDentistID(Integer dentistID);
+  List<DentistWorkingSchedule> findByDentistID(Integer dentistID);
 }

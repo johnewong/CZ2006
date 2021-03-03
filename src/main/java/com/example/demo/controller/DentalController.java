@@ -11,6 +11,7 @@ import com.example.demo.service.DentalService;
 
 import java.util.List;
 import java.util.Date;
+
 @Api(tags = "Dental management")
 @RestController
 @RequestMapping(value = "dental")
@@ -19,16 +20,16 @@ public class DentalController {
     DentalService dentalService;
 
     @ApiOperation(value = "api to get all dentals")
-    @GetMapping("/")
+    @GetMapping("/getall")
     public List<Dental> list() throws Exception {
         return dentalService.list();
     }
 
 
     @ApiOperation(value = "api to get a dental by dentalid", notes = "", response = Dental.class)
-    @GetMapping("/{dentalid}")
-    public Dental get(@PathVariable("dentalid") Integer dentalid) throws Exception {
-        Dental dental = dentalService.getdentalbyid(dentalid);
+    @GetMapping("/getbyid/{dentalid}")
+    public Dental getbyid(@PathVariable("dentalid") Integer dentalid) throws Exception {
+        Dental dental = dentalService.getbyid(dentalid);
         return dental;
     }
 
@@ -38,7 +39,7 @@ public class DentalController {
 
         Date updatedDate = new Date();
 
-        Dental dentalModel = dentalService.getdentalbyid(dental.getDentalId());
+        Dental dentalModel = dentalService.getbyid(dental.getDentalId());
         dentalModel.setDentalAddress(dental.getDentalAddress());
         dentalModel.setDentalName(dental.getDentalName());
         dentalModel.setDentalDescription(dental.getDentalDescription());

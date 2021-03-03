@@ -20,7 +20,7 @@ public class DentistWorkingScheduleController {
     DentistWorkingScheduleService dentistWorkingScheduleService;
 
     @ApiOperation(value = "api to get working schedule by dentistid", notes = "", response = DentistWorkingSchedule.class)
-    @GetMapping("/{dentistid}")
+    @GetMapping("/getbydentistid/{dentistid}")
     public List<DentistWorkingSchedule> getbydentistid(@PathVariable("dentistid") Integer dentistid) throws Exception {
         List<DentistWorkingSchedule> dentistWorkingSchedule = dentistWorkingScheduleService.getbydentistid(dentistid);
         return dentistWorkingSchedule;

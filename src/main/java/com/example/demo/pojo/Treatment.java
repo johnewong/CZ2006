@@ -5,9 +5,11 @@ import javax.persistence.*;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "treatment")
+@Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
 public class Treatment {

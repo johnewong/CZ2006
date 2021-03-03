@@ -4,9 +4,11 @@ import javax.persistence.*;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "dentist_working_schedule")
+@Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class DentistWorkingSchedule {
     @Id

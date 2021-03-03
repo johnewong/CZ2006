@@ -6,5 +6,5 @@ import com.example.demo.pojo.User;
 
 public interface UserDAO extends JpaRepository<User,Integer>{
 
-    public User findByUserName(String userName);
+    User findByUserName(String userName);
 }

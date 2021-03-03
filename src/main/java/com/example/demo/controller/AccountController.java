@@ -18,20 +18,20 @@ public class AccountController {
     UserService userService;
 
     @ApiOperation(value = "api to get all users")
-    @GetMapping("/user")
+    @GetMapping("/user/getall")
     public List<User> list() throws Exception {
         return userService.list();
     }
 
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
-    @GetMapping("/user/{name}")
+    @GetMapping("/user/getbyusername/{name}")
     public User get(@PathVariable("name") String name) throws Exception {
-        User user = userService.get(name);
+        User user = userService.getbyusername(name);
         return user;
     }
 
-    @ApiOperation("api to get add a user")
-    @PostMapping("/user")
+    @ApiOperation("api to add a user")
+    @PostMapping("/user/add")
     public Object add(@RequestBody User user) throws Exception {
         userService.add(user);
         return user;

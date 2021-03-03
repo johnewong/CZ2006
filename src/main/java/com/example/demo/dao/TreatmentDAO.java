@@ -6,5 +6,5 @@ import com.example.demo.pojo.Treatment;
 
 public interface TreatmentDAO extends JpaRepository<Treatment,Integer>{
 
-    public Treatment findByTreatmentID(Integer treatmentID);
+    Treatment findByTreatmentID(Integer treatmentID);
 }

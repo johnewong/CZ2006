@@ -21,7 +21,7 @@ public class UserService {
         userDAO.save(user);
     }
 
-    public User get(String name) {
+    public User getbyusername(String name) {
         return userDAO.findByUserName(name);
     }
 }
