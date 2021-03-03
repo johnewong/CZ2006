@@ -20,15 +20,15 @@ public class AppointmentController {
     AppointmentService appointmentService;
 
     @ApiOperation(value = "api to get all appointment by patientid")
-    @GetMapping("/getbypatientid/{patientid}")
-    public List<Appointment> getbypatientid(@PathVariable("patientid") Integer patientid) throws Exception {
-        return appointmentService.getbypatientid(patientid);
+    @GetMapping("/patient/{patientid}")
+    public List<Appointment> getByPatientID(@PathVariable("patientid") Integer patientid) throws Exception {
+        return appointmentService.getByPatientID(patientid);
     }
 
     @ApiOperation(value = "api to get a appointment by appointmentid", notes = "", response = Appointment.class)
-    @GetMapping("/getbyid/{appointmentid}")
-    public Appointment getbyid(@PathVariable("appointmentid") Integer appointmentid) throws Exception {
-        Appointment appointment = appointmentService.getbyid(appointmentid);
+    @GetMapping("/{appointmentid}")
+    public Appointment getByAppointmentID(@PathVariable("appointmentid") Integer appointmentid) throws Exception {
+        Appointment appointment = appointmentService.getByAppointmentID(appointmentid);
         return appointment;
     }
 }

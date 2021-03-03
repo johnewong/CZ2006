@@ -20,9 +20,9 @@ public class DentistWorkingScheduleController {
     DentistWorkingScheduleService dentistWorkingScheduleService;
 
     @ApiOperation(value = "api to get working schedule by dentistid", notes = "", response = DentistWorkingSchedule.class)
-    @GetMapping("/getbydentistid/{dentistid}")
-    public List<DentistWorkingSchedule> getbydentistid(@PathVariable("dentistid") Integer dentistid) throws Exception {
-        List<DentistWorkingSchedule> dentistWorkingSchedule = dentistWorkingScheduleService.getbydentistid(dentistid);
+    @GetMapping("/dentist/{dentistid}")
+    public List<DentistWorkingSchedule> getByDentistID(@PathVariable("dentistid") Integer dentistid) throws Exception {
+        List<DentistWorkingSchedule> dentistWorkingSchedule = dentistWorkingScheduleService.getByDentistID(dentistid);
         return dentistWorkingSchedule;
     }
 }

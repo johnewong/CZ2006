@@ -19,8 +19,8 @@ public class TreatmentController {
     TreatmentService treatmentService;
 
     @ApiOperation(value = "api to get all treatment")
-    @GetMapping("/getall")
-    public List<Treatment> list() throws Exception {
+    @GetMapping("")
+    public List<Treatment> getall() throws Exception {
         return treatmentService.list();
     }
 

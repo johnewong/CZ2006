@@ -17,7 +17,8 @@ public class DentalService {
         return dentalDAO.findAll(Sort.by(Sort.Direction.ASC, "dentalName"));
     }
 
-    public Dental getbyid(Integer dentalid) {
+    public Dental getByID(Integer dentalid) {
+
         return dentalDAO.findByDentalID(dentalid);
     }
 
