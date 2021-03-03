@@ -30,14 +30,14 @@ public class AccountController {
     }
 
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
-    @GetMapping("/user/getbyusername/{name}")
-    public User get(@PathVariable("name") String name) throws Exception {
-        User user = userService.getbyusername(name);
+    @GetMapping("/user/name/{name}")
+    public User getByUserName(@PathVariable("name") String name) throws Exception {
+        User user = userService.getByUserName(name);
         return user;
     }
 
     @ApiOperation("api to add a user")
-    @PostMapping("/user/add")
+    @PostMapping("/user")
     public Object add(@RequestBody User user) throws Exception {
         userService.add(user);
         return user;

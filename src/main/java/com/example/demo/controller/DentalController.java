@@ -20,16 +20,16 @@ public class DentalController {
     DentalService dentalService;
 
     @ApiOperation(value = "api to get all dentals")
-    @GetMapping("/getall")
-    public List<Dental> list() throws Exception {
+    @GetMapping("")
+    public List<Dental> getall() throws Exception {
         return dentalService.list();
     }
 
 
     @ApiOperation(value = "api to get a dental by dentalid", notes = "", response = Dental.class)
-    @GetMapping("/getbyid/{dentalid}")
-    public Dental getbyid(@PathVariable("dentalid") Integer dentalid) throws Exception {
-        Dental dental = dentalService.getbyid(dentalid);
+    @GetMapping("/{dentalid}")
+    public Dental getByID(@PathVariable("dentalid") Integer dentalid) throws Exception {
+        Dental dental = dentalService.getByID(dentalid);
         return dental;
     }
 
@@ -39,7 +39,7 @@ public class DentalController {
 
         Date updatedDate = new Date();
 
-        Dental dentalModel = dentalService.getbyid(dental.getDentalId());
+        Dental dentalModel = dentalService.getByID(dental.getDentalId());
         dentalModel.setDentalAddress(dental.getDentalAddress());
         dentalModel.setDentalName(dental.getDentalName());
         dentalModel.setDentalDescription(dental.getDentalDescription());

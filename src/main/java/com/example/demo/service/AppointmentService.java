@@ -16,11 +16,11 @@ public class AppointmentService {
         appointmentDAO.save(appointment);
     }
 
-    public Appointment getbyid(Integer appointmentid) {
+    public Appointment getByAppointmentID(Integer appointmentid) {
         return appointmentDAO.findByAppointmentID(appointmentid);
     }
 
-    public List<Appointment> getbypatientid(Integer patientid) {
+    public List<Appointment> getByPatientID(Integer patientid) {
         return appointmentDAO.findByPatientID(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
 
