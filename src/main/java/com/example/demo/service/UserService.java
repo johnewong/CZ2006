@@ -13,8 +13,12 @@ import com.example.demo.dao.UserDAO;
 public class UserService {
     @Autowired UserDAO userDAO;
 
-    public List<User> list() {
+    public List<User> listAll() {
         return userDAO.findAll(Sort.by(Sort.Direction.DESC, "userID"));
+    }
+
+    public List<User> list() {
+        return userDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.DESC, "userID"));
     }
 
     public void add(User user){

@@ -18,7 +18,13 @@ public class AccountController {
     UserService userService;
 
     @ApiOperation(value = "api to get all users")
-    @GetMapping("/user/getall")
+    @GetMapping("/user/all")
+    public List<User> listAll() throws Exception {
+        return userService.listAll();
+    }
+
+    @ApiOperation(value = "api to get all exists users")
+    @GetMapping("/user")
     public List<User> list() throws Exception {
         return userService.list();
     }
