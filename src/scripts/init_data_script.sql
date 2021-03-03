@@ -18,3 +18,7 @@ insert into dentist_working_schedule values('4', '1','4','0001-01-01 08:00:00','
 
 insert into dentist_working_schedule values('5', '1','5','0001-01-01 08:00:00','0001-01-01 18:00:00'
         ,'0001-01-01 12:00:00'  ,'0001-01-01 13:00:00','1','2021-01-01 00:00:00',null,null,'0')
+
+
+insert into dental values('1', 'testDentalName','Test Dental Description','50 Nanyang Ave, 639798','0001-01-01 08:00:00'
+        ,'0001-01-01 18:00:00'  ,'1','2021-01-01 00:00:00',null,null,'0')
