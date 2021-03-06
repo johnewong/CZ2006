@@ -19,7 +19,7 @@ public class DentalService {
 
     public List<Dental> list() {
 
-        return dentalDAO.findAllAndIsDeletedFalse(Sort.by(Sort.Direction.ASC, "dentalName"));
+        return dentalDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.ASC, "dentalName"));
     }
 
     public Dental getByID(Integer dentalid) {

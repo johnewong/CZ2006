@@ -11,5 +11,5 @@ public interface UserDAO extends JpaRepository<User, Integer> {
 
     List<User> findAllByIsDeletedFalse(Sort sort);
 
-    User findByUserNameIsDeletedFalse(String userName);
+    User findByUserNameAndIsDeletedFalse(String userName);
 }

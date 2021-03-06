@@ -26,6 +26,6 @@ public class AccountService {
     }
 
     public User getByUserName(String name) {
-        return userDAO.findByUserNameIsDeletedFalse(name);
+        return userDAO.findByUserNameAndIsDeletedFalse(name);
     }
 }

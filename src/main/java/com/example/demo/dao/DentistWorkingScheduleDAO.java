@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.pojo.DentistWorkingSchedule;
 
 public interface DentistWorkingScheduleDAO extends JpaRepository<DentistWorkingSchedule,Integer>{
-  List<DentistWorkingSchedule> findAllByIsDeletedFalse(Sort sort);
 
   List<DentistWorkingSchedule> findByDentistIDAndIsDeletedFalse(Integer dentistID);
 }

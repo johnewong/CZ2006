@@ -10,6 +10,6 @@ public interface DentalDAO extends JpaRepository<Dental,Integer>{
 
     Dental findByDentalIDAndIsDeletedFalse(Integer dentistID);
 
-    List<Dental> findAllAndIsDeletedFalse(Sort sort);
+    List<Dental> findAllByIsDeletedFalse(Sort sort);
 
 }
