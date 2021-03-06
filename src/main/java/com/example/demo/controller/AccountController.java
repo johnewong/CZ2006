@@ -68,7 +68,13 @@ public class AccountController {
         return new ResponseEntity("User registered successfully", HttpStatus.OK);
     }
 
-
+    @ApiOperation("api to forget password function")
+    @PostMapping("/user/forgetpassword")
+    public Object forgetpassword(@RequestBody Object email) throws Exception {
+        String emailaddress = "test123@gmail.com";
+        String newpassword = accountService.generateStrongPassword();
+        return newpassword;
+    }
 }
 
 class LoginInfo{
