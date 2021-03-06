@@ -13,7 +13,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-//@Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
 public class User {

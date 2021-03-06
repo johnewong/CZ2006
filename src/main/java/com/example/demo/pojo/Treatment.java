@@ -9,7 +9,6 @@ import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "treatment")
-@Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
 public class Treatment {

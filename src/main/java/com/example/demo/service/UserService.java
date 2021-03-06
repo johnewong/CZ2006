@@ -26,6 +26,6 @@ public class UserService {
     }
 
     public User getByUserName(String name) {
-        return userDAO.findByUserName(name);
+        return userDAO.findByUserNameIsDeletedFalse(name);
     }
 }

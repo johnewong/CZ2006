@@ -16,7 +16,11 @@ public class TreatmentService {
     @Autowired TreatmentDAO treatmentDAO;
 
     public List<Treatment> list() {
-        return treatmentDAO.findAll(Sort.by(Sort.Direction.ASC, "treatmentName"));
+        return treatmentDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.ASC, "treatmentName"));
+    }
+
+    public Treatment getByTreatmentID(Integer treatmentid) {
+        return treatmentDAO.findByTreatmentIDAndIsDeletedFalse(treatmentid);
     }
 
 }

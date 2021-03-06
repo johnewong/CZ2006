@@ -17,11 +17,11 @@ public class AppointmentService {
     }
 
     public Appointment getByAppointmentID(Integer appointmentid) {
-        return appointmentDAO.findByAppointmentID(appointmentid);
+        return appointmentDAO.findByAppointmentIDAndIsDeletedFalse(appointmentid);
     }
 
     public List<Appointment> getByPatientID(Integer patientid) {
-        return appointmentDAO.findByPatientID(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+        return appointmentDAO.findByPatientIDAndIsDeletedFalse(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
 
 

@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "appointment")
-@Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class Appointment {
     @Id

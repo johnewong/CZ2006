@@ -12,14 +12,19 @@ import java.util.List;
 public class DentalService {
     @Autowired DentalDAO dentalDAO;
 
-    public List<Dental> list() {
+    public List<Dental> listall() {
 
         return dentalDAO.findAll(Sort.by(Sort.Direction.ASC, "dentalName"));
     }
 
+    public List<Dental> list() {
+
+        return dentalDAO.findAllAndIsDeletedFalse(Sort.by(Sort.Direction.ASC, "dentalName"));
+    }
+
     public Dental getByID(Integer dentalid) {
 
-        return dentalDAO.findByDentalID(dentalid);
+        return dentalDAO.findByDentalIDAndIsDeletedFalse(dentalid);
     }
 
     public void edit(Dental dental){
