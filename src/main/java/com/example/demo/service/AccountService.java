@@ -13,7 +13,12 @@ import com.example.demo.dao.UserDAO;
 
 @Service
 public class AccountService {
-    @Autowired UserDAO userDAO;
+    @Autowired
+    UserDAO userDAO;
+
+    public User save(User user) {
+        return userDAO.save(user);
+    }
 
     public List<User> listAll() {
         return userDAO.findAll(Sort.by(Sort.Direction.DESC, "userID"));
@@ -23,7 +28,7 @@ public class AccountService {
         return userDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.DESC, "userID"));
     }
 
-    public void add(User user){
+    public void add(User user) {
         Date createdDate = new Date();
 
         User userModel = new User();
