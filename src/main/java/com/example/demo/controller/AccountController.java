@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.service.UserService;
+import com.example.demo.service.AccountService;
 import com.example.demo.pojo.User;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequestMapping(value = "account")
 public class AccountController {
     @Autowired
-    UserService userService;
+    AccountService userService;
 
     @ApiOperation(value = "api to get all users")
     @GetMapping("/user/all")

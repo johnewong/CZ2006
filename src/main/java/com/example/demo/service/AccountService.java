@@ -10,7 +10,7 @@ import com.example.demo.pojo.User;
 import com.example.demo.dao.UserDAO;
 
 @Service
-public class UserService {
+public class AccountService {
     @Autowired UserDAO userDAO;
 
     public List<User> listAll() {
