@@ -5,7 +5,7 @@ insert into user values('2', 'user02','user 02','123456','2021-01-01','123@email
                        ,1,'G140022P','1',2,'2021-01-01',null,null,1);
 
 insert into treatment values('1', 'Extractions','1','2021-01-01',null,null
-        ,0)
+        ,0);
 
 insert into dentist_working_schedule values('1', '1','1','0001-01-01 08:00:00','0001-01-01 18:00:00'
                 ,'0001-01-01 12:00:00'  ,'0001-01-01 13:00:00','1','2021-01-01 00:00:00',null,null,'0')

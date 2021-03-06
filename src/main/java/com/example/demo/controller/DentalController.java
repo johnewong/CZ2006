@@ -25,7 +25,6 @@ public class DentalController {
         return dentalService.list();
     }
 
-
     @ApiOperation(value = "api to get a dental by dentalid", notes = "", response = Dental.class)
     @GetMapping("/{dentalid}")
     public Dental getByID(@PathVariable("dentalid") Integer dentalid) throws Exception {
@@ -37,17 +36,7 @@ public class DentalController {
     @PostMapping("/edit")
     public Object edit(@RequestBody Dental dental) throws Exception {
 
-        Date updatedDate = new Date();
-
-        Dental dentalModel = dentalService.getByID(dental.getDentalId());
-        dentalModel.setDentalAddress(dental.getDentalAddress());
-        dentalModel.setDentalName(dental.getDentalName());
-        dentalModel.setDentalDescription(dental.getDentalDescription());
-        dentalModel.setOperatingHourStart(dental.getOperatingHourStart());
-        dentalModel.setOperatingHourEnd(dental.getOperatingHourEnd());
-        dentalModel.setUpdatedBy(dental.getUpdatedBy());
-        dentalModel.setUpdatedDate(updatedDate);
-        dentalService.edit(dentalModel);
+        dentalService.edit(dental);
 
         return new ResponseEntity("Dental updated successfully", HttpStatus.OK);
 

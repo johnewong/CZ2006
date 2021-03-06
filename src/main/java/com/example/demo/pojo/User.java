@@ -81,7 +81,7 @@ public class User {
         this.contactNumber = contactNumber;
     }
 
-    public boolean isGender() {
+    public boolean getGender() {
         return gender;
     }
 

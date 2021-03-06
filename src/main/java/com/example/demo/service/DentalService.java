@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -28,6 +29,17 @@ public class DentalService {
     }
 
     public void edit(Dental dental){
+
+        Date updatedDate = new Date();
+
+        Dental dentalModel = this.getByID(dental.getDentalId());
+        dentalModel.setDentalAddress(dental.getDentalAddress());
+        dentalModel.setDentalName(dental.getDentalName());
+        dentalModel.setDentalDescription(dental.getDentalDescription());
+        dentalModel.setOperatingHourStart(dental.getOperatingHourStart());
+        dentalModel.setOperatingHourEnd(dental.getOperatingHourEnd());
+        dentalModel.setUpdatedBy(dental.getUpdatedBy());
+        dentalModel.setUpdatedDate(updatedDate);
 
         dentalDAO.save(dental);
     }

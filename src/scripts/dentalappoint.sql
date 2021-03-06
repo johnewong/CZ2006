@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS `appointment`;
 
 CREATE TABLE `appointment` (
-  `AppointmentID` bigint(20) NOT NULL,
+  `AppointmentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `AppointmentNumber` varchar(255) NOT NULL,
   `AppointmentDate` date NOT NULL,
   `AppointmentStartTime` datetime  NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `appointment` (
 
 DROP TABLE IF EXISTS `dental`;
 CREATE TABLE `dental` (
-  `DentalID` bigint(20) NOT NULL,
+  `DentalID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DentalName` varchar(255) NOT NULL,
   `DentalDescription` varchar(3000) DEFAULT NULL,
   `DentalAddress` varchar(255) DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `dental` (
 
 DROP TABLE IF EXISTS `dental_treatment`;
 CREATE TABLE `dental_treatment` (
-  `Dental_TreatmentID` bigint(20) NOT NULL,
+  `Dental_TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DentalID` bigint(20) NOT NULL,
   `TreatmentID` bigint(20) NOT NULL,
   `PerSessionDuration` float NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE `dental_treatment` (
 
 DROP TABLE IF EXISTS `dentist`;
 CREATE TABLE `dentist` (
-  `DentistID` bigint(20) NOT NULL,
+  `DentistID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DentistName` varchar(255) NOT NULL,
   `DentalID` bigint(20) NOT NULL,
   `DentistDescription` varchar(3000) DEFAULT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE `dentist` (
 
 DROP TABLE IF EXISTS `dentist_working_schedule`;
 CREATE TABLE `dentist_working_schedule` (
-  `DentistWorkingScheduleID` bigint(20) NOT NULL,
+  `DentistWorkingScheduleID` bigint(20) NOT NULL AUTO_INCREMENT,
   `DentistID` bigint(20) NOT NULL,
   `DayOfWeek` int(1) NOT NULL,
   `StartTime` datetime NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE `dentist_working_schedule` (
 
 DROP TABLE IF EXISTS `treatment`;
 CREATE TABLE `treatment` (
-  `TreatmentID` bigint(20) NOT NULL,
+  `TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
   `TreatmentName` varchar(255) NOT NULL,
   `CreatedBy` bigint(20) NOT NULL,
   `CreatedDate` datetime NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE `treatment` (
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `UserID` bigint(20) NOT NULL,
+  `UserID` bigint(20) NOT NULL AUTO_INCREMENT,
   `UserName` varchar(255) NOT NULL,
   `DisplayName` varchar(255) DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,

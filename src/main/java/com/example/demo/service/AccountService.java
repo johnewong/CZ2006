@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import java.util.Date;
 import java.util.List;
 
+import com.example.demo.utility.EncryptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -22,10 +24,25 @@ public class AccountService {
     }
 
     public void add(User user){
+        Date createdDate = new Date();
+
+        User userModel = new User();
+        userModel.setBirthDate(user.getBirthDate());
+        userModel.setContactNumber(user.getContactNumber());
+        userModel.setEmailAddress(user.getEmailAddress());
+        userModel.setGender(user.getGender());
+        userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
+        userModel.setUserType(user.getUserType());
+        userModel.setIcNumber(user.getIcNumber());
+        userModel.setCreatedBy(0);
+        userModel.setCreatedDate(createdDate);
+        
         userDAO.save(user);
     }
 
     public User getByUserName(String name) {
         return userDAO.findByUserNameAndIsDeletedFalse(name);
     }
+
+
 }
