@@ -50,7 +50,7 @@ public class User {
     private boolean isDeleted;
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {

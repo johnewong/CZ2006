@@ -16,6 +16,20 @@ public class AccountService {
     @Autowired
     UserDAO userDAO;
 
+    public boolean login(String username, String password){
+        User user = userDAO.findByUserNameAndIsDeletedFalse(username);
+        if (user == null){
+            return false;
+        }
+        String encryptedPwd = EncryptionUtil.encryptPassword(password);
+
+        if (user.getPassword().equals(encryptedPwd)){
+            return true;
+        }
+
+        return false;
+    }
+
     public User save(User user) {
         return userDAO.save(user);
     }
@@ -32,6 +46,9 @@ public class AccountService {
         Date createdDate = new Date();
 
         User userModel = new User();
+        userModel.setUserName(user.getUserName());
+        userModel.setContactNumber(user.getContactNumber());
+        userModel.setDisplayName(user.getDisplayName());
         userModel.setBirthDate(user.getBirthDate());
         userModel.setContactNumber(user.getContactNumber());
         userModel.setEmailAddress(user.getEmailAddress());
@@ -42,7 +59,7 @@ public class AccountService {
         userModel.setCreatedBy(0);
         userModel.setCreatedDate(createdDate);
         
-        userDAO.save(user);
+        userDAO.save(userModel);
     }
 
     public User getByUserName(String name) {

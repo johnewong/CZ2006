@@ -23,6 +23,14 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+
+    @ApiOperation(value = "api to login")
+    @PostMapping("/user/login")
+    public Object login(@RequestBody LoginInfo loginInfo) throws Exception {
+        boolean state = accountService.login(loginInfo.username, loginInfo.password);
+        return state;
+    }
+
     @ApiOperation(value = "api to edit profile")
     @PostMapping("/user/profile")
     public Object editProfile(@RequestBody User user) throws Exception {
@@ -60,5 +68,25 @@ public class AccountController {
         return new ResponseEntity("User registered successfully", HttpStatus.OK);
     }
 
+
+}
+
+class LoginInfo{
+    String username;
+    String password;
+
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }
