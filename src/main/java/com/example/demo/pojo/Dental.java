@@ -10,6 +10,7 @@ import org.hibernate.annotations.Where;
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class Dental {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dentalid")
     private Integer dentalID;
 
