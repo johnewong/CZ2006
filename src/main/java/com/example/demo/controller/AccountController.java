@@ -12,7 +12,10 @@ import com.example.demo.pojo.User;
 
 import java.util.Date;
 import java.util.List;
+
 import com.example.demo.utility.EncryptionUtil;
+
+
 @Api(tags = "Account management")
 @RestController
 @RequestMapping(value = "account")
@@ -21,16 +24,17 @@ public class AccountController {
     AccountService accountService;
 
     @ApiOperation(value = "api to edit profile")
-    @GetMapping("/user/profile")
-    public User editProfile() throws Exception {
-        return null;
+    @PostMapping("/user/profile")
+    public Object editProfile(@RequestBody User user) throws Exception {
+        accountService.save(user);
+        return new ResponseEntity("User registered successfully", HttpStatus.OK);
     }
 
     @ApiOperation(value = "api to get all users")
     @GetMapping("/user/all")
     public List<User> listAll() throws Exception {
 
-       System.out.println("get all user api !!");
+        System.out.println("get all user api !!");
 
         return accountService.listAll();
     }
@@ -56,6 +60,11 @@ public class AccountController {
         return new ResponseEntity("User registered successfully", HttpStatus.OK);
     }
 
-
-
+    @ApiOperation("api to forget password function")
+    @PostMapping("/user/forgetpassword")
+    public Object forgetpassword(@RequestBody Object email) throws Exception {
+        String emailaddress = "test123@gmail.com";
+        String newpassword = accountService.generateStrongPassword();
+        return newpassword;
+    }
 }
