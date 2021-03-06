@@ -12,4 +12,6 @@ public interface TreatmentDAO extends JpaRepository<Treatment,Integer>{
     List<Treatment> findAllByIsDeletedFalse(Sort sort);
 
     Treatment findByTreatmentIDAndIsDeletedFalse(Integer treatmentID);
+
+
 }
