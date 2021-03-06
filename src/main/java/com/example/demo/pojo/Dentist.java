@@ -19,17 +19,20 @@ public class Dentist {
     @Column(name = "dentistid")
     private Integer DentistID;
 
-    @Column(name = "DentistName")
+    @Column(name = "dentistname")
     private String DentistName;
 
-    @Column(name = "DentalID")
+    @Column(name = "dentalid")
     private Integer DentalID;
 
-    @Column(name = "DentistDescription")
+    @Column(name = "dentistdescription")
     private String DentistDescription;
 
-    @Column(name = "Gender")
+    @Column(name = "gender")
     private String Gender;
+
+    @Column(name = "isonleave")
+    private boolean IsOnLeave ;
 
 
 
