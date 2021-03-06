@@ -22,6 +22,8 @@ public class User {
     private Integer userID;
     @Column(name = "username")
     private String userName;
+    @Column(name = "displayname")
+    private String displayName;
     @Column(name = "password")
     private String password;
     @Column(name = "birthdate")
@@ -155,5 +157,13 @@ public class User {
     }
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 }

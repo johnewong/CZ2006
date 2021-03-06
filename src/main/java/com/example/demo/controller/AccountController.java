@@ -17,9 +17,18 @@ public class AccountController {
     @Autowired
     AccountService userService;
 
+    @ApiOperation(value = "api to edit profile")
+    @GetMapping("/user/profile")
+    public User editProfile() throws Exception {
+        return null;
+    }
+
     @ApiOperation(value = "api to get all users")
     @GetMapping("/user/all")
     public List<User> listAll() throws Exception {
+
+       System.out.println("get all user api !!");
+
         return userService.listAll();
     }
 

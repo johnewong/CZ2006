@@ -103,7 +103,8 @@ CREATE TABLE `treatment` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `UserID` bigint(20) NOT NULL,
-  `UserName` varchar(255) DEFAULT NULL,
+  `UserName` varchar(255) NOT NULL,
+  `DisplayName` varchar(255) DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,
   `BirthDate` datetime NOT NULL,
   `EmailAddress` varchar(255) NOT NULL,
