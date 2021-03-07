@@ -2,6 +2,8 @@ package com.example.demo.pojo;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Where;
 
@@ -16,6 +18,9 @@ public class Dental {
 
     @Column(name = "dentalname")
     private String dentalName;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dental", fetch = FetchType.EAGER)
+    private List<Dentist> dentistList;
 
     @Column(name = "dentaldescription")
     private String dentalDescription;
@@ -130,5 +135,13 @@ public class Dental {
 
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
+    }
+
+    public List<Dentist> getDentistList() {
+        return dentistList;
+    }
+
+    public void setDentistList(List<Dentist> dentistList) {
+        this.dentistList = dentistList;
     }
 }

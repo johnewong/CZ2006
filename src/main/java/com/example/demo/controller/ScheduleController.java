@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.DentistWorkingSchedule;
-import com.example.demo.service.DentistWorkingScheduleService;
+import com.example.demo.pojo.Schedule;
+import com.example.demo.service.ScheduleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,14 @@ import java.util.List;
 @Api(tags = "Working schedule management")
 @RestController
 @RequestMapping(value = "dentistworkingschedule")
-public class DentistWorkingScheduleController {
+public class ScheduleController {
     @Autowired
-    DentistWorkingScheduleService dentistWorkingScheduleService;
+    ScheduleService scheduleService;
 
-    @ApiOperation(value = "api to get working schedule by dentistid", notes = "", response = DentistWorkingSchedule.class)
+    @ApiOperation(value = "api to get working schedule by dentistid", notes = "", response = Schedule.class)
     @GetMapping("/dentist/{dentistid}")
-    public List<DentistWorkingSchedule> getByDentistID(@PathVariable("dentistid") Integer dentistid) throws Exception {
-        List<DentistWorkingSchedule> dentistWorkingSchedule = dentistWorkingScheduleService.getByDentistID(dentistid);
+    public List<Schedule> getByDentistID(@PathVariable("dentistid") Integer dentistid) throws Exception {
+        List<Schedule> dentistWorkingSchedule = scheduleService.getByDentistID(dentistid);
         return dentistWorkingSchedule;
     }
 }
