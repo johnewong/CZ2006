@@ -2,7 +2,6 @@ package com.example.demo.pojo;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -46,19 +45,19 @@ public class Appointment {
     private Integer treatmentID;
 
     @Column(name = "createdby")
-    private Integer createdBy;
+    protected Integer createdBy;
 
     @Column(name = "createddate")
-    private Date createdDate;
+    protected Date createdDate;
 
     @Column(name = "updatedby")
-    private Integer updatedBy;
+    protected Integer updatedBy;
 
     @Column(name = "updateddate")
-    private Date updatedDate;
+    protected Date updatedDate;
 
     @Column(name = "isdeleted")
-    private Boolean isDeleted;
+    protected Boolean isDeleted;
 
     public Integer getAppointmentID() {
         return this.appointmentID;

@@ -9,11 +9,11 @@ import org.hibernate.annotations.Where;
 @Entity
 @Table(name = "dentist_working_schedule")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class DentistWorkingSchedule {
+public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dentistworkingscheduleid")
-    private Integer dentistWorkingScheduleID;
+    private Integer scheduleID;
 
     @Column(name = "dentistid")
     private Integer dentistID;
@@ -48,12 +48,12 @@ public class DentistWorkingSchedule {
     @Column(name = "isdeleted")
     private Boolean isDeleted;
 
-    public Integer getDentistWorkingScheduleID() {
-        return this.dentistWorkingScheduleID;
+    public Integer getScheduleID() {
+        return this.scheduleID;
     }
 
-    public void setDentistWorkingScheduleID(Integer dentistWorkingScheduleID) {
-        this.dentistWorkingScheduleID = dentistWorkingScheduleID;
+    public void setScheduleID(Integer scheduleID) {
+        this.scheduleID = scheduleID;
     }
 
     public Integer getDentistID() {

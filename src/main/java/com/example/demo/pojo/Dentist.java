@@ -4,13 +4,14 @@ import javax.persistence.*;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Where;
 
 @Entity
 @Table(name = "dentist")
 @Where(clause = "isDeleted='false'")
-@JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
+@JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 
 public class Dentist {
 
@@ -22,8 +23,12 @@ public class Dentist {
     @Column(name = "dentistname")
     private String dentistName;
 
-    @Column(name = "dentalid")
-    private Integer dentalID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dentalid")
+    private Dental dental;
+
+//    @Column(name = "dentalid")
+//    private Integer dentalID;
 
     @Column(name = "dentistdescription")
     private String dentistDescription;
@@ -70,14 +75,14 @@ public class Dentist {
     public void setDentistName(String dentistName) {
         this.dentistName = dentistName;
     }
-
-    public Integer getDentalID() {
-        return dentalID;
-    }
-
-    public void setDentalID(Integer dentalID) {
-        this.dentalID = dentalID;
-    }
+//
+//    public Integer getDentalID() {
+//        return dentalID;
+//    }
+//
+//    public void setDentalID(Integer dentalID) {
+//        this.dentalID = dentalID;
+//    }
 
     public String getDentistDescription() {
         return dentistDescription;
@@ -151,11 +156,20 @@ public class Dentist {
         this.updatedDate = updatedDate;
     }
 
-    public boolean isDelected() {
+    public boolean getIsDelected() {
         return isDelected;
     }
 
-    public void setDelected(boolean delected) {
-        isDelected = delected;
+    public void setIsDelected(boolean isDelected) {
+        this.isDelected = isDelected;
+    }
+
+    public Dental getDental() {
+        return dental;
+    }
+
+    @JsonBackReference
+    public void setDental(Dental dental) {
+        this.dental = dental;
     }
 }
