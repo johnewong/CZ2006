@@ -45,6 +45,20 @@ https://docs.google.com/document/d/1I5FBhkh0cMp_Y8Kzfcjd3w0s0cVusiLwKWlvDnPdQ-Q/
 ## How to use JPA?
 https://www.cnblogs.com/ityouknow/p/5891443.html
 
+## Add email lib
+
+On intellij go to File -> Project Structure -> Modules -> Dependencies
+Press the "+" button below select import JAR and select the jar file under externallib
+
+## Use your own gmail account to send email
+
+1. Go to foler src/main/resources/application.properties file and modify spring.mail.username and spring.mail.password
+	- For username please exclude the @gmail.com
+
+2. Unblock unsecure app to send email through gmail
+	Follow this link to unblock: https://devanswers.co/allow-less-secure-apps-access-gmail-account/
+
+
 ## Team Members
 - Weng Yifei  (U1920094F)
 - Liang Xuchao  (U1920092B)
