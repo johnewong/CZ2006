@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.service.AccountService;
 import com.example.demo.pojo.User;
-
-import java.util.Date;
 import java.util.List;
-import com.example.demo.utility.EncryptionUtil;
 @Api(tags = "Account management")
 @RestController
 @RequestMapping(value = "account")
