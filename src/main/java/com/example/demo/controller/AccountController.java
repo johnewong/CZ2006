@@ -1,17 +1,15 @@
 package com.example.demo.controller;
 
+import com.example.demo.pojo.User;
+import com.example.demo.service.AccountService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.example.demo.service.AccountService;
-import com.example.demo.pojo.User;
+import com.example.demo.service.EmailService;
 import java.util.List;
-
-import com.example.demo.utility.EncryptionUtil;
 
 
 @Api(tags = "Account management")
@@ -21,6 +19,8 @@ public class AccountController {
     @Autowired
     AccountService accountService;
 
+    @Autowired
+    EmailService emailService;
 
     @ApiOperation(value = "api to login")
     @PostMapping("/user/login")
@@ -68,9 +68,12 @@ public class AccountController {
 
     @ApiOperation("api to forget password function")
     @PostMapping("/user/forgetpassword")
-    public Object forgetpassword(@RequestBody Object email) throws Exception {
-        String emailaddress = "test123@gmail.com";
+    public Object forgetpassword(@RequestBody EmailInfo email) throws Exception {
+        String emailaddress = email.getEmailaddress();
         String newpassword = accountService.generateStrongPassword();
+        String subject = "AppName";
+        String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
+        emailService.send(emailaddress,subject,body);
         return newpassword;
     }
 }
@@ -92,5 +95,19 @@ class LoginInfo{
     public void setPassword(String password) {
         this.password = password;
     }
+
+}
+
+class EmailInfo{
+
+    String emailaddress;
+    public String getEmailaddress() {
+        return emailaddress;
+    }
+
+    public void setEmailaddress(String emailaddress) {
+        this.emailaddress = emailaddress;
+    }
+
 
 }
