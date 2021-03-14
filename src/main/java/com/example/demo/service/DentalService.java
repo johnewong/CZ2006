@@ -23,7 +23,7 @@ public class DentalService {
         return dentalDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.ASC, "dentalName"));
     }
 
-    public Dental getByID(Integer dentalid) {
+    public Dental getByDentalID(Integer dentalid) {
 
         return dentalDAO.findByDentalIDAndIsDeletedFalse(dentalid);
     }
@@ -32,7 +32,7 @@ public class DentalService {
 
         Date updatedDate = new Date();
 
-        Dental dentalModel = this.getByID(dental.getDentalId());
+        Dental dentalModel = this.getByDentalID(dental.getDentalId());
         dentalModel.setDentalAddress(dental.getDentalAddress());
         dentalModel.setDentalName(dental.getDentalName());
         dentalModel.setDentalDescription(dental.getDentalDescription());

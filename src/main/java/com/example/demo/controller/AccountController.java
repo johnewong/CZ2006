@@ -2,13 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.User;
 import com.example.demo.service.AccountService;
+import com.example.demo.service.EmailService;
+import com.example.demo.viewmodel.EmailInfo;
+import com.example.demo.viewmodel.LoginInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.service.EmailService;
+
 import java.util.List;
 
 
@@ -25,7 +28,7 @@ public class AccountController {
     @ApiOperation(value = "api to login")
     @PostMapping("/user/login")
     public Object login(@RequestBody LoginInfo loginInfo) throws Exception {
-        boolean state = accountService.login(loginInfo.username, loginInfo.password);
+        boolean state = accountService.login(loginInfo.getUsername(), loginInfo.getPassword());
         return state;
     }
 
@@ -33,7 +36,7 @@ public class AccountController {
     @PostMapping("/user/profile")
     public Object editProfile(@RequestBody User user) throws Exception {
         accountService.save(user);
-        return new ResponseEntity("User registered successfully", HttpStatus.OK);
+        return new ResponseEntity("User profile updated successfully", HttpStatus.OK);
     }
 
     @ApiOperation(value = "api to get all users")
@@ -74,40 +77,6 @@ public class AccountController {
         String subject = "AppName";
         String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
         emailService.send(emailaddress,subject,body);
-        return newpassword;
+        return new ResponseEntity("Sent", HttpStatus.OK);
     }
-}
-
-class LoginInfo{
-    String username;
-    String password;
-
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-}
-
-class EmailInfo{
-
-    String emailaddress;
-    public String getEmailaddress() {
-        return emailaddress;
-    }
-
-    public void setEmailaddress(String emailaddress) {
-        this.emailaddress = emailaddress;
-    }
-
-
 }

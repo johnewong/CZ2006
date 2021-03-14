@@ -1,14 +1,13 @@
 package com.example.demo.service;
 
 
-import java.util.List;
-
+import com.example.demo.dao.TreatmentDAO;
+import com.example.demo.pojo.Treatment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.pojo.Treatment;
-import com.example.demo.dao.TreatmentDAO;
+import java.util.List;
 
 @Service
 public class TreatmentService {
@@ -22,5 +21,6 @@ public class TreatmentService {
     public Treatment getByTreatmentID(Integer treatmentid) {
         return treatmentDAO.findByTreatmentIDAndIsDeletedFalse(treatmentid);
     }
+
 
 }

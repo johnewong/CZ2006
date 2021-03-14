@@ -1,16 +1,13 @@
 package com.example.demo.pojo;
 
-import javax.persistence.*;
-
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "treatment")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-
 public class Treatment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

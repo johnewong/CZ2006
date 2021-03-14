@@ -1,11 +1,10 @@
 package com.example.demo.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Where;
+import java.util.Set;
 
 @Entity
 @Table(name = "dental")
@@ -20,7 +19,10 @@ public class Dental {
     private String dentalName;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dental", fetch = FetchType.EAGER)
-    private List<Dentist> dentistList;
+    private Set<Dentist> dentistList;
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dental", fetch = FetchType.EAGER)
+    private Set<DentalTreatment> dentalTreatmentList;
 
     @Column(name = "dentaldescription")
     private String dentalDescription;
@@ -137,11 +139,19 @@ public class Dental {
         this.isDeleted = isDeleted;
     }
 
-    public List<Dentist> getDentistList() {
+    public Set<Dentist> getDentistList() {
         return dentistList;
     }
 
-    public void setDentistList(List<Dentist> dentistList) {
+    public void setDentistList(Set<Dentist> dentistList) {
         this.dentistList = dentistList;
+    }
+
+    public Set<DentalTreatment> getDentalTreatmentList() {
+        return dentalTreatmentList;
+    }
+
+    public void setDentalTreatmentList(Set<DentalTreatment> dentalTreatmentList) {
+        this.dentalTreatmentList = dentalTreatmentList;
     }
 }

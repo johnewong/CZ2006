@@ -1,12 +1,12 @@
 package com.example.demo.pojo;
 
-import javax.persistence.*;
-
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "dentist")
@@ -29,6 +29,11 @@ public class Dentist {
 
 //    @Column(name = "dentalid")
 //    private Integer dentalID;
+
+
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dentist", fetch = FetchType.EAGER)
+    private Set<Schedule> scheduleList;
+
 
     @Column(name = "dentistdescription")
     private String dentistDescription;
@@ -58,7 +63,8 @@ public class Dentist {
     private Date updatedDate;
 
     @Column(name = "isdeleted")
-    private boolean isDelected;
+    private boolean isDeleted;
+
 
     public Integer getDentistID() {
         return dentistID;
@@ -156,20 +162,31 @@ public class Dentist {
         this.updatedDate = updatedDate;
     }
 
-    public boolean getIsDelected() {
-        return isDelected;
+    public boolean getIsDeleted() {
+        return isDeleted;
     }
 
-    public void setIsDelected(boolean isDelected) {
-        this.isDelected = isDelected;
+    public void setIsDeleted(boolean isDelected) {
+        this.isDeleted = isDelected;
     }
 
     public Dental getDental() {
         return dental;
     }
 
+
+    public Set<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(Set<Schedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
     @JsonBackReference
     public void setDental(Dental dental) {
         this.dental = dental;
     }
+
+
 }

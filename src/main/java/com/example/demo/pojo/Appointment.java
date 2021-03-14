@@ -1,9 +1,9 @@
 package com.example.demo.pojo;
 
-import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "appointment")
@@ -33,7 +33,7 @@ public class Appointment {
     private String patientName;
 
     @Column(name = "status")
-    private Boolean status;
+    private Integer status;
 
     @Column(name = "dentistid")
     private Integer dentistID;
@@ -115,11 +115,11 @@ public class Appointment {
         this.patientName = patientName;
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return this.status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

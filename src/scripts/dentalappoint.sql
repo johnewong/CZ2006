@@ -100,22 +100,25 @@ CREATE TABLE `treatment` (
   PRIMARY KEY (`TreatmentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `UserID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(255) NOT NULL,
-  `DisplayName` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  `BirthDate` datetime NOT NULL,
-  `EmailAddress` varchar(255) NOT NULL,
-  `ContactNumber` varchar(20) NOT NULL,
-  `Gender` tinyint(1) DEFAULT NULL,
-  `ICNumber` varchar(15) NOT NULL,
-  `UserType` tinyint(5) DEFAULT NULL,
-  `CreatedBy` bigint(20) NOT NULL,
-  `CreatedDate` datetime NOT NULL,
-  `UpdatedBy` bigint(20) DEFAULT NULL,
-  `UpdatedDate` datetime DEFAULT NULL,
-  `IsDeleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+    `UserID` bigint(20) NOT NULL AUTO_INCREMENT,
+    `UserName` varchar(255) NOT NULL,
+    `DisplayName` varchar(255) DEFAULT NULL,
+    `Password` varchar(255) NOT NULL,
+    `BirthDate` datetime NOT NULL,
+    `EmailAddress` varchar(255) NOT NULL,
+    `ContactNumber` varchar(20) NOT NULL,
+    `Gender` tinyint(1) DEFAULT NULL,
+    `ICNumber` varchar(15) NOT NULL,
+    `UserType` tinyint(5) DEFAULT NULL,
+    `CreatedBy` bigint(20) NOT NULL,
+    `CreatedDate` datetime NOT NULL,
+    `UpdatedBy` bigint(20) DEFAULT NULL,
+    `UpdatedDate` datetime DEFAULT NULL,
+    `IsDeleted` tinyint(1) DEFAULT NULL,
+    PRIMARY KEY (`UserID`),
+    UNIQUE KEY `UserName_UNIQUE` (`UserName`),
+    UNIQUE KEY `EmailAddress_UNIQUE` (`EmailAddress`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

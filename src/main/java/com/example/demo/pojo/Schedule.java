@@ -1,10 +1,10 @@
 package com.example.demo.pojo;
 
-import javax.persistence.*;
-
-import java.util.Date;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Where;
+
+import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "dentist_working_schedule")
@@ -15,8 +15,13 @@ public class Schedule {
     @Column(name = "dentistworkingscheduleid")
     private Integer scheduleID;
 
-    @Column(name = "dentistid")
-    private Integer dentistID;
+   // @Column(name = "dentistid")
+   // private Integer dentistID;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dentistid")
+    private Dentist dentist;
+
 
     @Column(name = "dayofweek")
     private Integer dayOfWeek;
@@ -56,13 +61,13 @@ public class Schedule {
         this.scheduleID = scheduleID;
     }
 
-    public Integer getDentistID() {
-        return this.dentistID;
-    }
+   // public Integer getDentistID() {
+   //     return this.dentistID;
+   // }
 
-    public void setDentistID(Integer dentistID) {
-        this.dentistID = dentistID;
-    }
+  //  public void setDentistID(Integer dentistID) {
+  //      this.dentistID = dentistID;
+  //  }
 
     public Integer getDayOfWeek() {
         return this.dayOfWeek;
@@ -143,4 +148,12 @@ public class Schedule {
     public void setIsDeleted(Boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
+
+
+    @JsonBackReference
+    public void setDentist(Dentist dentist) {
+        this.dentist = dentist;
+    }
+
+
 }
