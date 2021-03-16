@@ -36,7 +36,7 @@ public class AppointmentController {
         return appointment;
     }
 
-    @ApiOperation(value = "api to get available slot by dentalid and treatment and date", notes = "", response = Appointment.class)
+    @ApiOperation(value = "api to get available slot by dentalid and treatment and date. Date format = yyyy-MM-dd", notes = "", response = Appointment.class)
     @GetMapping("/{dentalid}/{treatmentid}/{date}")
     public List<DentistSlot> getByDentalIDAndTreatmentAndDate(@PathVariable("dentalid") Integer dentalid,@PathVariable("treatmentid") Integer treatmentid,@PathVariable("date") String date) throws Exception {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");

@@ -48,12 +48,6 @@ public class AccountController {
         return accountService.listAll();
     }
 
-    @ApiOperation(value = "api to get all exists users")
-    @GetMapping("/user")
-    public List<User> list() throws Exception {
-        return accountService.list();
-    }
-
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
     @GetMapping("/user/name/{name}")
     public User getByUserName(@PathVariable("name") String name) throws Exception {

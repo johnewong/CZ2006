@@ -28,7 +28,7 @@ public class DentalService {
         return dentalDAO.findByDentalIDAndIsDeletedFalse(dentalid);
     }
 
-    public void edit(Dental dental){
+    public void editDentalProfile(Dental dental){
 
         Date updatedDate = new Date();
 
@@ -41,7 +41,9 @@ public class DentalService {
         dentalModel.setUpdatedBy(dental.getUpdatedBy());
         dentalModel.setUpdatedDate(updatedDate);
 
-        dentalDAO.save(dental);
+        dentalDAO.save(dentalModel);
     }
+
+
 
 }
