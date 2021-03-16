@@ -34,7 +34,7 @@ public class AppointmentService {
         return appointmentDAO.findByDentalIDAndAppointmentDateAndIsDeletedFalse(dentalid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));
     }
     public List<Appointment> getByDentalIDAndDentistIDAndPeriod(Integer dentalid,Integer dentistid,Date AppointDate, Date StartTime, Date EndTime){
-        return appointmentDAO.findByDentalIDAndDentistIDAndPeriodAndIsDeletedFalse(dentalid,dentistid,AppointDate,EndTime);
+        return appointmentDAO.findByDentalIDAndDentistIDAndPeriodAndIsDeletedFalse(dentalid,dentistid,AppointDate,StartTime,EndTime);
 
     }
 
@@ -90,7 +90,6 @@ public class AppointmentService {
         Set<Dentist> dentistList = dentalModel.getDentistList();
         Set<DentalTreatment> dentalTreatment = dentalModel.getDentalTreatmentList();
 
-
         float TreatmentDuration = 0.5f;
         for(DentalTreatment element: dentalTreatment){
             if(element.getTreatmentID() == treatmentid){
@@ -137,7 +136,6 @@ public class AppointmentService {
             }
 
             dentistSlot.setAvailableSlots(slots);
-
             dentistSlots.add(dentistSlot);
         }
 
