@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "dentist_working_schedule")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class Schedule {
+public class Schedule extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dentistworkingscheduleid")
@@ -34,24 +34,6 @@ public class Schedule {
 
     @Column(name = "breakstarttime")
     private Date breakStartTime;
-
-    @Column(name = "breakendtime")
-    private Date breakEndTime;
-
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
-
-    @Column(name = "isdeleted")
-    private Boolean isDeleted;
 
     public Integer getScheduleID() {
         return this.scheduleID;
@@ -101,59 +83,8 @@ public class Schedule {
         this.breakStartTime = breakStartTime;
     }
 
-    public Date getBreakEndTime() {
-        return this.breakEndTime;
-    }
-
-    public void setBreakEndTime(Date breakEndTime) {
-        this.breakEndTime = breakEndTime;
-    }
-
-    public Integer getCreatedBy() {
-        return this.createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return this.updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return this.updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public Boolean getIsDeleted() {
-        return this.isDeleted;
-    }
-
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
-
     @JsonBackReference
     public void setDentist(Dentist dentist) {
         this.dentist = dentist;
     }
-
-
 }

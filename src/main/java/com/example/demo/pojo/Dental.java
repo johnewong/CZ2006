@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "dental")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class Dental {
+public class Dental extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dentalid")
@@ -24,6 +25,9 @@ public class Dental {
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dental", fetch = FetchType.EAGER)
     private Set<DentalTreatment> dentalTreatmentList;
 
+//    @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+//    private List<Treatment> treatmentList;
+
     @Column(name = "dentaldescription")
     private String dentalDescription;
 
@@ -35,21 +39,6 @@ public class Dental {
 
     @Column(name = "operatinghourend")
     private Date operatingHourEnd;
-
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
-
-    @Column(name = "isdeleted")
-    private Boolean isDeleted;
 
     public Integer getDentalId() {
         return this.dentalID;
@@ -99,44 +88,12 @@ public class Dental {
         this.operatingHourEnd = operatingHourEnd;
     }
 
-    public Integer getCreatedBy() {
-        return this.createdBy;
+    public Set<DentalTreatment> getDentalTreatmentList() {
+        return this.dentalTreatmentList;
     }
 
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return this.updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return this.updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public Boolean getIsDeleted() {
-        return this.isDeleted;
-    }
-
-    public void setIsDeleted(Boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDentalTreatmentList(Set<DentalTreatment> treatmentList) {
+        this.dentalTreatmentList = treatmentList;
     }
 
     public Set<Dentist> getDentistList() {
@@ -147,11 +104,11 @@ public class Dental {
         this.dentistList = dentistList;
     }
 
-    public Set<DentalTreatment> getDentalTreatmentList() {
-        return dentalTreatmentList;
-    }
-
-    public void setDentalTreatmentList(Set<DentalTreatment> dentalTreatmentList) {
-        this.dentalTreatmentList = dentalTreatmentList;
-    }
+//    public List<Treatment> getTreatmentList() {
+//        return treatmentList;
+//    }
+//
+//    public void setTreatmentList(List<Treatment> treatmentList) {
+//        this.treatmentList = treatmentList;
+//    }
 }

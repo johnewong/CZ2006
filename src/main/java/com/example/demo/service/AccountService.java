@@ -124,7 +124,7 @@ public class AccountService {
         userModel.setUserType(user.getUserType());
         userModel.setIcNumber(user.getIcNumber());
         userModel.setCreatedBy(0);
-        userModel.setCreatedDate(createdDate);
+        //userModel.setCreatedDate(createdDate);
         
         userDAO.save(userModel);
     }

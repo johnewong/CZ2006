@@ -7,6 +7,8 @@ insert into user values('2', 'user02','user 02','ef797c8118f02dfb649607dd5d3f8c7
 insert into treatment values('1', 'Extractions','1','2021-01-01',null,null
         ,0);
 
+insert into dental_treatment values(1, 1,1,5.2,0,Now(),null,null,0);
+
 insert into dentist_working_schedule values('1', '1','1','1970-01-01 08:00:00','1970-01-01 18:00:00'
                 ,'1970-01-01 12:00:00'  ,'1970-01-01 13:00:00','1','2021-01-01 00:00:00',null,null,'0')
 

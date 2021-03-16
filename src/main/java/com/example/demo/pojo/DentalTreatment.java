@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(name = "dental_treatment")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
-public class DentalTreatment {
+public class DentalTreatment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,21 +30,6 @@ public class DentalTreatment {
 
     @Column(name = "persessionduration")
     private float perSeccionDuration;
-
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
-
-    @Column(name = "isdeleted")
-    private boolean isDeleted;
 
     public Integer getDental_TreatmentID() {
         return dental_TreatmentID;
@@ -78,51 +63,9 @@ public class DentalTreatment {
         this.perSeccionDuration = perSeccionDuration;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
-
-
     @JsonBackReference
     public void setDental(Dental dental) {
         this.dental = dental;
     }
-
 
 }
