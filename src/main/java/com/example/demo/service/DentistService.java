@@ -10,7 +10,7 @@ public class DentistService {
     @Autowired
     DentistDAO dentistDAO;
 
-    public Dental getByDentistID(Integer dentalid) {
+    public Dental getByDentalID(Integer dentalid) {
 
         return dentistDAO.findByDentistIDAndIsDeletedFalse(dentalid);
     }
