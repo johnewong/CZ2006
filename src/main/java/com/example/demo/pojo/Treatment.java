@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "treatment")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
-public class Treatment {
+public class Treatment extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "treatmentid")
@@ -17,20 +18,8 @@ public class Treatment {
     @Column(name = "treatmentname")
     private String treatmentName;
 
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
-
-    @Column(name = "isdeleted")
-    private boolean isDeleted;
+    @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+    private List<Dental> dentalList;
 
     public Integer getTreatmentID() {
         return this.treatmentID;
@@ -48,43 +37,12 @@ public class Treatment {
         this.treatmentName = treatmentName;
     }
 
-    public Integer getCreatedBy() {
-        return this.createdBy;
+    public List<Dental> getDentalList() {
+        return dentalList;
     }
 
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
+    public void setDentalList(List<Dental> dentalList) {
+        this.dentalList = dentalList;
     }
 
-    public Date getCreatedDate() {
-        return this.createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return this.updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return this.updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public boolean getIsDeleted() {
-        return this.isDeleted;
-    }
-
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 }

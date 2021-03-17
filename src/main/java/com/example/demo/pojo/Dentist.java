@@ -13,7 +13,7 @@ import java.util.Set;
 @Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 
-public class Dentist {
+public class Dentist extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,17 +50,6 @@ public class Dentist {
     @Column(name = "leaveenddate")
     private Date leaveEndDate;
 
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
 
     @Column(name = "isdeleted")
     private boolean isDeleted;
@@ -130,46 +119,6 @@ public class Dentist {
         this.leaveEndDate = leaveEndDate;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(boolean isDelected) {
-        this.isDeleted = isDelected;
-    }
-
     public Dental getDental() {
         return dental;
     }
@@ -187,6 +136,5 @@ public class Dentist {
     public void setDental(Dental dental) {
         this.dental = dental;
     }
-
 
 }

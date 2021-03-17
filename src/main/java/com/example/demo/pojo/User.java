@@ -15,7 +15,7 @@ import java.util.Date;
 @Table(name = "user")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
-public class User {
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
@@ -38,16 +38,6 @@ public class User {
     private String icNumber;
     @Column(name = "usertype")
     private Integer userType;
-    @Column(name = "createdby")
-    private Integer createdBy;
-    @Column(name = "createddate")
-    private Date createdDate;
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-    @Column(name = "updateddate")
-    private Date updatedDate;
-    @Column(name = "isdeleted")
-    private boolean isDeleted;
 
     public String getPassword() {
         return this.password;
@@ -105,49 +95,10 @@ public class User {
         this.userType = userType;
     }
 
-    public Integer getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Integer createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Integer getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Integer updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    public boolean getIsDeleted() {
-        return isDeleted;
-    }
-
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
-    }
-
     public Integer getUserID() {
         return userID;
     }
+
     public void setUserID(Integer userID) {
         this.userID = userID;
     }
@@ -155,6 +106,7 @@ public class User {
     public String getUserName() {
         return userName;
     }
+
     public void setUserName(String userName) {
         this.userName = userName;
     }
