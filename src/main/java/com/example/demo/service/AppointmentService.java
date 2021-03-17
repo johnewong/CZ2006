@@ -154,4 +154,33 @@ public class AppointmentService {
 
     }
 
+    public boolean addAppointment(Appointment appointment){
+
+        List<Appointment> list = getByDentalIDAndDentistIDAndPeriod(appointment.getDentalID(),appointment.getDentistID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime());
+        if(list.size()>0){
+            return false;
+        }
+        else {
+            Appointment appointmentModel = new Appointment();
+            appointmentModel.setAppointmentEndTime(appointment.getAppointmentEndTime());
+            appointmentModel.setAppointmentDate(appointment.getAppointmentDate());
+            appointmentModel.setAppointmentStartTime(appointment.getAppointmentStartTime());
+            appointmentModel.setAppointmentNumber(appointment.getAppointmentNumber());
+            appointmentModel.setDentalID(appointment.getDentalID());
+            appointmentModel.setDentistID(appointment.getDentistID());
+            appointmentModel.setDentalID(appointment.getDentalID());
+            appointmentModel.setPatientID(appointment.getPatientID());
+            appointmentModel.setPatientName(appointment.getPatientName());
+            appointmentModel.setCreatedBy(appointment.getCreatedBy());
+            appointmentModel.setCreatedDate(appointment.getCreatedDate());
+            appointmentModel.setTreatmentID(appointment.getTreatmentID());
+
+            appointmentDAO.save(appointmentModel);
+
+            return true;
+
+        }
+
+    }
+
 }
