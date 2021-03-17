@@ -10,4 +10,7 @@ import java.util.List;
 public interface DentistDAO extends JpaRepository<Dentist,Integer> {
     Dental findByDentistIDAndIsDeletedFalse(Integer dentistID);
     List<Dental> findAllByIsDeletedFalse(Sort sort);
+
+    Dentist findDentistByDentistIDAndIsDeletedFalse(Integer dentistID);
+
 }

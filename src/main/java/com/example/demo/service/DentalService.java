@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.DentalDAO;
 import com.example.demo.pojo.Dental;
+import com.example.demo.pojo.Dentist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,6 @@ public class DentalService {
 
         dentalDAO.save(dentalModel);
     }
-
 
 
 }

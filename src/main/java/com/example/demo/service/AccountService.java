@@ -97,6 +97,10 @@ public class AccountService {
         return false;
     }
 
+    public boolean resetpwd(String oldpwd, String newpwd){
+        return false;
+    }
+
     public User save(User user) {
         return userDAO.save(user);
     }

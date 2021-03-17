@@ -50,17 +50,6 @@ public class Dentist extends BaseEntity{
     @Column(name = "leaveenddate")
     private Date leaveEndDate;
 
-    @Column(name = "createdby")
-    private Integer createdBy;
-
-    @Column(name = "createddate")
-    private Date createdDate;
-
-    @Column(name = "updatedby")
-    private Integer updatedBy;
-
-    @Column(name = "updateddate")
-    private Date updatedDate;
 
     @Column(name = "isdeleted")
     private boolean isDeleted;
@@ -147,6 +136,5 @@ public class Dentist extends BaseEntity{
     public void setDental(Dental dental) {
         this.dental = dental;
     }
-
 
 }
