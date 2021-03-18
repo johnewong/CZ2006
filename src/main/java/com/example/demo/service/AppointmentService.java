@@ -15,9 +15,7 @@ public class AppointmentService {
     @Autowired AppointmentDAO appointmentDAO;
     @Autowired DentalService dentalService;
 
-    public void add(Appointment appointment){
-        appointmentDAO.save(appointment);
-    }
+    //public void add(Appointment appointment){ appointmentDAO.save(appointment); }
 
     public Appointment getByAppointmentID(Integer appointmentid) {
         return appointmentDAO.findByAppointmentIDAndIsDeletedFalse(appointmentid);

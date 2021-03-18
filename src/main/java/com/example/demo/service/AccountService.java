@@ -109,26 +109,35 @@ public class AccountService {
         return userDAO.findAll(Sort.by(Sort.Direction.DESC, "userID"));
     }
 
+    public User getByUserNameOrEmailAddressOrContactNumberOrIcNumber(String userName, String emailAddress, String contactNUmber, String icNumber){
+        return  userDAO.findByUserNameOrEmailAddressOrContactNumberOrIcNumberAndIsDeletedFalse(userName, emailAddress, contactNUmber, icNumber);
+    }
 
-
-    public void add(User user){
+    public boolean add(User user){
         Date createdDate = new Date();
 
-        User userModel = new User();
-        userModel.setUserName(user.getUserName());
-        userModel.setContactNumber(user.getContactNumber());
-        userModel.setDisplayName(user.getDisplayName());
-        userModel.setBirthDate(user.getBirthDate());
-        userModel.setContactNumber(user.getContactNumber());
-        userModel.setEmailAddress(user.getEmailAddress());
-        userModel.setGender(user.getGender());
-        userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
-        userModel.setUserType(user.getUserType());
-        userModel.setIcNumber(user.getIcNumber());
-        userModel.setCreatedBy(0);
-        //userModel.setCreatedDate(createdDate);
-        
-        userDAO.save(userModel);
+        User isUserExisted = getByUserNameOrEmailAddressOrContactNumberOrIcNumber(user.getUserName(), user.getEmailAddress(), user.getContactNumber(), user.getIcNumber());
+        if (isUserExisted == null) {
+
+            User userModel = new User();
+            userModel.setUserName(user.getUserName());
+            userModel.setContactNumber(user.getContactNumber());
+            userModel.setDisplayName(user.getDisplayName());
+            userModel.setBirthDate(user.getBirthDate());
+            userModel.setContactNumber(user.getContactNumber());
+            userModel.setEmailAddress(user.getEmailAddress());
+            userModel.setGender(user.getGender());
+            userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
+            userModel.setUserType(user.getUserType());
+            userModel.setIcNumber(user.getIcNumber());
+            userModel.setCreatedBy(0);
+            //userModel.setCreatedDate(createdDate);
+            userDAO.save(userModel);
+            return true;
+        }
+
+
+        else return false;
     }
 
     public User getByUserName(String name) {

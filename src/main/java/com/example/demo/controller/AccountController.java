@@ -59,8 +59,13 @@ public class AccountController {
     @PostMapping("/user")
     public Object add(@RequestBody User user) throws Exception {
 
-        accountService.add(user);
-        return new ResponseEntity("User registered successfully", HttpStatus.OK);
+        boolean status = accountService.add(user);
+        if(status){
+
+            return new ResponseEntity("New user added successfully", HttpStatus.OK);
+        }
+
+        return new ResponseEntity("User is existed", HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation("api to forget password function")
