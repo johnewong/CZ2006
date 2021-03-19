@@ -36,8 +36,8 @@ public class DashboardDentistController {
     }
     @ApiOperation(value = "api to edit dentist profile")
     @PostMapping("/dentist/profile")
-    public Object editProfile(@RequestBody Dentist dentist ) throws Exception {
-        //dentistService.edit(dentist );
+    public Object editProfile(@RequestBody Dentist dentist,@RequestParam Integer dentistId ) throws Exception {
+        dentistService.edit(dentist,dentistId);
         return new ResponseEntity("Dentist  profile updated successfully", HttpStatus.OK);
     }
 

@@ -27,9 +27,6 @@ public class Dentist extends BaseEntity{
     @JoinColumn(name = "dentalid")
     private Dental dental;
 
-//    @Column(name = "dentalid")
-//    private Integer dentalID;
-
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dentist", fetch = FetchType.EAGER)
     private Set<Schedule> scheduleList;
