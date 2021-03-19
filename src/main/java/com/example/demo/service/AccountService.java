@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.dao.UserDAO;
 import com.example.demo.pojo.User;
 import com.example.demo.utility.EncryptionUtil;
+import com.example.demo.utility.RoleType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class AccountService {
 
@@ -83,18 +83,27 @@ public class AccountService {
     @Autowired
     UserDAO userDAO;
 
-    public boolean login(String username, String password){
-        User user = userDAO.findByUserNameAndIsDeletedFalse(username);
+    public User login(String username, String password,String loginType){
+        User user = new User();
+
+
+        if(loginType.equals(RoleType.Admin.name())){
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Admin.toInt());
+
+        }else if(loginType.equals(RoleType.Customer.name())){
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Customer.toInt());
+
+        }
         if (user == null){
-            return false;
+            return null;
         }
         String encryptedPwd = EncryptionUtil.encryptPassword(password);
 
         if (user.getPassword().equals(encryptedPwd)){
-            return true;
+            return user;
         }
 
-        return false;
+        return null;
     }
 
     public boolean resetpwd(String oldpwd, String newpwd){
@@ -135,6 +144,9 @@ public class AccountService {
         return userDAO.findByUserNameAndIsDeletedFalse(name);
     }
 
+    public User getByUserID(Integer userid) {
+        return userDAO.findByUserIDAndIsDeletedFalse(userid);
+    }
 
 }
 

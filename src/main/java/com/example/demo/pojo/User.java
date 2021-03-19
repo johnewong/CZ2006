@@ -1,14 +1,7 @@
 package com.example.demo.pojo;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Where;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -38,6 +31,9 @@ public class User extends BaseEntity{
     private String icNumber;
     @Column(name = "usertype")
     private Integer userType;
+
+    @Column(name = "dentalid")
+    private Integer dentalID;
 
     public String getPassword() {
         return this.password;
@@ -95,13 +91,6 @@ public class User extends BaseEntity{
         this.userType = userType;
     }
 
-    public Integer getUserID() {
-        return userID;
-    }
-
-    public void setUserID(Integer userID) {
-        this.userID = userID;
-    }
 
     public String getUserName() {
         return userName;
@@ -118,4 +107,18 @@ public class User extends BaseEntity{
     public void setDisplayName(String displayName) {
         this.displayName = displayName;
     }
+
+
+    public boolean isGender() {
+        return gender;
+    }
+
+    public Integer getDentalID() {
+        return dentalID;
+    }
+
+    public void setDentalID(Integer dentalID) {
+        this.dentalID = dentalID;
+    }
+
 }

@@ -113,6 +113,7 @@ CREATE TABLE `user` (
     `Gender` tinyint(1) DEFAULT NULL,
     `ICNumber` varchar(15) NOT NULL,
     `UserType` tinyint(5) DEFAULT NULL,
+    `DentalID` bigint(20) DEFAULT NULL,
     `CreatedBy` bigint(20) NOT NULL,
     `CreatedDate` datetime NOT NULL,
     `UpdatedBy` bigint(20) DEFAULT NULL,

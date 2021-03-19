@@ -28,7 +28,6 @@ public class AppointmentController {
         return appointmentService.getByPatientID(patientid);
     }
 
-
     @ApiOperation(value = "api to get an appointment by appointmentid", notes = "", response = Appointment.class)
     @GetMapping("/{appointmentid}")
     public Appointment getByAppointmentID(@PathVariable("appointmentid") Integer appointmentid) throws Exception {
