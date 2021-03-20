@@ -34,19 +34,19 @@ public class DentistService {
 
     }
 
-    public void edit(Dentist dentist, Integer dentistId) {
-        Dentist dentistModel = dentistDAO.findDentistByDentistIDAndIsDeletedFalse(dentistId);
-        Date updatedDate = new Date();
+    public void edit(Dentist dentist) {
+        Dentist dentistModel = dentistDAO.findDentistByDentistIDAndIsDeletedFalse(dentist.getDentistID());
         dentistModel.setIsDeleted(dentist.getIsDeleted());
         dentistModel.setUpdatedBy(dentist.getUpdatedBy());
-        dentistModel.setUpdatedDate(updatedDate);
         dentistModel.setDentistDescription(dentist.getDentistDescription());
         dentistModel.setDentistName(dentist.getDentistName());
         dentistModel.setGender(dentist.getGender());
         dentistModel.setScheduleList(dentist.getScheduleList());
         dentistModel.setLeaveStartDate(dentist.getLeaveStartDate());
         dentistModel.setLeaveEndDate(dentist.getLeaveEndDate());
-        dentistModel.setOnLeave(dentist.isOnLeave());
+        if (dentist.getLeaveStartDate()!=null){
+            dentistModel.setOnLeave(true);
+        }
         dentistDAO.save(dentistModel);
     }
 }

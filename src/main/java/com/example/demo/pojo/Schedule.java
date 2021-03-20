@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Date;
 
+
+
 @Entity
 @Table(name = "dentist_working_schedule")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
@@ -16,7 +18,7 @@ public class Schedule extends BaseEntity{
     private Integer scheduleID;
 
    // @Column(name = "dentistid")
-   // private Integer dentistID;
+  // private Integer dentistID ;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dentistid")
@@ -34,6 +36,9 @@ public class Schedule extends BaseEntity{
 
     @Column(name = "breakstarttime")
     private Date breakStartTime;
+
+    @Column(name = "breakendtime")
+    private Date breakEndTime;
 
     public Integer getScheduleID() {
         return this.scheduleID;
@@ -82,9 +87,20 @@ public class Schedule extends BaseEntity{
     public void setBreakStartTime(Date breakStartTime) {
         this.breakStartTime = breakStartTime;
     }
+    public Date getBreakEndTime() {
+        return this.breakEndTime;
+    }
+
+    public void setBreakEndTime(Date breakEndTime) {
+        this.breakEndTime = breakEndTime;
+    }
+
+    public Dentist getDentist() { return dentist; }
 
     @JsonBackReference
     public void setDentist(Dentist dentist) {
         this.dentist = dentist;
     }
+
+
 }
