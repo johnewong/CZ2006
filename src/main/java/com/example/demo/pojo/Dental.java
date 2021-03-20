@@ -34,6 +34,12 @@ public class Dental extends BaseEntity{
     @Column(name = "dentaladdress")
     private String dentalAddress;
 
+    @Column(name = "dentalcontactnumber")
+    private String dentalContactNumber;
+
+    @Column(name = "dentalpostcode")
+    private String dentalPostcode;
+
     @Column(name = "operatinghourstart")
     private Date operatingHourStart;
 
@@ -102,6 +108,22 @@ public class Dental extends BaseEntity{
 
     public void setDentistList(Set<Dentist> dentistList) {
         this.dentistList = dentistList;
+    }
+
+    public String getDentalPostcode() {
+        return dentalPostcode;
+    }
+
+    public void setDentalContactNumber(String dentalContactNumber) {
+        this.dentalContactNumber = dentalContactNumber;
+    }
+
+    public String getDentalContactNumber() {
+        return dentalContactNumber;
+    }
+
+    public void setDentalPostcode(String dentalPostcode) {
+        this.dentalPostcode = dentalPostcode;
     }
 
 //    public List<Treatment> getTreatmentList() {

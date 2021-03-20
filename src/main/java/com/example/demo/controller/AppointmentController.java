@@ -28,7 +28,6 @@ public class AppointmentController {
         return appointmentService.getByPatientID(patientid);
     }
 
-
     @ApiOperation(value = "api to get an appointment by appointmentid", notes = "", response = Appointment.class)
     @GetMapping("/{appointmentid}")
     public Appointment getByAppointmentID(@PathVariable("appointmentid") Integer appointmentid) throws Exception {
@@ -55,6 +54,21 @@ public class AppointmentController {
         }
 
         return new ResponseEntity("Appointment cancelled failed", HttpStatus.BAD_REQUEST);
+    }
+
+    @ApiOperation(value = "api to add an appointment by appointmentid", notes = "", response = Appointment.class)
+    @PostMapping("/add")
+    public Object addAppointmnet(@RequestBody Appointment appointment) throws Exception {
+
+        boolean status = appointmentService.addAppointment(appointment);
+
+        if(status){
+
+            return new ResponseEntity("Appointment added successfully", HttpStatus.OK);
+        }
+
+        return new ResponseEntity("Appointment slot is not available", HttpStatus.BAD_REQUEST);
+
     }
 
 

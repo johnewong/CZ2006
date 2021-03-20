@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.User;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.EmailService;
+import com.example.demo.utility.RoleType;
 import com.example.demo.viewmodel.EmailInfo;
 import com.example.demo.viewmodel.LoginInfo;
 import io.swagger.annotations.Api;
@@ -28,8 +29,13 @@ public class AccountController {
     @ApiOperation(value = "api to login")
     @PostMapping("/user/login")
     public Object login(@RequestBody LoginInfo loginInfo) throws Exception {
-        boolean state = accountService.login(loginInfo.getUsername(), loginInfo.getPassword());
-        return state;
+        User UserModel = accountService.login(loginInfo.getUsername(), loginInfo.getPassword(), RoleType.Customer.name());
+        if(UserModel == null){
+            return new ResponseEntity("Credential not valid", HttpStatus.FORBIDDEN);
+
+        }
+        return UserModel;
+
     }
 
     @ApiOperation(value = "api to edit profile")
@@ -59,8 +65,13 @@ public class AccountController {
     @PostMapping("/user")
     public Object add(@RequestBody User user) throws Exception {
 
-        accountService.add(user);
-        return new ResponseEntity("User registered successfully", HttpStatus.OK);
+        boolean status = accountService.add(user);
+        if(status){
+
+            return new ResponseEntity("New user added successfully", HttpStatus.OK);
+        }
+
+        return new ResponseEntity("User is existed", HttpStatus.BAD_REQUEST);
     }
 
     @ApiOperation("api to forget password function")

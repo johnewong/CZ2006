@@ -1,7 +1,7 @@
 package com.example.demo.utility;
 
 public enum RoleType {
-    Patient(0), Admin(1);
+    Customer(0), Admin(1);
 
     private int number;
 
