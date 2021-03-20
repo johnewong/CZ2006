@@ -27,6 +27,8 @@ CREATE TABLE `dental` (
   `DentalName` varchar(255) NOT NULL,
   `DentalDescription` varchar(3000) DEFAULT NULL,
   `DentalAddress` varchar(255) DEFAULT NULL,
+  `DentalContactNumber` varchar(255) DEFAULT NULL,
+  `DentalPostcode` varchar(255) DEFAULT NULL,
   `OperatingHourStart` datetime  NOT NULL,
   `OperatingHourEnd` datetime  NOT NULL,
   `CreatedBy` bigint(20) NOT NULL,
