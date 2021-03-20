@@ -2,18 +2,23 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AppointmentDAO;
 import com.example.demo.pojo.*;
+import com.example.demo.viewmodel.AppointmentInfo;
 import com.example.demo.viewmodel.AvailableSlot;
 import com.example.demo.viewmodel.DentistSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
 public class AppointmentService {
     @Autowired AppointmentDAO appointmentDAO;
     @Autowired DentalService dentalService;
+    @Autowired DentistService dentistService;
+    @Autowired AccountService accountService;
+    @Autowired TreatmentService treatmentService;
 
     //public void add(Appointment appointment){ appointmentDAO.save(appointment); }
 
@@ -25,8 +30,35 @@ public class AppointmentService {
         return appointmentDAO.findByPatientIDAndIsDeletedFalse(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
 
-    public List<Appointment> getByDentalID(Integer dentalid) {
-        return appointmentDAO.findByDentalIDAndIsDeletedFalse(dentalid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+    public  List<AppointmentInfo> getByDentalID(Integer dentalid) {
+        List<AppointmentInfo> AppointInfoList = new ArrayList<>();
+        List<Appointment> appointmentList = appointmentDAO.findByDentalIDAndIsDeletedFalse(dentalid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+        for(Appointment aitem: appointmentList){
+
+            AppointmentInfo Info = new AppointmentInfo();
+            Info.setAppointment(aitem);
+
+            SimpleDateFormat localDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+            Info.setAppointmentDateFormat(localDateFormat.format(aitem.getAppointmentDate()));
+
+            SimpleDateFormat localTimeFormat = new SimpleDateFormat("HH:mm");
+            Info.setStartTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()));
+            Info.setEndTimeFormat(localTimeFormat.format(aitem.getAppointmentEndTime()));
+
+            User user = accountService.getByUserID(aitem.getPatientID());
+            Info.setCustomer(user);
+
+            Dentist dentist = dentistService.getDentistInfobyDentistID(aitem.getDentistID());
+            dentist.setScheduleList(null);
+            Info.setDentist(dentist);
+
+            Treatment treatment = treatmentService.getByTreatmentID(aitem.getTreatmentID());
+            Info.setTreatment(treatment);
+
+            AppointInfoList.add(Info);
+        }
+
+        return AppointInfoList;
     }
     public List<Appointment> getByDentalIDAndDentistIDAndDate(Integer dentalid, Integer dentistid, Date date) {
         return appointmentDAO.findByDentalIDAndAppointmentDateAndIsDeletedFalse(dentalid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));

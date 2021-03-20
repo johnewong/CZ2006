@@ -9,8 +9,10 @@ import java.util.Date;
 import java.util.List;
 
 public interface UserDAO extends JpaRepository<User, Integer> {
+    User findByUserNameAndUserTypeAndIsDeletedFalse(String userName,Integer userType);
 
     User findByUserNameAndIsDeletedFalse(String userName);
+    User findByUserIDAndIsDeletedFalse(Integer userID);
 
     User findByUserNameOrEmailAddressOrContactNumberOrIcNumberAndIsDeletedFalse(String userName, String emailAddress, String contactNUmber, String icNumber);
 

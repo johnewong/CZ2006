@@ -27,15 +27,26 @@ public class DentistService {
         dentistModel.setDental(dental);
         dentistModel.setGender(dentist.getGender());
         dentistModel.setCreatedDate(updatedDate);
-        dentistModel.setCreatedBy(0);
+        dentistModel.setCreatedBy(dental.getCreatedBy());
         dentistModel.setIsDeleted(false);
 
         dentistDAO.save(dentistModel);
 
     }
-    public void editDentalProfile(Dentist dentist){
+
+    public void edit(Dentist dentist) {
+        Dentist dentistModel = dentistDAO.findDentistByDentistIDAndIsDeletedFalse(dentist.getDentistID());
+        dentistModel.setIsDeleted(dentist.getIsDeleted());
+        dentistModel.setUpdatedBy(dentist.getUpdatedBy());
+        dentistModel.setDentistDescription(dentist.getDentistDescription());
+        dentistModel.setDentistName(dentist.getDentistName());
+        dentistModel.setGender(dentist.getGender());
+        dentistModel.setScheduleList(dentist.getScheduleList());
+        dentistModel.setLeaveStartDate(dentist.getLeaveStartDate());
+        dentistModel.setLeaveEndDate(dentist.getLeaveEndDate());
+        if (dentist.getLeaveStartDate()!=null){
+            dentistModel.setOnLeave(true);
+        }
+        dentistDAO.save(dentistModel);
     }
-
-
-
 }
