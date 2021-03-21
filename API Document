@@ -1,0 +1,73 @@
+1. Dentist Management
+
+- api to get a dentist by dentistid
+
+	input: Integer DentistID
+	output: Dentist information
+
+- api to add dentist
+	Input:
+	1) Integer DentalID
+	2){
+ 		"createdBy": 1,
+		 "dentistName": "Coco",
+  		"dentistDescription": "Good",
+  		"gender": "Female",
+	     }
+       	Output:
+	 Database updated
+	  Message "Dentist added successfully"
+
+
+
+- api to Edit Dentist
+	Input
+	{ "dentistID": 3,
+  	"updatedBy": 1,
+ 	 "dentistName": "Mr TAN",
+  	"dentistDescription": "Very good",
+ 	 "gender": "Male",
+ 	 "leaveStartDate": "2021-03-20",
+ 	"leaveEndDate": "2021-03-20",
+	  "onLeave": true
+	}
+      	Output:
+	 Database updated
+	  Message "Dentist updated successfully"
+
+
+2.  Working schedule management
+
+- api to get working schedule by dentistid
+	input: Integer DentistID
+	output: Dentist Schedule information
+
+- api to Edit Schedule
+
+	Input
+	1) Dentist ID
+	2) Schedule List
+	[
+ 	 {
+    	"updatedBy": null, 
+   	 "dayOfWeek": 1,
+    	 "startTime": "0001-01-01T09:00:00.000+00:00",
+   	 "endTime": "0001-01-01T18:00:00.000+00:00",
+   	 "breakStartTime": "0001-01-01T12:00:00.000+00:00",
+    	 "breakEndTime": "0001-01-01T13:00:00.000+00:00"
+  	},
+
+ 	{
+    	 "updatedBy": 1,
+  	  "dayOfWeek": 4,
+   	 "startTime": "0001-01-01T09:00:00.000+00:00",
+   	 "endTime": "0001-01-01T18:00:00.000+00:00",
+   	 "breakStartTime": "0001-01-01T12:00:00.000+00:00",
+   	 "breakEndTime": "0001-01-01T13:00:00.000+00:00"
+ 	 }
+ 
+]
+      	Output:
+	 Database updated
+	  Message "Dentist schedule updated successfully"
+

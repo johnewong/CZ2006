@@ -6,21 +6,23 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.*;
 import java.util.Date;
 
+
+
 @Entity
-@Table(name = "veter_working_schedule")
+@Table(name = "dentist_working_schedule")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class Schedule extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "veterworkingscheduleid")
+    @Column(name = "dentistworkingscheduleid")
     private Integer scheduleID;
 
-   // @Column(name = "veterid")
-   // private Integer veterID;
+   // @Column(name = "dentistid")
+  // private Integer dentistID ;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "veterid")
-    private Veter veter;
+    @JoinColumn(name = "dentistid")
+    private Dentist dentist;
 
 
     @Column(name = "dayofweek")
@@ -35,6 +37,9 @@ public class Schedule extends BaseEntity{
     @Column(name = "breakstarttime")
     private Date breakStartTime;
 
+    @Column(name = "breakendtime")
+    private Date breakEndTime;
+
     public Integer getScheduleID() {
         return this.scheduleID;
     }
@@ -43,12 +48,12 @@ public class Schedule extends BaseEntity{
         this.scheduleID = scheduleID;
     }
 
-   // public Integer getVeterID() {
-   //     return this.veterID;
+   // public Integer getDentistID() {
+   //     return this.dentistID;
    // }
 
-  //  public void setVeterID(Integer veterID) {
-  //      this.veterID = veterID;
+  //  public void setDentistID(Integer dentistID) {
+  //      this.dentistID = dentistID;
   //  }
 
     public Integer getDayOfWeek() {
@@ -82,9 +87,20 @@ public class Schedule extends BaseEntity{
     public void setBreakStartTime(Date breakStartTime) {
         this.breakStartTime = breakStartTime;
     }
+    public Date getBreakEndTime() {
+        return this.breakEndTime;
+    }
+
+    public void setBreakEndTime(Date breakEndTime) {
+        this.breakEndTime = breakEndTime;
+    }
+
+    public Dentist getDentist() { return dentist; }
 
     @JsonBackReference
-    public void setVeter(Veter veter) {
-        this.veter = veter;
+    public void setDentist(Dentist dentist) {
+        this.dentist = dentist;
     }
+
+
 }
