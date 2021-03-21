@@ -21,7 +21,7 @@ CREATE TABLE `appointment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-DROP TABLE IF EXISTS `vet`;
+DROP TABLE IF EXISTS `dental`;
 DROP TABLE IF EXISTS `vet`;
 CREATE TABLE `vet` (
   `VetID` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -53,7 +53,7 @@ CREATE TABLE `vet_treatment` (
   PRIMARY KEY (`Vet_TreatmentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `veter`;
+DROP TABLE IF EXISTS `dentist`;
 DROP TABLE IF EXISTS `veter`;
 CREATE TABLE `veter` (
   `VeterID` bigint(20) NOT NULL AUTO_INCREMENT,

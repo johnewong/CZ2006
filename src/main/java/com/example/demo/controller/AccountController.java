@@ -30,7 +30,7 @@ public class AccountController {
     @PostMapping("/user/login")
     public Object login(@RequestBody LoginInfo loginInfo) throws Exception {
         User UserModel = accountService.login(loginInfo.getUsername(), loginInfo.getPassword(), RoleType.Customer.name());
-        if(UserModel == null){
+        if (UserModel == null) {
             return new ResponseEntity("Credential not valid", HttpStatus.FORBIDDEN);
 
         }
@@ -64,10 +64,8 @@ public class AccountController {
     @ApiOperation("api to add a user - UserType: 0 = patient, 1= admin; Gender: 0 = Male, 1 = Female")
     @PostMapping("/user")
     public Object add(@RequestBody User user) throws Exception {
-
         boolean status = accountService.add(user);
-        if(status){
-
+        if (status) {
             return new ResponseEntity("New user added successfully", HttpStatus.OK);
         }
 
@@ -81,7 +79,7 @@ public class AccountController {
         String newpassword = accountService.generateStrongPassword();
         String subject = "AppName";
         String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
-        emailService.send(emailaddress,subject,body);
+        emailService.send(emailaddress, subject, body);
         return new ResponseEntity("Sent", HttpStatus.OK);
     }
 }
