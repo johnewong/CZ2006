@@ -11,7 +11,7 @@ public class ScheduleService {
     ScheduleDAO scheduleDAO;
 
 /*
-    public List<Schedule> getByDentistID(Integer dentistid) {
-        return scheduleDAO.findByDentistIDAndIsDeletedFalse(dentistid);
+    public List<Schedule> getByVeterID(Integer veterid) {
+        return scheduleDAO.findByVeterIDAndIsDeletedFalse(veterid);
     }*/
 }

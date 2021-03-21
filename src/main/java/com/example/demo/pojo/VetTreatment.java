@@ -4,25 +4,24 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
-@Table(name = "dental_treatment")
+@Table(name = "vet_treatment")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
-public class DentalTreatment extends BaseEntity {
+public class VetTreatment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dental_treatmentid")
-    private Integer dental_TreatmentID;
+    @Column(name = "vet_treatmentid")
+    private Integer vet_TreatmentID;
 
-    //@Column(name = "dentalid")
-    //private Integer dentalID;
+    //@Column(name = "vetid")
+    //private Integer vetID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dentalid")
-    private Dental dental;
+    @JoinColumn(name = "vetid")
+    private Vet vet;
 
 
     @Column(name = "treatmentid")
@@ -31,20 +30,20 @@ public class DentalTreatment extends BaseEntity {
     @Column(name = "persessionduration")
     private float perSeccionDuration;
 
-    public Integer getDental_TreatmentID() {
-        return dental_TreatmentID;
+    public Integer getVet_TreatmentID() {
+        return vet_TreatmentID;
     }
 
-    public void setDental_TreatmentID(Integer dental_TreatmentID) {
-        this.dental_TreatmentID = dental_TreatmentID;
+    public void setVet_TreatmentID(Integer vet_TreatmentID) {
+        this.vet_TreatmentID = vet_TreatmentID;
     }
 
-    //public Integer getDentalID() {
-   //     return dentalID;
+    //public Integer getVetID() {
+   //     return vetID;
     //}
 
-   // public void setDentalID(Integer dentalID) {
-   //     this.dentalID = dentalID;
+   // public void setVetID(Integer vetID) {
+   //     this.vetID = vetID;
     //}
 
     public Integer getTreatmentID() {
@@ -64,8 +63,8 @@ public class DentalTreatment extends BaseEntity {
     }
 
     @JsonBackReference
-    public void setDental(Dental dental) {
-        this.dental = dental;
+    public void setVet(Vet vet) {
+        this.vet = vet;
     }
 
 }

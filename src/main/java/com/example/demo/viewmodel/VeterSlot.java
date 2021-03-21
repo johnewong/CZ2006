@@ -1,11 +1,11 @@
 package com.example.demo.viewmodel;
 
-import com.example.demo.pojo.Dentist;
+import com.example.demo.pojo.Veter;
 
 import java.util.List;
 
-public class DentistSlot {
-    Dentist dentist;
+public class VeterSlot {
+    Veter veter;
 
 
     List<AvailableSlot> availableSlots;
@@ -19,11 +19,11 @@ public class DentistSlot {
         this.availableSlots = availableSlots;
     }
 
-    public Dentist getDentist() {
-        return dentist;
+    public Veter getVeter() {
+        return veter;
     }
 
-    public void setDentist(Dentist dentist) {
-        this.dentist = dentist;
+    public void setVeter(Veter veter) {
+        this.veter = veter;
     }
 }

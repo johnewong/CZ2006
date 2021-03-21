@@ -9,34 +9,34 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "dentist")
+@Table(name = "veter")
 @Where(clause = "isDeleted='false'")
 @JsonIgnoreProperties({"handler", "hibernateLazyInitializer"})
 
-public class Dentist extends BaseEntity{
+public class Veter extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dentistid")
-    private Integer dentistID;
+    @Column(name = "veterid")
+    private Integer veterID;
 
-    @Column(name = "dentistname")
-    private String dentistName;
+    @Column(name = "vetername")
+    private String veterName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dentalid")
-    private Dental dental;
+    @JoinColumn(name = "vetid")
+    private Vet vet;
 
-//    @Column(name = "dentalid")
-//    private Integer dentalID;
+//    @Column(name = "vetid")
+//    private Integer vetID;
 
 
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dentist", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "veter", fetch = FetchType.EAGER)
     private Set<Schedule> scheduleList;
 
 
-    @Column(name = "dentistdescription")
-    private String dentistDescription;
+    @Column(name = "veterdescription")
+    private String veterDescription;
 
     @Column(name = "gender")
     private String gender;
@@ -55,36 +55,36 @@ public class Dentist extends BaseEntity{
     private boolean isDeleted;
 
 
-    public Integer getDentistID() {
-        return dentistID;
+    public Integer getVeterID() {
+        return veterID;
     }
 
-    public void setDentistID(Integer dentistID) {
-        this.dentistID = dentistID;
+    public void setVeterID(Integer veterID) {
+        this.veterID = veterID;
     }
 
-    public String getDentistName() {
-        return dentistName;
+    public String getVeterName() {
+        return veterName;
     }
 
-    public void setDentistName(String dentistName) {
-        this.dentistName = dentistName;
+    public void setVeterName(String veterName) {
+        this.veterName = veterName;
     }
 //
-//    public Integer getDentalID() {
-//        return dentalID;
+//    public Integer getVetID() {
+//        return vetID;
 //    }
 //
-//    public void setDentalID(Integer dentalID) {
-//        this.dentalID = dentalID;
+//    public void setVetID(Integer vetID) {
+//        this.vetID = vetID;
 //    }
 
-    public String getDentistDescription() {
-        return dentistDescription;
+    public String getVeterDescription() {
+        return veterDescription;
     }
 
-    public void setDentistDescription(String dentistDescription) {
-        this.dentistDescription = dentistDescription;
+    public void setVeterDescription(String veterDescription) {
+        this.veterDescription = veterDescription;
     }
 
     public String getGender() {
@@ -119,8 +119,8 @@ public class Dentist extends BaseEntity{
         this.leaveEndDate = leaveEndDate;
     }
 
-    public Dental getDental() {
-        return dental;
+    public Vet getVet() {
+        return vet;
     }
 
 
@@ -133,8 +133,8 @@ public class Dentist extends BaseEntity{
     }
 
     @JsonBackReference
-    public void setDental(Dental dental) {
-        this.dental = dental;
+    public void setVet(Vet vet) {
+        this.vet = vet;
     }
 
 }

@@ -32,8 +32,8 @@ public class User extends BaseEntity{
     @Column(name = "usertype")
     private Integer userType;
 
-    @Column(name = "dentalid")
-    private Integer dentalID;
+    @Column(name = "vetid")
+    private Integer vetID;
 
     public String getPassword() {
         return this.password;
@@ -113,12 +113,12 @@ public class User extends BaseEntity{
         return gender;
     }
 
-    public Integer getDentalID() {
-        return dentalID;
+    public Integer getVetID() {
+        return vetID;
     }
 
-    public void setDentalID(Integer dentalID) {
-        this.dentalID = dentalID;
+    public void setVetID(Integer vetID) {
+        this.vetID = vetID;
     }
 
 }

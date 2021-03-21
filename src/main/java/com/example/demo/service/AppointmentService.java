@@ -2,9 +2,10 @@ package com.example.demo.service;
 
 import com.example.demo.dao.AppointmentDAO;
 import com.example.demo.pojo.*;
+import com.example.demo.utility.StatusType;
 import com.example.demo.viewmodel.AppointmentInfo;
 import com.example.demo.viewmodel.AvailableSlot;
-import com.example.demo.viewmodel.DentistSlot;
+import com.example.demo.viewmodel.VeterSlot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -15,24 +16,31 @@ import java.util.*;
 @Service
 public class AppointmentService {
     @Autowired AppointmentDAO appointmentDAO;
-    @Autowired DentalService dentalService;
-    @Autowired DentistService dentistService;
+    @Autowired
+    VetService vetService;
+    @Autowired
+    VeterService veterService;
     @Autowired AccountService accountService;
     @Autowired TreatmentService treatmentService;
+    @Autowired
+    EmailService emailService;
 
     //public void add(Appointment appointment){ appointmentDAO.save(appointment); }
 
     public Appointment getByAppointmentID(Integer appointmentid) {
         return appointmentDAO.findByAppointmentIDAndIsDeletedFalse(appointmentid);
     }
+    public Appointment getByAppointmentNumber(String appointmentnumber) {
+        return appointmentDAO.findByAppointmentNumberAndIsDeletedFalse(appointmentnumber);
+    }
 
     public List<Appointment> getByPatientID(Integer patientid) {
         return appointmentDAO.findByPatientIDAndIsDeletedFalse(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
 
-    public  List<AppointmentInfo> getByDentalID(Integer dentalid) {
+    public  List<AppointmentInfo> getByVetID(Integer vetid) {
         List<AppointmentInfo> AppointInfoList = new ArrayList<>();
-        List<Appointment> appointmentList = appointmentDAO.findByDentalIDAndIsDeletedFalse(dentalid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+        List<Appointment> appointmentList = appointmentDAO.findByVetIDAndIsDeletedFalse(vetid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
         for(Appointment aitem: appointmentList){
 
             AppointmentInfo Info = new AppointmentInfo();
@@ -42,15 +50,16 @@ public class AppointmentService {
             Info.setAppointmentDateFormat(localDateFormat.format(aitem.getAppointmentDate()));
 
             SimpleDateFormat localTimeFormat = new SimpleDateFormat("HH:mm");
-            Info.setStartTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()));
-            Info.setEndTimeFormat(localTimeFormat.format(aitem.getAppointmentEndTime()));
+            Info.setAppointmentTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()) + "-" + localTimeFormat.format(aitem.getAppointmentEndTime()) );
+
+            Info.setAppointmentStatusFormat(StatusType.getValue(aitem.getStatus()));
 
             User user = accountService.getByUserID(aitem.getPatientID());
             Info.setCustomer(user);
 
-            Dentist dentist = dentistService.getDentistInfobyDentistID(aitem.getDentistID());
-            dentist.setScheduleList(null);
-            Info.setDentist(dentist);
+            Veter veter = veterService.getByVeterID(aitem.getVeterID());
+            veter.setScheduleList(null);
+            Info.setVeter(veter);
 
             Treatment treatment = treatmentService.getByTreatmentID(aitem.getTreatmentID());
             Info.setTreatment(treatment);
@@ -60,15 +69,15 @@ public class AppointmentService {
 
         return AppointInfoList;
     }
-    public List<Appointment> getByDentalIDAndDentistIDAndDate(Integer dentalid, Integer dentistid, Date date) {
-        return appointmentDAO.findByDentalIDAndAppointmentDateAndIsDeletedFalse(dentalid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));
+    public List<Appointment> getByVetIDAndVeterIDAndDate(Integer vetid, Integer veterid, Date date) {
+        return appointmentDAO.findByVetIDAndAppointmentDateAndIsDeletedFalse(vetid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));
     }
-    public List<Appointment> getByDentalIDAndDentistIDAndPeriod(Integer dentalid,Integer dentistid,Date AppointDate, Date StartTime, Date EndTime){
-        return appointmentDAO.findByDentalIDAndDentistIDAndPeriodAndIsDeletedFalse(dentalid,dentistid,AppointDate,StartTime,EndTime);
+    public List<Appointment> getByVetIDAndVeterIDAndPeriod(Integer vetid,Integer veterid,Date AppointDate, Date StartTime, Date EndTime){
+        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid,veterid,AppointDate,StartTime,EndTime);
 
     }
 
-    public Boolean cancelAppointment(Integer appointmnetid){
+    public Boolean cancelAppointmentByID(Integer appointmnetid){
         Date updatedDate = new Date();
 
         Appointment appointmentModel = getByAppointmentID(appointmnetid);
@@ -86,9 +95,45 @@ public class AppointmentService {
         appointmentModel.setUpdatedDate(updatedDate);
         appointmentDAO.save(appointmentModel);
 
+       /* User user = accountService.getByUserID(appointmentModel.getPatientID());
+        if(user != null){
+            String subject = "AppName";
+            String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
+            emailService.send(user.getEmailAddress(),subject,body);
+
+        }*/
+
         return true;
     }
 
+    public Boolean cancelAppointmentByNumber(String appointmentNumber){
+        Date updatedDate = new Date();
+
+        Appointment appointmentModel = getByAppointmentNumber(appointmentNumber);
+
+        if(appointmentModel == null){
+            return false;
+        }
+
+        if(appointmentModel.getStatus() == 2 || appointmentModel.getStatus() == 3){
+            return false;
+        }
+
+        appointmentModel.setStatus(2);
+        appointmentModel.setUpdatedBy(appointmentModel.getCreatedBy());
+        appointmentModel.setUpdatedDate(updatedDate);
+        appointmentDAO.save(appointmentModel);
+
+        User user = accountService.getByUserID(appointmentModel.getPatientID());
+        if(user != null){
+            String subject = "AppName";
+            String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
+            emailService.send(user.getEmailAddress(),subject,body);
+
+        }
+
+        return true;
+    }
 
     public Boolean edit(Appointment appointment){
         Date updatedDate = new Date();
@@ -108,85 +153,91 @@ public class AppointmentService {
     }
 
 
+    public List<VeterSlot> getAvailableSlotByVetIDAndTreatmentID(Integer vetid, Integer treatmentid, Date date)  {
 
-    public List<DentistSlot> getAvailableSlotByDentalIDAndTreamentID(Integer dentalid, Integer treatmentid, Date date){
-
+        Integer dateofweek = 0;
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        Integer dateofweek = cal.get(cal.DAY_OF_WEEK);
+        dateofweek = cal.get(cal.DAY_OF_WEEK);
 
       //  Integer dateofweek = date.getDay();
-        Dental dentalModel = dentalService.getByDentalID(dentalid);
-        Set<Dentist> dentistList = dentalModel.getDentistList();
-        Set<DentalTreatment> dentalTreatment = dentalModel.getDentalTreatmentList();
+        Vet vetModel = vetService.getByVetID(vetid);
+        Set<Veter> veterList = vetModel.getVeterList();
+        Set<VetTreatment> vetTreatment = vetModel.getVetTreatmentList();
 
         float TreatmentDuration = 0.5f;
-        for(DentalTreatment element: dentalTreatment){
+        for(VetTreatment element: vetTreatment){
             if(element.getTreatmentID() == treatmentid){
                 TreatmentDuration = element.getPerSeccionDuration();
                 break;
             }
         }
 
-        List<DentistSlot> dentistSlots = new ArrayList<DentistSlot>();
-        for(Dentist dentist: dentistList){
+        List<VeterSlot> veterSlots = new ArrayList<VeterSlot>();
+        for(Veter veter : veterList){
 
-            DentistSlot dentistSlot = new DentistSlot();
-            dentistSlot.setDentist(dentist);
+            VeterSlot veterSlot = new VeterSlot();
+            veterSlot.setVeter(veter);
 
-            Set<Schedule> scheduleList = dentist.getScheduleList();
-            Schedule scheduleModel = new Schedule();
+            Set<Schedule> scheduleList = veter.getScheduleList();
+            Schedule scheduleModel = null;
             for(Schedule schedule: scheduleList){
                 if(schedule.getDayOfWeek() == dateofweek){
                     scheduleModel = schedule;
                     break;
                 }
             }
-            long timediff = scheduleModel.getEndTime().getTime() - scheduleModel.getStartTime().getTime();
-            long difference_In_Hours
-                    = (timediff
-                    / (1000 * 60 * 60))
-                    % 24;
+            if(scheduleModel != null){
 
-            float countSection = difference_In_Hours / TreatmentDuration;
+                long timediff = scheduleModel.getEndTime().getTime() - scheduleModel.getStartTime().getTime();
+                long difference_In_Hours
+                        = (timediff
+                        / (1000 * 60 * 60))
+                        % 24;
 
-            Date StartTime = scheduleModel.getStartTime();
-            List<AvailableSlot> slots = new ArrayList<AvailableSlot>();
-            for(int i=0; i< (int)countSection; i++){
+                float countSection = difference_In_Hours / TreatmentDuration;
 
-                long t= StartTime.getTime();
-                Date afterAdding= new Date((long) (t + (TreatmentDuration * 60 * 60000)));
+                Date StartTime = scheduleModel.getStartTime();
+                List<AvailableSlot> slots = new ArrayList<AvailableSlot>();
+                for(int i=0; i< (int)countSection; i++){
 
-                AvailableSlot slot = new AvailableSlot();
-                slot.setStartTime(scheduleModel.getStartTime());
-                slot.setEndTime(afterAdding);
-                slot.setAvailable(true);
-                slots.add(slot);
-                StartTime = afterAdding;
+                    long t= StartTime.getTime();
+                    Date afterAdding= new Date((long) (t + (TreatmentDuration * 60 * 60000)));
+
+                    AvailableSlot slot = new AvailableSlot();
+                    slot.setStartTime(StartTime);
+                    slot.setEndTime(afterAdding);
+                    slot.setAvailable(true);
+                    slots.add(slot);
+                    StartTime = afterAdding;
+                }
+
+                veterSlot.setAvailableSlots(slots);
+
             }
-
-            dentistSlot.setAvailableSlots(slots);
-            dentistSlots.add(dentistSlot);
+            veterSlots.add(veterSlot);
         }
 
-        for(DentistSlot dentistSlot: dentistSlots){
-
-            for(AvailableSlot ava: dentistSlot.getAvailableSlots()){
-                List<Appointment> list = getByDentalIDAndDentistIDAndPeriod(dentalid,dentistSlot.getDentist().getDentistID(),date, ava.getStartTime(),ava.getEndTime());
-                if(list.size()>0){
-                    ava.setAvailable(false);
+        for(VeterSlot veterSlot : veterSlots){
+            if(veterSlot.getAvailableSlots() != null){
+                for(AvailableSlot ava: veterSlot.getAvailableSlots()){
+                    List<Appointment> list = getByVetIDAndVeterIDAndPeriod(vetid, veterSlot.getVeter().getVeterID(),date, ava.getStartTime(),ava.getEndTime());
+                    if(list.size()>0){
+                        ava.setAvailable(false);
+                    }
                 }
             }
 
+
         }
 
-        return dentistSlots;
+        return veterSlots;
 
     }
 
     public boolean addAppointment(Appointment appointment){
 
-        List<Appointment> list = getByDentalIDAndDentistIDAndPeriod(appointment.getDentalID(),appointment.getDentistID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime());
+        List<Appointment> list = getByVetIDAndVeterIDAndPeriod(appointment.getVetID(),appointment.getVeterID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime());
         if(list.size()>0){
             return false;
         }
@@ -196,9 +247,9 @@ public class AppointmentService {
             appointmentModel.setAppointmentDate(appointment.getAppointmentDate());
             appointmentModel.setAppointmentStartTime(appointment.getAppointmentStartTime());
             appointmentModel.setAppointmentNumber(appointment.getAppointmentNumber());
-            appointmentModel.setDentalID(appointment.getDentalID());
-            appointmentModel.setDentistID(appointment.getDentistID());
-            appointmentModel.setDentalID(appointment.getDentalID());
+            appointmentModel.setVetID(appointment.getVetID());
+            appointmentModel.setVeterID(appointment.getVeterID());
+            appointmentModel.setVetID(appointment.getVetID());
             appointmentModel.setPatientID(appointment.getPatientID());
             appointmentModel.setPatientName(appointment.getPatientName());
             appointmentModel.setCreatedBy(appointment.getCreatedBy());

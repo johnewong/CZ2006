@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ScheduleDAO extends JpaRepository<Schedule,Integer>{
 
- /* List<Schedule> findByDentistIDAndIsDeletedFalse(Integer dentistID);*/
+ /* List<Schedule> findByVeterIDAndIsDeletedFalse(Integer veterID);*/
 }

@@ -2,7 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Appointment;
 import com.example.demo.service.AppointmentService;
-import com.example.demo.viewmodel.DentistSlot;
+import com.example.demo.viewmodel.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Api(tags = "Appointment management")
 @RestController
@@ -35,25 +36,22 @@ public class AppointmentController {
         return appointment;
     }
 
-    @ApiOperation(value = "api to get available slot by dentalid and treatment and date. Date format = yyyy-MM-dd", notes = "", response = Appointment.class)
-    @GetMapping("/{dentalid}/{treatmentid}/{date}")
-    public List<DentistSlot> getByDentalIDAndTreatmentAndDate(@PathVariable("dentalid") Integer dentalid,@PathVariable("treatmentid") Integer treatmentid,@PathVariable("date") String date) throws Exception {
+    @ApiOperation(value = "api to get available slot by vetid and treatment and date. Date format = yyyy-MM-dd", notes = "", response = Appointment.class)
+    @GetMapping("/{vetid}/{treatmentid}/{date}")
+    public List<VeterSlot> getByVeterIDAndTreatmentAndDate(@PathVariable("vetid") Integer vetid, @PathVariable("treatmentid") Integer treatmentid, @PathVariable("date") String date) throws Exception {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
         Date formatdate = format.parse(date);
-        List<DentistSlot> dentistSlots = appointmentService.getAvailableSlotByDentalIDAndTreamentID(dentalid,treatmentid,formatdate);
-        return dentistSlots;
+        List<VeterSlot> veterSlots = appointmentService.getAvailableSlotByVetIDAndTreatmentID(vetid,treatmentid,formatdate);
+        return veterSlots;
     }
 
     @ApiOperation(value = "api to cancel an appointment by appointmentid", notes = "", response = Appointment.class)
     @PostMapping("/cancel")
-    public Object cancelAppointmnet(@RequestBody Integer appointmentid) throws Exception {
-        Boolean status = appointmentService.cancelAppointment(appointmentid);
-        if(status){
+    public Boolean cancelAppointmnet(@RequestBody Integer appointmentid) throws Exception {
+        Boolean status = appointmentService.cancelAppointmentByID(appointmentid);
 
-            return new ResponseEntity("Appointment cancelled successfully", HttpStatus.OK);
-        }
-
-        return new ResponseEntity("Appointment cancelled failed", HttpStatus.BAD_REQUEST);
+        return status;
     }
 
     @ApiOperation(value = "api to add an appointment by appointmentid", notes = "", response = Appointment.class)

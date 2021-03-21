@@ -7,20 +7,20 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "dentist_working_schedule")
+@Table(name = "veter_working_schedule")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 public class Schedule extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "dentistworkingscheduleid")
+    @Column(name = "veterworkingscheduleid")
     private Integer scheduleID;
 
-   // @Column(name = "dentistid")
-   // private Integer dentistID;
+   // @Column(name = "veterid")
+   // private Integer veterID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dentistid")
-    private Dentist dentist;
+    @JoinColumn(name = "veterid")
+    private Veter veter;
 
 
     @Column(name = "dayofweek")
@@ -43,12 +43,12 @@ public class Schedule extends BaseEntity{
         this.scheduleID = scheduleID;
     }
 
-   // public Integer getDentistID() {
-   //     return this.dentistID;
+   // public Integer getVeterID() {
+   //     return this.veterID;
    // }
 
-  //  public void setDentistID(Integer dentistID) {
-  //      this.dentistID = dentistID;
+  //  public void setVeterID(Integer veterID) {
+  //      this.veterID = veterID;
   //  }
 
     public Integer getDayOfWeek() {
@@ -84,7 +84,7 @@ public class Schedule extends BaseEntity{
     }
 
     @JsonBackReference
-    public void setDentist(Dentist dentist) {
-        this.dentist = dentist;
+    public void setVeter(Veter veter) {
+        this.veter = veter;
     }
 }

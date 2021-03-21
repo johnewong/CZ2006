@@ -35,11 +35,11 @@ public class Appointment extends BaseEntity{
     @Column(name = "status")
     private Integer status;
 
-    @Column(name = "dentistid")
-    private Integer dentistID;
+    @Column(name = "veterid")
+    private Integer veterID;
 
-    @Column(name = "dentalid")
-    private Integer dentalID;
+    @Column(name = "vetid")
+    private Integer vetID;
 
     @Column(name = "treatmentid")
     private Integer treatmentID;
@@ -108,20 +108,20 @@ public class Appointment extends BaseEntity{
         this.status = status;
     }
 
-    public Integer getDentistID() {
-        return this.dentistID;
+    public Integer getVeterID() {
+        return this.veterID;
     }
 
-    public void setDentistID(Integer dentistID) {
-        this.dentistID = dentistID;
+    public void setVeterID(Integer veterID) {
+        this.veterID = veterID;
     }
 
-    public Integer getDentalID() {
-        return this.dentalID;
+    public Integer getVetID() {
+        return this.vetID;
     }
 
-    public void setDentalID(Integer dentalID) {
-        this.dentalID = dentalID;
+    public void setVetID(Integer vetID) {
+        this.vetID = vetID;
     }
 
     public Integer getTreatmentID() {

@@ -9,8 +9,8 @@ CREATE TABLE `appointment` (
   `PatientID` bigint(20) NOT NULL,
   `PatientName` varchar(255) NOT NULL,
   `Status` tinyint(5) NOT NULL,
-  `DentistID` bigint(20) NOT NULL,
-  `DentalID` bigint(20) NOT NULL,
+  `VeterID` bigint(20) NOT NULL,
+  `VetID` bigint(20) NOT NULL,
   `TreatmentID` bigint(20) NOT NULL,
   `CreatedBy` bigint(20) NOT NULL,
   `CreatedDate` datetime NOT NULL,
@@ -21,12 +21,13 @@ CREATE TABLE `appointment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-DROP TABLE IF EXISTS `dental`;
-CREATE TABLE `dental` (
-  `DentalID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `DentalName` varchar(255) NOT NULL,
-  `DentalDescription` varchar(3000) DEFAULT NULL,
-  `DentalAddress` varchar(255) DEFAULT NULL,
+DROP TABLE IF EXISTS `vet`;
+DROP TABLE IF EXISTS `vet`;
+CREATE TABLE `vet` (
+  `VetID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `VetName` varchar(255) NOT NULL,
+  `VetDescription` varchar(3000) DEFAULT NULL,
+  `VetAddress` varchar(255) DEFAULT NULL,
   `OperatingHourStart` datetime  NOT NULL,
   `OperatingHourEnd` datetime  NOT NULL,
   `CreatedBy` bigint(20) NOT NULL,
@@ -34,13 +35,14 @@ CREATE TABLE `dental` (
   `UpdatedBy` bigint(20) DEFAULT NULL,
   `UpdatedDate` datetime DEFAULT NULL,
   `IsDeleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`DentalID`)
+  PRIMARY KEY (`VetID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `dental_treatment`;
-CREATE TABLE `dental_treatment` (
-  `Dental_TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `DentalID` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `vet_treatment`;
+DROP TABLE IF EXISTS `vet_treatment`;
+CREATE TABLE `vet_treatment` (
+  `Vet_TreatmentID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `VetID` bigint(20) NOT NULL,
   `TreatmentID` bigint(20) NOT NULL,
   `PerSessionDuration` float NOT NULL,
   `CreatedBy` bigint(20) NOT NULL,
@@ -48,15 +50,16 @@ CREATE TABLE `dental_treatment` (
   `UpdatedBy` bigint(20) DEFAULT NULL,
   `UpdatedDate` datetime DEFAULT NULL,
   `IsDeleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`Dental_TreatmentID`)
+  PRIMARY KEY (`Vet_TreatmentID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-DROP TABLE IF EXISTS `dentist`;
-CREATE TABLE `dentist` (
-  `DentistID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `DentistName` varchar(255) NOT NULL,
-  `DentalID` bigint(20) NOT NULL,
-  `DentistDescription` varchar(3000) DEFAULT NULL,
+DROP TABLE IF EXISTS `veter`;
+DROP TABLE IF EXISTS `veter`;
+CREATE TABLE `veter` (
+  `VeterID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `VeterName` varchar(255) NOT NULL,
+  `VetID` bigint(20) NOT NULL,
+  `VeterDescription` varchar(3000) DEFAULT NULL,
   `Gender` varchar(10) NOT NULL,
   `IsOnLeave` tinyint(4) DEFAULT NULL,
   `LeaveStartDate` date DEFAULT NULL,
@@ -66,14 +69,15 @@ CREATE TABLE `dentist` (
   `UpdatedBy` bigint(20) DEFAULT NULL,
   `UpdatedDate` datetime DEFAULT NULL,
   `IsDeleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`DentistID`)
+  PRIMARY KEY (`VeterID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
-DROP TABLE IF EXISTS `dentist_working_schedule`;
-CREATE TABLE `dentist_working_schedule` (
-  `DentistWorkingScheduleID` bigint(20) NOT NULL AUTO_INCREMENT,
-  `DentistID` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `veter_working_schedule`;
+DROP TABLE IF EXISTS `veter_working_schedule`;
+CREATE TABLE `veter_working_schedule` (
+  `VeterWorkingScheduleID` bigint(20) NOT NULL AUTO_INCREMENT,
+  `VeterID` bigint(20) NOT NULL,
   `DayOfWeek` int(1) NOT NULL,
   `StartTime` datetime NOT NULL,
   `EndTime` datetime  NOT NULL,
@@ -84,7 +88,7 @@ CREATE TABLE `dentist_working_schedule` (
   `UpdatedBy` bigint(20) DEFAULT NULL,
   `UpdatedDate` datetime DEFAULT NULL,
   `IsDeleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`DentistWorkingScheduleID`)
+  PRIMARY KEY (`VeterWorkingScheduleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -113,7 +117,7 @@ CREATE TABLE `user` (
     `Gender` tinyint(1) DEFAULT NULL,
     `ICNumber` varchar(15) NOT NULL,
     `UserType` tinyint(5) DEFAULT NULL,
-    `DentalID` bigint(20) DEFAULT NULL,
+    `VetID` bigint(20) DEFAULT NULL,
     `CreatedBy` bigint(20) NOT NULL,
     `CreatedDate` datetime NOT NULL,
     `UpdatedBy` bigint(20) DEFAULT NULL,
