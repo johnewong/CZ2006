@@ -1,9 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.pojo.Dentist;
 import com.example.demo.pojo.Schedule;
-import com.example.demo.service.DentistService;
+import com.example.demo.pojo.Veter;
 import com.example.demo.service.ScheduleService;
+import com.example.demo.service.VeterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,26 +15,26 @@ import java.util.List;
 
 @Api(tags = "Working schedule management")
 @RestController
-@RequestMapping(value = "dentistworkingschedule")
+@RequestMapping(value = "veterworkingschedule")
 public class ScheduleController {
     @Autowired
     ScheduleService scheduleService;
     @Autowired
-    DentistService dentistService;
+    VeterService veterService;
 
-    @ApiOperation(value = "api to edit dentist schedule")
+    @ApiOperation(value = "api to edit veter schedule")
     @PostMapping("/schedule/edit")
-    public Object editschedule(@RequestParam Integer dentistId,@RequestBody List<Schedule> scheduleList) throws Exception {
-        Dentist dentist = dentistService.getDentistInfobyDentistID(dentistId);
-        scheduleService.edit(dentist ,scheduleList);
-        return new ResponseEntity("Dentist schedule updated successfully", HttpStatus.OK);
+    public Object editschedule(@RequestParam Integer veterId,@RequestBody List<Schedule> scheduleList) throws Exception {
+        Veter veter = veterService.getByVeterID(veterId);
+        scheduleService.edit(veter ,scheduleList);
+        return new ResponseEntity("Veter schedule updated successfully", HttpStatus.OK);
     }
 
-    @ApiOperation(value = "api to get working schedule by dentistid")// , notes = "", response = Schedule.class
-    @GetMapping("/schedule/{dentistid}")
-    public List<Schedule> getByDentistID(@PathVariable("dentistid") Integer dentistid) throws Exception {
-      Dentist dentist = dentistService.getDentistInfobyDentistID(dentistid);
-        return scheduleService.getByDentistID(dentist);
+    @ApiOperation(value = "api to get working schedule by veterid")// , notes = "", response = Schedule.class
+    @GetMapping("/schedule/{veterid}")
+    public List<Schedule> getByVeterID(@PathVariable("veterid") Integer veterid) throws Exception {
+        Veter veter = veterService.getByVeterID(veterid);
+        return scheduleService.getByVeterID(veter);
     }
 
 }

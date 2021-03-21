@@ -1,9 +1,9 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.DentistDAO;
+import com.example.demo.dao.VeterDAO;
 import com.example.demo.dao.ScheduleDAO;
-import com.example.demo.pojo.Dental;
-import com.example.demo.pojo.Dentist;
+import com.example.demo.pojo.Vet;
+import com.example.demo.pojo.Veter;
 import com.example.demo.pojo.Schedule;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,8 @@ public class ScheduleService {
     @Autowired
     ScheduleDAO scheduleDAO;
 
-   public List<Schedule> getByDentistID(Dentist dentist) {
-        return scheduleDAO.findAllByDentistAndIsDeletedFalse(dentist);}
+   public List<Schedule> getByVeterID(Veter veter) {
+        return scheduleDAO.findAllByVeterAndIsDeletedFalse(veter);}
 
    public Schedule findScheduleByWeekofday(List<Schedule> oldscheduleList, Integer weekOfDay){
        Schedule item =null;
@@ -32,7 +32,7 @@ public class ScheduleService {
    }
 
 
-   public void add(Schedule schedule,Dentist dentist){
+   public void add(Schedule schedule,Veter veter){
        Schedule scheduleMode = new Schedule();
        scheduleMode.setCreatedBy(schedule.getCreatedBy());
        scheduleMode.setDayOfWeek(schedule.getDayOfWeek());
@@ -42,7 +42,7 @@ public class ScheduleService {
        scheduleMode.setEndTime(schedule.getEndTime());
        scheduleMode.setBreakStartTime(schedule.getBreakEndTime());
        scheduleMode.setBreakEndTime(schedule.getBreakEndTime());
-       scheduleMode.setDentist(dentist);
+       scheduleMode.setVeter(veter);
        scheduleDAO.save(scheduleMode);
 
    }
@@ -50,8 +50,8 @@ public class ScheduleService {
 
 
 
-   public void edit(Dentist dentist,  List<Schedule> scheduleList){
-       List<Schedule> oldscheduleList = getByDentistID(dentist);
+   public void edit(Veter veter,  List<Schedule> scheduleList){
+       List<Schedule> oldscheduleList = getByVeterID(veter);
        List<Integer> DayofweekList = new ArrayList<>();
        for (Schedule newschedule : oldscheduleList) {
            DayofweekList.add(newschedule.getDayOfWeek());
@@ -73,7 +73,7 @@ public class ScheduleService {
                scheduleMode.setBreakEndTime(newschedule.getBreakEndTime());
                scheduleDAO.save(scheduleMode);
            } else {
-               add(newschedule, dentist);
+               add(newschedule, veter);
            }
 
        }

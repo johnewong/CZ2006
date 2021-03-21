@@ -41,14 +41,15 @@ public class DashboardVeterController {
     @ApiOperation(value = "api to add veter")
     @PostMapping("/add")
     public Object addVeter(@RequestBody Veter veter, @RequestParam Integer vetId ) throws Exception {
-       Vet vet = vetService.getByVetID(vetId);
+        Vet vet = vetService.getByVetID(vetId);
         veterService.addVeter(veter, vet);
         return new ResponseEntity("Veter added successfully", HttpStatus.OK);
     }
+
     @ApiOperation(value = "api to edit veter profile")
     @PostMapping("/veter/profile")
     public Object editProfile(@RequestBody Veter veter) throws Exception {
-        //veterService.edit(veter );
+        veterService.edit(veter);
         return new ResponseEntity("Veter  profile updated successfully", HttpStatus.OK);
     }
 

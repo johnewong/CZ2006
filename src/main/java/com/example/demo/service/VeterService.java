@@ -18,7 +18,7 @@ public class VeterService {
         return veterDAO.findVeterByVeterIDAndIsDeletedFalse(dentaild);
     }
 
-    public void addVeter(Veter veter, Vet vet){
+    public void addVeter(Veter veter,Vet vet){
 
         Date updatedDate = new Date();
         Veter veterModel = new Veter();
@@ -27,15 +27,28 @@ public class VeterService {
         veterModel.setVet(vet);
         veterModel.setGender(veter.getGender());
         veterModel.setCreatedDate(updatedDate);
-        veterModel.setCreatedBy(0);
+        veterModel.setCreatedBy(vet.getCreatedBy());
         veterModel.setIsDeleted(false);
 
         veterDAO.save(veterModel);
 
     }
-    public void editVetProfile(Veter veter){
-    }
 
+    public void edit(Veter veter) {
+        Veter veterModel = veterDAO.findVeterByVeterIDAndIsDeletedFalse(veter.getVeterID());
+        veterModel.setIsDeleted(veter.getIsDeleted());
+        veterModel.setUpdatedBy(veter.getUpdatedBy());
+        veterModel.setVeterDescription(veter.getVeterDescription());
+        veterModel.setVeterName(veter.getVeterName());
+        veterModel.setGender(veter.getGender());
+        veterModel.setScheduleList(veter.getScheduleList());
+        veterModel.setLeaveStartDate(veter.getLeaveStartDate());
+        veterModel.setLeaveEndDate(veter.getLeaveEndDate());
+        if (veter.getLeaveStartDate()!=null){
+            veterModel.setOnLeave(true);
+        }
+        veterDAO.save(veterModel);
+    }
 
     public List<Veter> getByVet(Vet vet){
 

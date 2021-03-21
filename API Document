@@ -1,31 +1,31 @@
-1. Dentist Management
+1. Veter Management
 
-- api to get a dentist by dentistid
+- api to get a veter by veterid
 
-	input: Integer DentistID
-	output: Dentist information
+	input: Integer VeterID
+	output: Veter information
 
-- api to add dentist
+- api to add veter
 	Input:
-	1) Integer DentalID
+	1) Integer VetID
 	2){
  		"createdBy": 1,
-		 "dentistName": "Coco",
-  		"dentistDescription": "Good",
+		 "veterName": "Coco",
+  		"veterDescription": "Good",
   		"gender": "Female",
 	     }
        	Output:
 	 Database updated
-	  Message "Dentist added successfully"
+	  Message "Veter added successfully"
 
 
 
-- api to Edit Dentist
+- api to Edit Veter
 	Input
-	{ "dentistID": 3,
+	{ "veterID": 3,
   	"updatedBy": 1,
- 	 "dentistName": "Mr TAN",
-  	"dentistDescription": "Very good",
+ 	 "veterName": "Mr TAN",
+  	"veterDescription": "Very good",
  	 "gender": "Male",
  	 "leaveStartDate": "2021-03-20",
  	"leaveEndDate": "2021-03-20",
@@ -33,19 +33,19 @@
 	}
       	Output:
 	 Database updated
-	  Message "Dentist updated successfully"
+	  Message "Veter updated successfully"
 
 
 2.  Working schedule management
 
-- api to get working schedule by dentistid
-	input: Integer DentistID
-	output: Dentist Schedule information
+- api to get working schedule by veterid
+	input: Integer VeterID
+	output: Veter Schedule information
 
 - api to Edit Schedule
 
 	Input
-	1) Dentist ID
+	1) Veter ID
 	2) Schedule List
 	[
  	 {
@@ -69,5 +69,5 @@
 ]
       	Output:
 	 Database updated
-	  Message "Dentist schedule updated successfully"
+	  Message "Veter schedule updated successfully"
 
