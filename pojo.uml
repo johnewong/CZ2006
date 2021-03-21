@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.example.demo.pojo</OriginalElement>
+  <nodes>
+    <node x="0.0" y="495.5">com.example.demo.pojo.Veter</node>
+    <node x="283.0" y="449.5">com.example.demo.pojo.User</node>
+    <node x="1644.0" y="748.5">com.example.demo.pojo.Treatment</node>
+    <node x="871.5" y="0.0">com.example.demo.pojo.BaseEntity</node>
+    <node x="531.0" y="541.5">com.example.demo.pojo.Vet</node>
+    <node x="867.0" y="576.0">com.example.demo.pojo.Schedule</node>
+    <node x="1383.0" y="691.0">com.example.demo.pojo.VetTreatment</node>
+    <node x="1103.0" y="438.0">com.example.demo.pojo.Appointment</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.example.demo.pojo.Treatment" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-85.5" />
+      <point x="1759.0" y="398.0" />
+      <point x="1063.7142857142858" y="398.0" />
+      <point x="88.71428571428578" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.User" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-384.5" />
+      <point x="397.0" y="408.0" />
+      <point x="915.8571428571429" y="408.0" />
+      <point x="-59.14285714285711" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.Appointment" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-396.0" />
+      <point x="1233.0" y="418.0" />
+      <point x="1004.5714285714286" y="418.0" />
+      <point x="29.571428571428555" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.VetTreatment" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-143.0" />
+      <point x="1503.5" y="408.0" />
+      <point x="1034.142857142857" y="408.0" />
+      <point x="59.14285714285711" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.Veter" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-338.5" />
+      <point x="131.5" y="398.0" />
+      <point x="886.2857142857142" y="398.0" />
+      <point x="-88.71428571428578" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.Vet" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-292.5" />
+      <point x="689.0" y="418.0" />
+      <point x="945.4285714285714" y="418.0" />
+      <point x="-29.571428571428555" y="189.0" />
+    </edge>
+    <edge source="com.example.demo.pojo.Schedule" target="com.example.demo.pojo.BaseEntity">
+      <point x="0.0" y="-258.0" />
+      <point x="0.0" y="189.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="981.1666666666665" y="407.58333333333326" />
+  <SelectedNodes>
+    <node>com.example.demo.pojo.Schedule</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
