@@ -34,14 +34,13 @@ public class AppointmentService {
         return appointmentDAO.findByAppointmentNumberAndIsDeletedFalse(appointmentnumber);
     }
 
-    public List<Appointment> getByPatientID(Integer patientid) {
-        return appointmentDAO.findByPatientIDAndIsDeletedFalse(patientid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+    public List<Appointment> getByCustomerID(Integer customerid) {
+        return appointmentDAO.findByCustomerIDAndIsDeletedFalse(customerid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
 
-    public  List<AppointmentInfo> getByVetID(Integer vetid) {
+    public List<AppointmentInfo> prepareAppointmentInfo(List<Appointment> appointmentList){
         List<AppointmentInfo> AppointInfoList = new ArrayList<>();
-        List<Appointment> appointmentList = appointmentDAO.findByVetIDAndIsDeletedFalse(vetid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
-        for(Appointment aitem: appointmentList){
+         for(Appointment aitem: appointmentList){
 
             AppointmentInfo Info = new AppointmentInfo();
             Info.setAppointment(aitem);
@@ -55,7 +54,7 @@ public class AppointmentService {
 
             Info.setAppointmentStatusFormat(StatusType.getValue(aitem.getStatus()));
 
-            User user = accountService.getByUserID(aitem.getPatientID());
+            User user = accountService.getByUserID(aitem.getCustomerID());
             Info.setCustomer(user);
 
             Veter veter = veterService.getByVeterID(aitem.getVeterID());
@@ -70,6 +69,20 @@ public class AppointmentService {
 
         return AppointInfoList;
     }
+
+    public  List<AppointmentInfo> getByVetID(Integer vetid) {
+        List<Appointment> appointmentList = appointmentDAO.findByVetIDAndIsDeletedFalse(vetid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
+
+        return     prepareAppointmentInfo(appointmentList);
+    }
+
+    public  List<AppointmentInfo> getByCustomerIDAndMoreThanNow(Integer userid) {
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        List<Appointment> appointmentList = appointmentDAO.findByCustomerIDAndMoreThanNowAndIsDeletedFalse(userid,date);
+
+        return     prepareAppointmentInfo(appointmentList);
+    }
+
     public List<Appointment> getByVetIDAndVeterIDAndDate(Integer vetid, Integer veterid, Date date) {
         return appointmentDAO.findByVetIDAndAppointmentDateAndIsDeletedFalse(vetid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));
     }
@@ -101,7 +114,7 @@ public class AppointmentService {
         appointmentModel.setUpdatedDate(updatedDate);
         appointmentDAO.save(appointmentModel);
 
-       /* User user = accountService.getByUserID(appointmentModel.getPatientID());
+       /* User user = accountService.getByUserID(appointmentModel.getCustomerID());
         if(user != null){
             String subject = "AppName";
             String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
@@ -130,7 +143,7 @@ public class AppointmentService {
         appointmentModel.setUpdatedDate(updatedDate);
         appointmentDAO.save(appointmentModel);
 
-     //   User user = accountService.getByUserID(appointmentModel.getPatientID());
+     //   User user = accountService.getByUserID(appointmentModel.getCustomerID());
       //  if(user != null){
        //     String subject = "AppName";
        //     String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
@@ -175,7 +188,7 @@ public class AppointmentService {
         Vet vetModel = vetService.getByVetID(vetid);
         Set<Veter> veterList = vetModel.getVeterList();
         Set<VetTreatment> vetTreatment = vetModel.getVetTreatmentList();
-        
+
         float TreatmentDuration = 0.5f;
         for(VetTreatment element: vetTreatment){
             if(element.getTreatmentID() == treatmentid){
@@ -271,8 +284,8 @@ public class AppointmentService {
             appointmentModel.setVetID(appointment.getVetID());
             appointmentModel.setVeterID(appointment.getVeterID());
             appointmentModel.setVetID(appointment.getVetID());
-            appointmentModel.setPatientID(appointment.getPatientID());
-            appointmentModel.setPatientName(appointment.getPatientName());
+            appointmentModel.setCustomerID(appointment.getCustomerID());
+            appointmentModel.setCustomerName(appointment.getCustomerName());
             appointmentModel.setCreatedBy(appointment.getCreatedBy());
             appointmentModel.setCreatedDate(appointment.getCreatedDate());
             appointmentModel.setTreatmentID(appointment.getTreatmentID());

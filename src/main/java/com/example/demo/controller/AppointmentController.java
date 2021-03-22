@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Appointment;
 import com.example.demo.service.AppointmentService;
+import com.example.demo.viewmodel.AppointmentInfo;
 import com.example.demo.viewmodel.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,10 +24,10 @@ public class AppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @ApiOperation(value = "api to get all appointment by patientid")
-    @GetMapping("/patient/{patientid}")
-    public List<Appointment> getByPatientID(@PathVariable("patientid") Integer patientid) throws Exception {
-        return appointmentService.getByPatientID(patientid);
+    @ApiOperation(value = "api to get all appointment by customerid")
+    @GetMapping("/customer/{customerid}")
+    public  List<AppointmentInfo>   getByCustomerIDAndMoreThanNow(@PathVariable("userid") Integer userid) throws Exception {
+        return  appointmentService.getByCustomerIDAndMoreThanNow(userid);
     }
 
     @ApiOperation(value = "api to get an appointment by appointmentid", notes = "", response = Appointment.class)

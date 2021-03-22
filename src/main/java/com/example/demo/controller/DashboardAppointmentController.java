@@ -23,7 +23,6 @@ public class DashboardAppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @CrossOrigin
     @ApiOperation(value = "api to get list of appointment by vetid")
     @GetMapping("/{vetid}")
     public  List<AppointmentInfo> getByVetID(@PathVariable("vetid") Integer vetid) throws Exception {

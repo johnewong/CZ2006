@@ -64,7 +64,7 @@ public class AccountController {
         return user;
     }
 
-    @ApiOperation("api to add a user - UserType: 0 = patient, 1= admin; Gender: 0 = Male, 1 = Female")
+    @ApiOperation("api to add a user - UserType: 0 = customer, 1= admin; Gender: 0 = Male, 1 = Female")
     @PostMapping("/user")
     public Object add(@RequestBody User user) throws Exception {
 

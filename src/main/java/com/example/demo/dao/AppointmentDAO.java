@@ -13,9 +13,17 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
 
     Appointment findByAppointmentNumberAndIsDeletedFalse(String AppointmentNumber);
     Appointment findByAppointmentIDAndIsDeletedFalse(Integer AppointmentID);
-    List<Appointment> findByPatientIDAndIsDeletedFalse(Integer patientID,Sort sort);
+    List<Appointment> findByCustomerIDAndIsDeletedFalse(Integer customerID,Sort sort);
     List<Appointment> findByVetIDAndIsDeletedFalse(Integer vetID,Sort sort);
     List<Appointment> findByVetIDAndAppointmentDateAndIsDeletedFalse(Integer vetID, Date appointmentDate, Sort sort);
+
+    @Query(value = "select * from Appointment a where " +
+            "and a.custID = :custID " +
+            "and a.isDeleted = false and a.status != 2 and a.status !=3 and a.appointmentDate > :Now " +
+            "order by a.appointmentDate desc"
+            , nativeQuery = true)
+    List<Appointment> findByCustomerIDAndMoreThanNowAndIsDeletedFalse(@Param("custID") Integer custid,
+                                                                      @Param("Now") String Now);
 
     @Query(value = "select * from Appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID " +

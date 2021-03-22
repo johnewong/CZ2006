@@ -26,11 +26,11 @@ public class Appointment extends BaseEntity{
     @Column(name = "appointmentendtime")
     private Date appointmentEndTime;
 
-    @Column(name = "patientid")
-    private Integer patientID;
+    @Column(name = "customerid")
+    private Integer customerID;
 
-    @Column(name = "patientname")
-    private String patientName;
+    @Column(name = "customername")
+    private String customerName;
 
     @Column(name = "status")
     private Integer status;
@@ -84,20 +84,20 @@ public class Appointment extends BaseEntity{
         this.appointmentEndTime = appointmentEndTime;
     }
 
-    public Integer getPatientID() {
-        return this.patientID;
+    public Integer getCustomerID() {
+        return this.customerID;
     }
 
-    public void setPatientID(Integer patientID) {
-        this.patientID = patientID;
+    public void setCustomerID(Integer customerID) {
+        this.customerID = customerID;
     }
 
-    public String getPatientName() {
-        return this.patientName;
+    public String getCustomerName() {
+        return this.customerName;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public Integer getStatus() {
