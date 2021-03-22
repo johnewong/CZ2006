@@ -20,9 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "account")
 public class AccountController {
-    /**
-     *
-     */
+
     @Autowired
     AccountService accountService;
 
@@ -74,7 +72,11 @@ public class AccountController {
 
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
     @GetMapping("/user/name/{name}")
-
+    /**
+     * This method gets a user by username.
+     * @param name username.
+     * @return user.
+     */
 
     public User getByUserName(@PathVariable("name") String name) throws Exception {
         User user = accountService.getByUserName(name);
