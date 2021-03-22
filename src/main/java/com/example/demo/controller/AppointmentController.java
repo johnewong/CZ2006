@@ -50,7 +50,7 @@ public class AppointmentController {
     @ApiOperation(value = "api to get available slot by vetid and treatment and date. Date format = yyyy-MM-dd", notes = "", response = Appointment.class)
     @GetMapping("/{vetid}/{treatmentid}/{date}")
     /**
-     * THis method gets available slot by vet ID, treatment ID and date.
+     * This method gets available slot by vet ID, treatment ID and date.
      * @param vetid vet ID.
      * @param treatmentid treatment ID.
      * @param date date.
@@ -67,7 +67,7 @@ public class AppointmentController {
     @ApiOperation(value = "api to cancel an appointment by appointmentid", notes = "", response = Appointment.class)
     @PostMapping("/cancel")
     /**
-     * THis method cancels an appointment by appointment ID.
+     * This method cancels an appointment by appointment ID.
      * @param appointmentid appointment ID.
      * @return false the appointment status.
      */
@@ -80,7 +80,7 @@ public class AppointmentController {
     @ApiOperation(value = "api to add an appointment by appointmentid", notes = "", response = Appointment.class)
     @PostMapping("/add")
     /**
-     * THis method adds an appointment.
+     * This method adds an appointment.
      * @param appointment appointment information.
      * @return message "Appointment added successfully".
      */

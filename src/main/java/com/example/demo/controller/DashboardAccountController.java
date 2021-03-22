@@ -36,6 +36,11 @@ public class DashboardAccountController {
 
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
     @GetMapping("/user/name/{name}")
+    /**
+     * This method gets a user information by username.
+     * @param name username.
+     * @return user information.
+     */
     public User getByUserName(@PathVariable("name") String name) throws Exception {
         User user = accountService.getByUserName(name);
         return user;
