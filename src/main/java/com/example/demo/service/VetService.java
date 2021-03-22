@@ -14,21 +14,38 @@ public class VetService {
     @Autowired
     VetDAO vetDAO;
 
+    /**
+     * Method to get all vets
+     * @return list of vets
+     */
     public List<Vet> listall() {
 
         return vetDAO.findAll(Sort.by(Sort.Direction.ASC, "vetName"));
     }
 
+    /**
+     * Method to get all undeleted vets
+     * @return list of undeleted vets
+     */
     public List<Vet> list() {
 
         return vetDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.ASC, "vetName"));
     }
 
+    /**
+     * Method to get vet by betid
+     * @param vetid
+     * @return vet
+     */
     public Vet getByVetID(Integer vetid) {
 
         return vetDAO.findByVetIDAndIsDeletedFalse(vetid);
     }
 
+    /**
+     * Method to edit vet profile
+     * @param vet
+     */
     public void editVetProfile(Vet vet){
 
         Date updatedDate = new Date();

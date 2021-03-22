@@ -27,9 +27,22 @@ public class AppointmentService {
 
     //public void add(Appointment appointment){ appointmentDAO.save(appointment); }
 
+    /**
+     * Method to get appointment by its appointmentID
+     *
+     * @param appointmentid
+     * @return appointment
+     */
     public Appointment getByAppointmentID(Integer appointmentid) {
         return appointmentDAO.findByAppointmentIDAndIsDeletedFalse(appointmentid);
     }
+
+    /**
+     * Method to get appointment by its appointment number
+     *
+     * @param appointmentnumber
+     * @return
+     */
     public Appointment getByAppointmentNumber(String appointmentnumber) {
         return appointmentDAO.findByAppointmentNumberAndIsDeletedFalse(appointmentnumber);
     }
@@ -37,6 +50,15 @@ public class AppointmentService {
     public List<Appointment> getByCustomerID(Integer customerid) {
         return appointmentDAO.findByCustomerIDAndIsDeletedFalse(customerid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
     }
+
+    /**
+     * Method to list down appointment information
+     * (Date, appointment start time and end time,
+     * status, customer, veter and treatment)
+     *
+     * @param appointmentList
+     * @return list of appointment information
+     */
 
     public List<AppointmentInfo> prepareAppointmentInfo(List<Appointment> appointmentList){
         List<AppointmentInfo> AppointInfoList = new ArrayList<>();
@@ -70,12 +92,24 @@ public class AppointmentService {
         return AppointInfoList;
     }
 
+    /**
+     * Method to get all appointments by Vetid
+     *
+     * @param vetid
+     * @return appointment list for specific vet
+     */
     public  List<AppointmentInfo> getByVetID(Integer vetid) {
         List<Appointment> appointmentList = appointmentDAO.findByVetIDAndIsDeletedFalse(vetid,Sort.by(Sort.Direction.DESC, "appointmentDate"));
 
         return     prepareAppointmentInfo(appointmentList);
     }
 
+    /**
+     * Method to get future appointment by userid
+     *
+     * @param userid
+     * @return list of future appointments
+     */
     public  List<AppointmentInfo> getByCustomerIDAndMoreThanNow(Integer userid) {
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         List<Appointment> appointmentList = appointmentDAO.findByCustomerIDAndMoreThanNowAndIsDeletedFalse(userid,date);
@@ -86,16 +120,46 @@ public class AppointmentService {
     public List<Appointment> getByVetIDAndVeterIDAndDate(Integer vetid, Integer veterid, Date date) {
         return appointmentDAO.findByVetIDAndAppointmentDateAndIsDeletedFalse(vetid,date,Sort.by(Sort.Direction.DESC, "appointmentStartTime"));
     }
+
+    /**
+     * Method to get appointments by vetid, veterid and
+     * appointment date and time
+     *
+     * @param vetid
+     * @param veterid
+     * @param AppointDate
+     * @param StartTime
+     * @param EndTime
+     * @return appointments
+     */
     public List<Appointment> getByVetIDAndVeterIDAndPeriod(Integer vetid,Integer veterid,Date AppointDate, Date StartTime, Date EndTime){
         return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid,veterid,AppointDate,StartTime,EndTime);
 
     }
 
+    /**
+     * Method to get appointments other than appointments
+     * by vetid, veterid and appointment date and time
+     *
+     * @param vetid
+     * @param veterid
+     * @param AppointDate
+     * @param StartTime
+     * @param EndTime
+     * @param AppointmentID
+     * @return appointments
+     */
     public List<Appointment> getByVetIDAndVeterIDAndPeriodAndNotInID(Integer vetid,Integer veterid,Date AppointDate, Date StartTime, Date EndTime, Integer AppointmentID){
         return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalseAndNotInID(vetid,veterid,AppointDate,StartTime,EndTime,AppointmentID);
 
     }
 
+    /**
+     * Method to cancel appointment by appointmentid
+     *
+     * @param appointmnetid
+     * @return false if appointment not exist or already canceled or expired
+     */
     public Boolean cancelAppointmentByID(Integer appointmnetid){
         Date updatedDate = new Date();
 
@@ -125,6 +189,12 @@ public class AppointmentService {
         return true;
     }
 
+    /**
+     * Method to cancel appointment by appointmentNumber
+     *
+     * @param appointmentNumber
+     * @return false if appointment not exist or already canceled or expired
+     */
     public Boolean cancelAppointmentByNumber(String appointmentNumber){
         Date updatedDate = new Date();
 
@@ -154,6 +224,12 @@ public class AppointmentService {
         return true;
     }
 
+    /**
+     * Method to edit appointment
+     *
+     * @param appointment
+     * @return true if edit successfully, false if not
+     */
     public Boolean edit(Appointment appointment){
         Date updatedDate = new Date();
 
@@ -179,7 +255,13 @@ public class AppointmentService {
         return true;
     }
 
-
+    /**
+     * Method to get available slot by vetid, treatmentid and date
+     * @param vetid
+     * @param treatmentid
+     * @param date
+     * @return available veter slot
+     */
     public List<VeterSlot> getAvailableSlotByVetIDAndTreatmentID(Integer vetid, Integer treatmentid, Date date)  {
 
         Integer dateofweek = date.getDay();
@@ -269,6 +351,12 @@ public class AppointmentService {
 
     }
 
+    /**
+     * Method to add an appoinement
+     *
+     * @param appointment
+     * @return true if added successfully, false if failed
+     */
     public boolean addAppointment(Appointment appointment){
 
         List<Appointment> list = getByVetIDAndVeterIDAndPeriod(appointment.getVetID(),appointment.getVeterID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime());
