@@ -20,14 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "account")
 public class AccountController {
-    /**
-     *
-     *
-     *
-     *
-     *
-     *
-     */
+
     @Autowired
     AccountService accountService;
 
@@ -36,6 +29,11 @@ public class AccountController {
 
     @ApiOperation(value = "api to login")
     @PostMapping("/user/login")
+    /**
+     * This method determines whether the username and password are correct for login.
+     * @param loginInfo the input username and password.
+     * @return related user or show message"Credential not valid".
+     */
     public Object login(@RequestBody LoginInfo loginInfo) throws Exception {
         User UserModel = accountService.login(loginInfo.getUsername(), loginInfo.getPassword(), RoleType.Customer.name());
         if(UserModel == null){
@@ -48,6 +46,11 @@ public class AccountController {
 
     @ApiOperation(value = "api to edit profile")
     @PostMapping("/user/profile")
+    /**
+     * This method updates a edited user profile.
+     * @param user the edited user profile.
+     * @return message "User profile updated successfully".
+     */
     public Object editProfile(@RequestBody User user) throws Exception {
         accountService.save(user);
         return new ResponseEntity("User profile updated successfully", HttpStatus.OK);
@@ -55,6 +58,11 @@ public class AccountController {
 
     @ApiOperation(value = "api to get all users")
     @GetMapping("/user/all")
+    /**
+     * This method gets all users
+     * @return all users
+     */
+
     public List<User> listAll() throws Exception {
 
         System.out.println("get all user api !!");
@@ -64,6 +72,12 @@ public class AccountController {
 
     @ApiOperation(value = "api to get a user by username", notes = "", response = User.class)
     @GetMapping("/user/name/{name}")
+    /**
+     * This method gets a user by username.
+     * @param name username.
+     * @return user.
+     */
+
     public User getByUserName(@PathVariable("name") String name) throws Exception {
         User user = accountService.getByUserName(name);
         return user;
@@ -71,6 +85,11 @@ public class AccountController {
 
     @ApiOperation("api to add a user - UserType: 0 = customer, 1= admin; Gender: 0 = Male, 1 = Female")
     @PostMapping("/user")
+    /**
+     * This method add new users.
+     * @param user new user information.
+     * @return message "New user added successfully" or "User is existed".
+     */
     public Object add(@RequestBody User user) throws Exception {
 
         boolean status = accountService.add(user);
@@ -84,6 +103,12 @@ public class AccountController {
 
     @ApiOperation("api to forget password function")
     @PostMapping("/user/forgetpassword")
+    /**
+     * This method sends new password to user email.
+     * @param email the email address which will receive the new password.
+     * @return message "Sent".
+     */
+
     public Object forgetpassword(@RequestBody EmailInfo email) throws Exception {
         String emailaddress = email.getEmailaddress();
         String newpassword = accountService.generateStrongPassword();
