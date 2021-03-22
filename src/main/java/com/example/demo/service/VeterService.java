@@ -15,6 +15,7 @@ public class VeterService {
     VeterDAO veterDAO;
 
     public Veter getByVeterID(Integer dentaild){
+
         return veterDAO.findVeterByVeterIDAndIsDeletedFalse(dentaild);
     }
 
@@ -26,8 +27,8 @@ public class VeterService {
         veterModel.setVeterDescription(veter.getVeterDescription());
         veterModel.setVet(vet);
         veterModel.setGender(veter.getGender());
-        veterModel.setCreatedDate(updatedDate);
-        veterModel.setCreatedBy(vet.getCreatedBy());
+        veterModel.setUpdatedDate(updatedDate);
+        veterModel.setUpdatedBy(vet.getUpdatedBy());
         veterModel.setIsDeleted(false);
 
         veterDAO.save(veterModel);

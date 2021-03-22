@@ -84,4 +84,6 @@ public class AccountController {
         emailService.send(emailaddress,subject,body);
         return new ResponseEntity("Sent", HttpStatus.OK);
     }
+
+    
 }
