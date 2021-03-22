@@ -34,11 +34,7 @@ public class Schedule extends BaseEntity{
     @Column(name = "endtime")
     private Date endTime;
 
-    @Column(name = "breakstarttime")
-    private Date breakStartTime;
 
-    @Column(name = "breakendtime")
-    private Date breakEndTime;
 
     public Integer getScheduleID() {
         return this.scheduleID;
@@ -80,20 +76,6 @@ public class Schedule extends BaseEntity{
         this.endTime = endTime;
     }
 
-    public Date getBreakStartTime() {
-        return this.breakStartTime;
-    }
-
-    public void setBreakStartTime(Date breakStartTime) {
-        this.breakStartTime = breakStartTime;
-    }
-    public Date getBreakEndTime() {
-        return this.breakEndTime;
-    }
-
-    public void setBreakEndTime(Date breakEndTime) {
-        this.breakEndTime = breakEndTime;
-    }
 
     public Veter getVeter() { return veter; }
 
