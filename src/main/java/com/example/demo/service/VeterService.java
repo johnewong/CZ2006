@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.ScheduleDAO;
 import com.example.demo.dao.VeterDAO;
+import com.example.demo.pojo.Schedule;
 import com.example.demo.pojo.Vet;
 import com.example.demo.pojo.Veter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ import java.util.List;
 public class VeterService {
     @Autowired
     VeterDAO veterDAO;
-
+    @Autowired
+    ScheduleDAO scheduleDAO;
     public Veter getByVeterID(Integer dentaild){
 
         return veterDAO.findVeterByVeterIDAndIsDeletedFalse(dentaild);
@@ -35,20 +38,38 @@ public class VeterService {
 
     }
 
-    public void edit(Veter veter) {
+    public boolean edit(Veter veter) {
         Veter veterModel = veterDAO.findVeterByVeterIDAndIsDeletedFalse(veter.getVeterID());
-        veterModel.setIsDeleted(veter.getIsDeleted());
+        if(veterModel == null){
+            return false;
+        }
         veterModel.setUpdatedBy(veter.getUpdatedBy());
         veterModel.setVeterDescription(veter.getVeterDescription());
         veterModel.setVeterName(veter.getVeterName());
         veterModel.setGender(veter.getGender());
-        veterModel.setScheduleList(veter.getScheduleList());
         veterModel.setLeaveStartDate(veter.getLeaveStartDate());
         veterModel.setLeaveEndDate(veter.getLeaveEndDate());
+
+
+       // veterModel.setScheduleList(veter.getScheduleList());
         if (veter.getLeaveStartDate()!=null){
             veterModel.setOnLeave(true);
         }
         veterDAO.save(veterModel);
+
+
+         for(Schedule sitem : veterModel.getScheduleList()){
+             sitem.setIsDeleted(true);
+             scheduleDAO.save(sitem);
+         }
+
+        for(Schedule sitem : veter.getScheduleList()){
+            sitem.setVeter(veterModel);
+            scheduleDAO.save(sitem);
+        }
+
+
+        return true;
     }
 
     public List<Veter> getByVet(Vet vet){
