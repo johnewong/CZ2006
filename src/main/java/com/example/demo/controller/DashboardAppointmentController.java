@@ -25,6 +25,11 @@ public class DashboardAppointmentController {
 
     @ApiOperation(value = "api to get list of appointment by vetid")
     @GetMapping("/{vetid}")
+    /**
+     * This method return the appointment list by vet ID.
+     * @param vetid vet ID.
+     * @return this vet's all appointments.
+     */
     public  List<AppointmentInfo> getByVetID(@PathVariable("vetid") Integer vetid) throws Exception {
         return  appointmentService.getByVetID(vetid);
     }
