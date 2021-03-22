@@ -19,6 +19,7 @@ public class Vet extends BaseEntity{
     private String vetName;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "vet", fetch = FetchType.EAGER)
+    @OrderBy("veterName ASC")
     private Set<Veter> veterList;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "vet", fetch = FetchType.EAGER)

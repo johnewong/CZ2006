@@ -175,7 +175,7 @@ public class AppointmentService {
         Vet vetModel = vetService.getByVetID(vetid);
         Set<Veter> veterList = vetModel.getVeterList();
         Set<VetTreatment> vetTreatment = vetModel.getVetTreatmentList();
-
+        
         float TreatmentDuration = 0.5f;
         for(VetTreatment element: vetTreatment){
             if(element.getTreatmentID() == treatmentid){

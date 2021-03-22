@@ -47,14 +47,14 @@ public class DashboardVeterController {
     }
 
     @ApiOperation(value = "api to edit veter profile")
-    @PostMapping("/edit/profile")
+    @PostMapping("/edit")
     public Object editProfile(@RequestBody Veter veter) throws Exception {
         boolean status = veterService.edit(veter);
         if(status){
 
-            return new ResponseEntity("Veter  profile updated successfully", HttpStatus.OK);
+            return new ResponseEntity("Veterinarian  profile updated successfully", HttpStatus.OK);
         }
-        return new ResponseEntity("Veter  profile updated fail", HttpStatus.OK);
+        return new ResponseEntity("Veterinarian  profile updated fail", HttpStatus.OK);
     }
 
 
