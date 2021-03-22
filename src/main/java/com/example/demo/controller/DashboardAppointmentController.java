@@ -47,7 +47,7 @@ public class DashboardAppointmentController {
     }
 
     @ApiOperation(value = "api to edit appointment")
-    @PostMapping("/")
+    @PostMapping("/edit")
     public Object edit(@RequestBody Appointment appointment) throws Exception {
 
         Boolean status = appointmentService.edit(appointment);
@@ -66,4 +66,6 @@ public class DashboardAppointmentController {
         List<VeterSlot> veterSlots = appointmentService.getAvailableSlotByVetIDAndTreatmentID(vetid,treatmentid,formatdate);
         return veterSlots;
     }
+
+
 }

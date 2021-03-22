@@ -25,14 +25,14 @@ public class DashboardVeterController {
 
     @ApiOperation(value = "api to get a veter by veterid", notes = "", response = Veter.class)
     @GetMapping("/{veterid}")
-    public Veter getByID(@PathVariable("veterid") Integer veterlid) throws Exception {
-        Veter veter = veterService.getByVeterID(veterlid);
+    public Veter getByID(@PathVariable("veterid") Integer veterid) throws Exception {
+        Veter veter = veterService.getByVeterID(veterid);
         return veter;
     }
 
     @ApiOperation(value = "api to get list of veter by vetid", notes = "", response = Veter.class)
     @GetMapping("/vet/{vetid}")
-    public List<Veter> getByVetID(@PathVariable("vetid") Integer vetid) throws Exception {
+        public List<Veter> getByVetID(@PathVariable("vetid") Integer vetid) throws Exception {
         Vet vet = vetService.getByVetID(vetid);
         List<Veter> veter = veterService.getByVet(vet);
         return veter;
@@ -47,7 +47,7 @@ public class DashboardVeterController {
     }
 
     @ApiOperation(value = "api to edit veter profile")
-    @PostMapping("/veter/profile")
+    @PostMapping("/edit/profile")
     public Object editProfile(@RequestBody Veter veter) throws Exception {
         veterService.edit(veter);
         return new ResponseEntity("Veter  profile updated successfully", HttpStatus.OK);

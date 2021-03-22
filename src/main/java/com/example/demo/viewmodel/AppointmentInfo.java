@@ -18,7 +18,27 @@ public class AppointmentInfo {
 
     String appointmentStatusFormat;
 
-    String appointmentTimeFormat;
+    String appointmentStartTimeFormat;
+
+
+
+    String appointmentEndTimeFormat;
+    public String getAppointmentStartTimeFormat() {
+        return appointmentStartTimeFormat;
+    }
+
+    public void setAppointmentStartTimeFormat(String appointmentStartTimeFormat) {
+        this.appointmentStartTimeFormat = appointmentStartTimeFormat;
+    }
+
+    public String getAppointmentEndTimeFormat() {
+        return appointmentEndTimeFormat;
+    }
+
+    public void setAppointmentEndTimeFormat(String appointmentEndTimeFormat) {
+        this.appointmentEndTimeFormat = appointmentEndTimeFormat;
+    }
+
     public String getAppointmentStatusFormat() {
         return appointmentStatusFormat;
     }
@@ -27,13 +47,7 @@ public class AppointmentInfo {
         this.appointmentStatusFormat = appointmentStatusFormat;
     }
 
-    public String getAppointmentTimeFormat() {
-        return appointmentTimeFormat;
-    }
 
-    public void setAppointmentTimeFormat(String appointmentTimeFormat) {
-        this.appointmentTimeFormat = appointmentTimeFormat;
-    }
 
     public Treatment getTreatment() {
         return treatment;

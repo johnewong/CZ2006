@@ -46,11 +46,12 @@ public class AppointmentService {
             AppointmentInfo Info = new AppointmentInfo();
             Info.setAppointment(aitem);
 
-            SimpleDateFormat localDateFormat = new SimpleDateFormat("dd MMMM yyyy");
+            SimpleDateFormat localDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Info.setAppointmentDateFormat(localDateFormat.format(aitem.getAppointmentDate()));
 
             SimpleDateFormat localTimeFormat = new SimpleDateFormat("HH:mm");
-            Info.setAppointmentTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()) + "-" + localTimeFormat.format(aitem.getAppointmentEndTime()) );
+            Info.setAppointmentStartTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()));
+            Info.setAppointmentEndTimeFormat(localTimeFormat.format(aitem.getAppointmentEndTime()) );
 
             Info.setAppointmentStatusFormat(StatusType.getValue(aitem.getStatus()));
 
@@ -74,6 +75,11 @@ public class AppointmentService {
     }
     public List<Appointment> getByVetIDAndVeterIDAndPeriod(Integer vetid,Integer veterid,Date AppointDate, Date StartTime, Date EndTime){
         return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid,veterid,AppointDate,StartTime,EndTime);
+
+    }
+
+    public List<Appointment> getByVetIDAndVeterIDAndPeriodAndNotInID(Integer vetid,Integer veterid,Date AppointDate, Date StartTime, Date EndTime, Integer AppointmentID){
+        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalseAndNotInID(vetid,veterid,AppointDate,StartTime,EndTime,AppointmentID);
 
     }
 
@@ -124,13 +130,13 @@ public class AppointmentService {
         appointmentModel.setUpdatedDate(updatedDate);
         appointmentDAO.save(appointmentModel);
 
-        User user = accountService.getByUserID(appointmentModel.getPatientID());
-        if(user != null){
-            String subject = "AppName";
-            String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
-            emailService.send(user.getEmailAddress(),subject,body);
+     //   User user = accountService.getByUserID(appointmentModel.getPatientID());
+      //  if(user != null){
+       //     String subject = "AppName";
+       //     String body = "Dear customer, \n\nYour appointment is cancelled. \nAppointment Number: " + appointmentModel.getAppointmentNumber();
+       //     emailService.send(user.getEmailAddress(),subject,body);
 
-        }
+      //  }
 
         return true;
     }
@@ -144,6 +150,14 @@ public class AppointmentService {
             return false;
         }
 
+        List<Appointment> list = getByVetIDAndVeterIDAndPeriodAndNotInID(appointment.getVetID(),appointment.getVeterID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime(),appointment.getAppointmentID());
+        if(list.size()>0){
+            return false;
+        }
+
+        appointmentModel.setAppointmentDate(appointment.getAppointmentDate());
+        appointmentModel.setVeterID(appointment.getVeterID());
+
         appointmentModel.setAppointmentStartTime(appointment.getAppointmentStartTime());
         appointmentModel.setAppointmentEndTime(appointment.getAppointmentEndTime());
         appointmentModel.setUpdatedDate(updatedDate);
@@ -155,10 +169,7 @@ public class AppointmentService {
 
     public List<VeterSlot> getAvailableSlotByVetIDAndTreatmentID(Integer vetid, Integer treatmentid, Date date)  {
 
-        Integer dateofweek = 0;
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        dateofweek = cal.get(cal.DAY_OF_WEEK);
+        Integer dateofweek = date.getDay();
 
       //  Integer dateofweek = date.getDay();
         Vet vetModel = vetService.getByVetID(vetid);
@@ -175,6 +186,16 @@ public class AppointmentService {
 
         List<VeterSlot> veterSlots = new ArrayList<VeterSlot>();
         for(Veter veter : veterList){
+
+            if(veter.getLeaveStartDate() != null && veter.getLeaveEndDate()  != null){
+                if(date.compareTo(veter.getLeaveStartDate()) == 0
+                        || date.compareTo(veter.getLeaveEndDate()) == 0
+                        || (date.compareTo(veter.getLeaveStartDate()) > 0
+                        && date.compareTo(veter.getLeaveEndDate()) <= 0)){
+                    continue;
+                }
+            }
+
 
             VeterSlot veterSlot = new VeterSlot();
             veterSlot.setVeter(veter);
