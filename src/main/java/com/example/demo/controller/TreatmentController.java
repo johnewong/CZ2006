@@ -20,7 +20,8 @@ public class TreatmentController {
     @ApiOperation(value = "api to get all treatment")
     @GetMapping("")
     /**
-     * This
+     * This method gets all treatment.
+     * @return all treatment.
      */
     public List<Treatment> getall() throws Exception {
         return treatmentService.list();
@@ -28,6 +29,11 @@ public class TreatmentController {
 
     @ApiOperation(value = "api to get treatment by id")
     @GetMapping("/{treatmentid}")
+    /**
+     * This method gets treatment by treatment ID;
+     * @param treatmentid treatment ID.
+     * @return treatment.
+     */
     public Treatment getByTreatmentID(@PathVariable("treatmentid") Integer treatmentid) throws Exception {
         return treatmentService.getByTreatmentID(treatmentid);
     }
