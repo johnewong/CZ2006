@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import com.example.demo.dao.VeterDAO;
 import com.example.demo.dao.ScheduleDAO;
-import com.example.demo.pojo.Vet;
-import com.example.demo.pojo.Veter;
 import com.example.demo.pojo.Schedule;
+import com.example.demo.pojo.Veter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.DayOfWeek;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ScheduleService {
@@ -40,8 +38,6 @@ public class ScheduleService {
        scheduleMode.setUpdatedBy(schedule.getUpdatedBy());
        scheduleMode.setStartTime(schedule.getStartTime());
        scheduleMode.setEndTime(schedule.getEndTime());
-       scheduleMode.setBreakStartTime(schedule.getBreakEndTime());
-       scheduleMode.setBreakEndTime(schedule.getBreakEndTime());
        scheduleMode.setVeter(veter);
        scheduleDAO.save(scheduleMode);
 
@@ -69,8 +65,6 @@ public class ScheduleService {
                scheduleMode.setUpdatedBy(newschedule.getUpdatedBy());
                scheduleMode.setStartTime(newschedule.getStartTime());
                scheduleMode.setEndTime(newschedule.getEndTime());
-               scheduleMode.setBreakStartTime(newschedule.getBreakEndTime());
-               scheduleMode.setBreakEndTime(newschedule.getBreakEndTime());
                scheduleDAO.save(scheduleMode);
            } else {
                add(newschedule, veter);
