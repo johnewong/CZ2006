@@ -58,6 +58,17 @@ Press the "+" button below select import JAR and select the jar file under exter
 2. Unblock unsecure app to send email through gmail
 	Follow this link to unblock: https://devanswers.co/allow-less-secure-apps-access-gmail-account/
 
+## Instruction of Docker deployment
+
+1. open the comment for docker in application.properties
+2. run mvn package
+3. run following command to create mysql container
+'''docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=mydb -e MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql:8'''
+4. login db and create tables
+5. run following command to build application image
+'''docker build -t springbootapp .'''
+6. run foolowing command to run application container and link to the db container 
+'''docker run -d -p 8089:8089 --name springbootapp --link mysqldb:mysql springbootapp'''
 
 ## Team Members
 - Weng Yifei  (U1920094F)
