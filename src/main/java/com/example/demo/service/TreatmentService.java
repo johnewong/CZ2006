@@ -14,10 +14,19 @@ public class TreatmentService {
 
     @Autowired TreatmentDAO treatmentDAO;
 
+    /**
+     * Method to get all treatments
+     * @return treatment list
+     */
     public List<Treatment> list() {
         return treatmentDAO.findAllByIsDeletedFalse(Sort.by(Sort.Direction.ASC, "treatmentName"));
     }
 
+    /**
+     * Method to get treatment by treatmentid
+     * @param treatmentid
+     * @return treatment
+     */
     public Treatment getByTreatmentID(Integer treatmentid) {
         return treatmentDAO.findByTreatmentIDAndIsDeletedFalse(treatmentid);
     }

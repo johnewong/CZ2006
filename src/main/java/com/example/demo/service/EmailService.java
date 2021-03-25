@@ -14,6 +14,13 @@ public class EmailService {
     @Autowired
     private Environment env;
 
+    /**
+     * Method to send new password through email to customer if they forgot password
+     *
+     * @param Recipient
+     * @param Subject
+     * @param EmailMessage
+     */
     public void send(String Recipient, String Subject, String EmailMessage) {
         String host = env.getProperty("spring.mail.host");
         String port = env.getProperty("spring.mail.port");

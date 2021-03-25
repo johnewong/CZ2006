@@ -9,6 +9,7 @@ import java.util.Date;
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
 
 public class User extends BaseEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userid")
@@ -34,6 +35,13 @@ public class User extends BaseEntity{
 
     @Column(name = "vetid")
     private Integer vetID;
+    public Integer getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Integer userID) {
+        this.userID = userID;
+    }
 
     public String getPassword() {
         return this.password;
@@ -109,9 +117,6 @@ public class User extends BaseEntity{
     }
 
 
-    public boolean isGender() {
-        return gender;
-    }
 
     public Integer getVetID() {
         return vetID;

@@ -23,9 +23,13 @@ public class DashboardAppointmentController {
     @Autowired
     AppointmentService appointmentService;
 
-    @CrossOrigin
     @ApiOperation(value = "api to get list of appointment by vetid")
     @GetMapping("/{vetid}")
+    /**
+     * This method return the appointment list by vet ID.
+     * @param vetid vet ID.
+     * @return this vet's all appointments.
+     */
     public  List<AppointmentInfo> getByVetID(@PathVariable("vetid") Integer vetid) throws Exception {
         return  appointmentService.getByVetID(vetid);
     }
@@ -40,6 +44,11 @@ public class DashboardAppointmentController {
 
     @ApiOperation(value = "api to cancel an appointment by appointmentNumber", notes = "", response = Appointment.class)
     @PostMapping("/appointmentNumber/cancel")
+    /**
+     * This method cancels an appointment by appointment ID.
+     * @param appointmentid appointment ID.
+     * @return false the appointment status.
+     */
     public Boolean cancelAppointment(@RequestBody String appointmentNumber) throws Exception {
         Boolean status = appointmentService.cancelAppointmentByNumber(appointmentNumber);
 
@@ -48,6 +57,11 @@ public class DashboardAppointmentController {
 
     @ApiOperation(value = "api to edit appointment")
     @PostMapping("/edit")
+    /**
+     * This method edit an appointment.
+     * @param appointment updated appointment.
+     * @return message "Appointment edit successfully" or "Appointment edit failed".
+     */
     public Object edit(@RequestBody Appointment appointment) throws Exception {
 
         Boolean status = appointmentService.edit(appointment);
@@ -60,6 +74,13 @@ public class DashboardAppointmentController {
 
     @ApiOperation(value = "api to get available slot by vetid and treatment and date. Date format = yyyy-MM-dd", notes = "", response = Appointment.class)
     @GetMapping("/{vetid}/{treatmentid}/{date}")
+    /**
+     * This method gets available slot by vet ID, treatment ID and date.
+     * @param vetid vet ID.
+     * @param treatmentid treatment ID.
+     * @param date date.
+     * @return the available slot.
+     */
     public List<VeterSlot> getByVetIDAndTreatmentAndDate(@PathVariable("vetid") Integer vetid, @PathVariable("treatmentid") Integer treatmentid, @PathVariable("date") String date) throws Exception {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date formatdate = format.parse(date);

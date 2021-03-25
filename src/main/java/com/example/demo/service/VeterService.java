@@ -17,11 +17,22 @@ public class VeterService {
     VeterDAO veterDAO;
     @Autowired
     ScheduleDAO scheduleDAO;
-    public Veter getByVeterID(Integer dentaild){
 
-        return veterDAO.findVeterByVeterIDAndIsDeletedFalse(dentaild);
+    /**
+     * This method gets veter information by veter ID.
+     * @param veterid veter ID.
+     * @return veter information.
+     */
+    public Veter getByVeterID(Integer veterid){
+
+        return veterDAO.findVeterByVeterIDAndIsDeletedFalse(veterid);
     }
 
+    /**
+     * This method adds a new veter.
+     * @param veter new veter information.
+     * @param vet   vet information.
+     */
     public void addVeter(Veter veter,Vet vet){
 
         Date updatedDate = new Date();
@@ -38,6 +49,11 @@ public class VeterService {
 
     }
 
+    /**
+     * This method edits the veter profile.
+     * @param veter updated veter information.
+     * @return update status (false/true)
+     */
     public boolean edit(Veter veter) {
         Veter veterModel = veterDAO.findVeterByVeterIDAndIsDeletedFalse(veter.getVeterID());
         if(veterModel == null){
@@ -72,6 +88,11 @@ public class VeterService {
         return true;
     }
 
+    /**
+     * This method get the list of Veters by vet.
+     * @param vet
+     * @return the list of Veters.
+     */
     public List<Veter> getByVet(Vet vet){
 
         return veterDAO.findVeterByVetAndIsDeletedFalse(vet);

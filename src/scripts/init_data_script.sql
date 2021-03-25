@@ -7,7 +7,7 @@ insert into user values('2', 'admin01','admin 01','ef797c8118f02dfb649607dd5d3f8
 insert into treatment values('1', 'Extractions','1','2021-01-01',null,null
                             ,0);
 
-insert into vet_treatment values(1, 1,1,5.2,0,Now(),null,null,0);
+insert into vet_treatment values(1, 1,1,2,0,Now(),null,null,0);
 
 insert into veter_working_schedule values('1', '1','1','1970-01-01 08:00:00','1970-01-01 18:00:00'
                                          ,'1','2021-01-01 00:00:00',null,null,'0');
@@ -35,4 +35,6 @@ insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2
 insert into appointment values('1', 'APPOINT00000001','2021-03-03','1970-01-01 14:00:00','1970-01-01 16:00:00'
                               ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
 insert into appointment values('2', 'APPOINT00000002','2021-03-04','1970-01-01 14:00:00','1970-01-01 16:00:00'
+                              ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
+insert into appointment values('3', 'APPOINT00000003','2021-03-30','1970-01-01 14:00:00','1970-01-01 16:00:00'
                               ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);

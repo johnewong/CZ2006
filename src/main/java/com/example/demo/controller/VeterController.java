@@ -19,6 +19,11 @@ public class VeterController {
 
     @ApiOperation(value = "api to get a vet by vetid", notes = "", response = Vet.class)
     @GetMapping("/{vetid}")
+    /**
+     * This method gets a vet information by vet ID.
+     * @param vetid veter ID.
+     * @return vet information.
+     */
     public Vet getByID(@PathVariable("vetid") Integer vetid) throws Exception {
         Vet vet = vetService.getByVetID(vetid);
         return vet;

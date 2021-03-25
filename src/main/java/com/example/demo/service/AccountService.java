@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Service
 public class AccountService {
 
@@ -31,6 +30,14 @@ public class AccountService {
 
     private static SecureRandom random = new SecureRandom();
 
+    /**
+     * Method to combine all random string
+     * and generate a strong password with
+     * lower case and upper case letter, number
+     * and special characters
+     *
+     * @return return password
+     */
     public static String generateStrongPassword() {
 
         StringBuilder result = new StringBuilder(PASSWORD_LENGTH);
@@ -56,7 +63,15 @@ public class AccountService {
 
         return password;
     }
-
+    /**
+     * Method to generate a random string with
+     * lower case and upper case letter, number
+     * and special characters
+     *
+     * @param input different cases of characters
+     * @param size number of characters (at least 2 char)
+     * @return result string for different cases
+     */
     private static String generateRandomString(String input, int size) {
 
         if (input == null || input.length() <= 0)
@@ -84,41 +99,87 @@ public class AccountService {
     @Autowired
     UserDAO userDAO;
 
-    public User login(String username, String password, String loginType) {
+    /**
+     * Method to determine user group(admin or student)
+     * and verify if correct user credential is entered
+     *
+     * @param username
+     * @param password
+     * @param loginType (admin or student)
+     * @return user object is credential is entered correctly
+     */
+    public User login(String username, String password,String loginType){
         User user = new User();
 
-        if (loginType.equals(RoleType.Admin.name())) {
-            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username, RoleType.Admin.toInt());
-        } else if (loginType.equals(RoleType.Customer.name())) {
-            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username, RoleType.Customer.toInt());
+
+        if(loginType.equals(RoleType.Admin.name())){
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Admin.toInt());
+
+        }else if(loginType.equals(RoleType.Customer.name())){
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Customer.toInt());
+
         }
-        if (user == null) {
+        if (user == null){
             return null;
         }
         String encryptedPwd = EncryptionUtil.encryptPassword(password);
 
-        if (user.getPassword().equals(encryptedPwd)) {
+        if (user.getPassword().equals(encryptedPwd)){
             return user;
         }
 
         return null;
     }
 
-    public boolean resetpwd(String oldpwd, String newpwd) {
+    public boolean resetpwd(String oldpwd, String newpwd){
         return false;
     }
 
+    /**
+     * Method to save user information
+     *
+     * @param user
+     * @return object to userDAO
+     */
     public User save(User user) {
         return userDAO.save(user);
     }
 
+    /**
+     * Method to find all users
+     *
+     * @return list of all users
+     */
     public List<User> listAll() {
         return userDAO.findAll(Sort.by(Sort.Direction.DESC, "userID"));
     }
 
-    public boolean add(User user) {
-        User existedUser = getByUserNameOrEmailAddressOrContactNumberOrIcNumber(user.getUserName(), user.getEmailAddress(), user.getContactNumber(), user.getIcNumber());
-        if (existedUser == null) {
+    /**
+     * Method to check if user exist
+     *
+     * @param userName
+     * @param emailAddress
+     * @param contactNUmber
+     * @param icNumber
+     * @return specific user
+     */
+    public User getByUserNameOrEmailAddressOrContactNumberOrIcNumber(String userName, String emailAddress, String contactNUmber, String icNumber){
+        return  userDAO.findByUserNameOrEmailAddressOrContactNumberOrIcNumberAndIsDeletedFalse(userName, emailAddress, contactNUmber, icNumber);
+    }
+
+    /**
+     * Method to check if user already exist
+     * If not, add to database
+     *
+     * @param user
+     * @return true if added to databse or false if not added to database
+     */
+    public boolean add(User user){
+        Date createdDate = new Date();
+
+        User isUserExisted = getByUserNameOrEmailAddressOrContactNumberOrIcNumber(user.getUserName(), user.getEmailAddress(), user.getContactNumber(), user.getIcNumber());
+        if (isUserExisted == null) {
+
             User userModel = new User();
             userModel.setUserName(user.getUserName());
             userModel.setContactNumber(user.getContactNumber());
@@ -131,21 +192,34 @@ public class AccountService {
             userModel.setUserType(user.getUserType());
             userModel.setIcNumber(user.getIcNumber());
             userModel.setCreatedBy(0);
+            //userModel.setCreatedDate(createdDate);
             userDAO.save(userModel);
             return true;
-        } else return false;
+        }
+
+
+        else return false;
     }
 
+    /**
+     * Method to get user by its username
+     *
+     * @param name
+     * @return user
+     */
     public User getByUserName(String name) {
         return userDAO.findByUserNameAndIsDeletedFalse(name);
     }
 
+    /**
+     * Method to get user by its userID
+     *
+     * @param userid
+     * @return user
+     */
     public User getByUserID(Integer userid) {
         return userDAO.findByUserIDAndIsDeletedFalse(userid);
     }
 
-    private User getByUserNameOrEmailAddressOrContactNumberOrIcNumber(String userName, String emailAddress, String contactNUmber, String icNumber) {
-        return userDAO.findByUserNameOrEmailAddressOrContactNumberOrIcNumberAndIsDeletedFalse(userName, emailAddress, contactNUmber, icNumber);
-    }
 }
 
