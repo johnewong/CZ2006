@@ -24,6 +24,7 @@ This is the repository for backend providing APIs
 Jpa (Java Persistence API)
 
 ### Others
+- Azure Linux VM
 - Apache-tomcat-9
 - Docker
 - Mysql 
@@ -72,6 +73,13 @@ Press the "+" button below select import JAR and select the jar file under exter
 '''docker run -d -p 8089:8089 --name springbootapp --link mysqldb:mysql springbootapp'''
 
 reference:https://medium.com/thecodefountain/develop-a-spring-boot-and-mysql-application-and-run-in-docker-end-to-end-15b7cdf3a2ba
+
+## Instruction of Azure VM access
+1. ssh to vm '''ssh vmadmin@20.188.120.77'''   password:***Ask Yifei***
+2. access db inside docker container '''sudo docker exec -it 2d4409a34db2 /bin/sh'''
+3. run application container and link to db'''sudo docker container run -d -p 80:8089 --name springbootapp5 --link 2d4409a34db2 a11a8dc0f83b'''
+4. view all docker container ''''sudo docker container ls -a'''
+5. start container '''sudo docker container start 2d4409a34db2'''
 
 ## Team Members
 - Weng Yifei  (U1920094F)
