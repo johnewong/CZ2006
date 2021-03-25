@@ -25,6 +25,7 @@ Jpa (Java Persistence API)
 
 ### Others
 - Apache-tomcat-9
+- Docker
 - Mysql 
 - Intellij IDEA 2020.3
 - Maven - package management tool
