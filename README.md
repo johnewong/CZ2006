@@ -70,6 +70,7 @@ Press the "+" button below select import JAR and select the jar file under exter
 '''docker build -t springbootapp .'''
 6. run foolowing command to run application container and link to the db container 
 '''docker run -d -p 8089:8089 --name springbootapp --link mysqldb:mysql springbootapp'''
+reference:https://medium.com/thecodefountain/develop-a-spring-boot-and-mysql-application-and-run-in-docker-end-to-end-15b7cdf3a2ba
 
 ## Team Members
 - Weng Yifei  (U1920094F)
