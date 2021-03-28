@@ -24,7 +24,9 @@ This is the repository for backend providing APIs
 Jpa (Java Persistence API)
 
 ### Others
+- Azure Linux VM
 - Apache-tomcat-9
+- Docker
 - Mysql 
 - Intellij IDEA 2020.3
 - Maven - package management tool
@@ -58,6 +60,26 @@ Press the "+" button below select import JAR and select the jar file under exter
 2. Unblock unsecure app to send email through gmail
 	Follow this link to unblock: https://devanswers.co/allow-less-secure-apps-access-gmail-account/
 
+## Instruction of Docker deployment
+
+1. open the comment for docker in application.properties
+2. run mvn package
+3. run following command to create mysql container
+'''docker run --name mysqldb -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=mydb -e MYSQL_USER=sa -e MYSQL_PASSWORD=password -d mysql:8'''
+4. login db and create tables
+5. run following command to build application image
+'''docker build -t springbootapp .'''
+6. run foolowing command to run application container and link to the db container 
+'''docker run -d -p 8089:8089 --name springbootapp --link mysqldb:mysql springbootapp'''
+
+reference:https://medium.com/thecodefountain/develop-a-spring-boot-and-mysql-application-and-run-in-docker-end-to-end-15b7cdf3a2ba
+
+## Instruction of Azure VM access
+1. ssh to vm '''ssh vmadmin@20.188.120.77'''   password:***Ask Yifei***
+2. access db inside docker container '''sudo docker exec -it 2d4409a34db2 /bin/sh'''
+3. run application container and link to db'''sudo docker container run -d -p 80:8089 --name springbootapp5 --link 2d4409a34db2 a11a8dc0f83b'''
+4. view all docker container ''''sudo docker container ls -a'''
+5. start container '''sudo docker container start 2d4409a34db2'''
 
 ## Team Members
 - Weng Yifei  (U1920094F)
