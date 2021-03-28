@@ -31,8 +31,8 @@ public class AppointmentController {
      * @param userid user ID.
      * @return the appointment list.
      */
-    public  List<AppointmentInfo>   getByCustomerIDAndMoreThanNow(@PathVariable("userid") Integer userid) throws Exception {
-        return  appointmentService.getByCustomerIDAndMoreThanNow(userid);
+    public  List<AppointmentInfo>  getByCustomerIDAndMoreThanNow(@PathVariable("customerid") Integer customerid) throws Exception {
+        return  appointmentService.getByCustomerIDAndMoreThanNow(customerid);
     }
 
     @ApiOperation(value = "api to get an appointment by appointmentid", notes = "", response = Appointment.class)

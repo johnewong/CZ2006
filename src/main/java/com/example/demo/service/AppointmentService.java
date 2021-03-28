@@ -111,7 +111,7 @@ public class AppointmentService {
      * @return list of future appointments
      */
     public  List<AppointmentInfo> getByCustomerIDAndMoreThanNow(Integer userid) {
-        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
         List<Appointment> appointmentList = appointmentDAO.findByCustomerIDAndMoreThanNowAndIsDeletedFalse(userid,date);
 
         return     prepareAppointmentInfo(appointmentList);
