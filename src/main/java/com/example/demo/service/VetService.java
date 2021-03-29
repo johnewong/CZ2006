@@ -2,6 +2,9 @@ package com.example.demo.service;
 
 import com.example.demo.dao.VetDAO;
 import com.example.demo.pojo.Vet;
+import com.example.demo.viewmodel.PublicData;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -62,5 +65,12 @@ public class VetService {
         vetDAO.save(vetModel);
     }
 
+    public void dataProcess(String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        PublicData data = objectMapper.readValue(json, PublicData.class);
+
+
+
+    }
 
 }
