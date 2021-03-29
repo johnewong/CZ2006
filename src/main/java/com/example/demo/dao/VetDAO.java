@@ -9,5 +9,6 @@ public interface VetDAO extends JpaRepository<Vet,Integer>{
 
     Vet findByVetIDAndIsDeletedFalse(Integer veterID);
     List<Vet> findAllByIsDeletedFalse(Sort sort);
+    List<Vet> findByLocationIDAndIsDeletedFalse(Integer locationid);
 
 }

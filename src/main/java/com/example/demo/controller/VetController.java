@@ -1,22 +1,25 @@
 package com.example.demo.controller;
 
+import com.example.demo.pojo.Appointment;
 import com.example.demo.pojo.Vet;
+import com.example.demo.service.AppointmentService;
 import com.example.demo.service.VetService;
+import com.example.demo.viewmodel.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @Api(tags = "Vet management")
 @RestController
 @RequestMapping(value = "vet")
-public class VeterController {
+public class VetController {
     @Autowired
     VetService vetService;
-
+    AppointmentService appointmentService;
     @ApiOperation(value = "api to get a vet by vetid", notes = "", response = Vet.class)
     @GetMapping("/{vetid}")
     /**
@@ -28,6 +31,8 @@ public class VeterController {
         Vet vet = vetService.getByVetID(vetid);
         return vet;
     }
+
+
 
 
 }
