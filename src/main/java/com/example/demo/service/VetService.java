@@ -71,9 +71,8 @@ public class VetService {
         vetDAO.save(vetModel);
     }
 
-    public void dataProcess(String json) throws JsonProcessingException, ParseException {
+    public List<Vet> dataProcess(String json) throws JsonProcessingException, ParseException {
         ObjectMapper objectMapper = new ObjectMapper();
-
         var startTime = new SimpleDateFormat("hh:mm:ss").parse("09:00:00");
         var endTime = new SimpleDateFormat("hh:mm:ss").parse("18:30:00");
 
@@ -93,6 +92,8 @@ public class VetService {
             newVets.add(newVet);
         }
         vetDAO.saveAll(newVets);
+
+        return newVets;
     }
 
     public List<Vet> getByLocationID(Integer locationid) {

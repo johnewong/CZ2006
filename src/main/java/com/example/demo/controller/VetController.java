@@ -50,13 +50,12 @@ public class VetController {
     /**
      * This method gets a public data from gov api
      */
-    public void getPublicData() throws Exception {
+    public List<Vet> getPublicData() throws Exception {
         final String uri = "https://data.gov.sg/api/action/datastore_search?resource_id=b2871270-4eef-44a3-be98-908e2a73b19f";
-
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
-        vetService.dataProcess(result);
 
+        return vetService.dataProcess(result);
     }
 
 
