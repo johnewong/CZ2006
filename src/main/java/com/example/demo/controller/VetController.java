@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Api(tags = "Vet management")
 @RestController
 @RequestMapping(value = "vet")
@@ -30,6 +32,17 @@ public class VetController {
     public Vet getByID(@PathVariable("vetid") Integer vetid) throws Exception {
         Vet vet = vetService.getByVetID(vetid);
         return vet;
+    }
+
+    @ApiOperation(value = "api to get all vet")
+    @GetMapping("/list")
+    /**
+     * This method gets all Vet.
+     * @return vet list.
+     */
+    public List<Vet> getAll() throws Exception {
+        List<Vet> vets= vetService.list();
+        return vets;
     }
 
     @ApiOperation(value = "api to get public data")
