@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.pojo.Vet;
+import com.example.demo.service.AppointmentService;
 import com.example.demo.service.VetService;
+import com.example.demo.viewmodel.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,10 @@ import org.springframework.web.client.RestTemplate;
 @Api(tags = "Vet management")
 @RestController
 @RequestMapping(value = "vet")
-public class VeterController {
+public class VetController {
     @Autowired
     VetService vetService;
-
+    AppointmentService appointmentService;
     @ApiOperation(value = "api to get a vet by vetid", notes = "", response = Vet.class)
     @GetMapping("/{vetid}")
     /**

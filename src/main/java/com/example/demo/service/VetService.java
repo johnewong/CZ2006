@@ -72,5 +72,8 @@ public class VetService {
 
 
     }
+    public List<Vet> getByLocationID(Integer locationid){
 
+        return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);
+    }
 }
