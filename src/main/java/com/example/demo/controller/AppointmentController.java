@@ -66,7 +66,7 @@ public class AppointmentController {
     }
 
     @ApiOperation(value = "api to search Vet by location and Appointment date and treatment", notes = "", response = Appointment.class)
-    @PostMapping("/search/{locationid}/{date}/{treatmentid}")
+    @GetMapping("/search/{locationid}/{date}/{treatmentid}")
     public Object getVetByLocationAndDateAndTreatment(@PathVariable("locationid") Integer locationid, @PathVariable("date") String date, @PathVariable("treatmentid") Integer treatmentid) throws Exception{
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
