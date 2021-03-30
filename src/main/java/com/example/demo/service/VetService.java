@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.VetDAO;
 import com.example.demo.pojo.Vet;
+import com.example.demo.viewmodel.VetLocationRegister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,5 +100,20 @@ public class VetService {
     public List<Vet> getByLocationID(Integer locationid) {
 
         return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);
+    }
+
+    public List<Vet> updateVetLocation(List<VetLocationRegister> info) {
+        var allVets = vetDAO.findAll();
+        var updateVets = new ArrayList<Vet>();
+
+        for (VetLocationRegister vet : info) {
+            var matchVet = allVets.stream().filter(v -> v.getVetId() == vet.VetID).findAny().get();
+            matchVet.setLocationID(vet.LocationID);
+            matchVet.setCoordinate(vet.Coordinate);
+            updateVets.add(matchVet);
+        }
+        vetDAO.saveAll(updateVets);
+
+        return updateVets;
     }
 }

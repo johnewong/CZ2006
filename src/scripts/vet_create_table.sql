@@ -31,6 +31,7 @@ CREATE TABLE `vet` (
                        `OperatingHourStart` datetime NOT NULL,
                        `OperatingHourEnd` datetime NOT NULL,
                        `Postal_code` varchar(10) DEFAULT NULL,
+                       `Coordinate` varchar(20) DEFAULT NULL,
                        `LocationID` int(10) NOT NULL,
                        `Tel_office_1` varchar(10) DEFAULT NULL,
                        `Tel_office_2`varchar(10) DEFAULT NULL,
