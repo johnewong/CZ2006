@@ -2,13 +2,16 @@ package com.example.demo.service;
 
 import com.example.demo.dao.VetDAO;
 import com.example.demo.pojo.Vet;
-import com.example.demo.viewmodel.PublicData;
+import com.example.demo.viewmodel.VetLocationRegister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class VetService {
 
     /**
      * Method to get all vets
+     *
      * @return list of vets
      */
     public List<Vet> listall() {
@@ -28,6 +32,7 @@ public class VetService {
 
     /**
      * Method to get all undeleted vets
+     *
      * @return list of undeleted vets
      */
     public List<Vet> list() {
@@ -37,6 +42,7 @@ public class VetService {
 
     /**
      * Method to get vet by betid
+     *
      * @param vetid
      * @return vet
      */
@@ -47,9 +53,10 @@ public class VetService {
 
     /**
      * Method to edit vet profile
+     *
      * @param vet
      */
-    public void editVetProfile(Vet vet){
+    public void editVetProfile(Vet vet) {
 
         Date updatedDate = new Date();
 
@@ -65,15 +72,48 @@ public class VetService {
         vetDAO.save(vetModel);
     }
 
-    public void dataProcess(String json) throws JsonProcessingException {
+    public List<Vet> dataProcess(String json) throws JsonProcessingException, ParseException {
         ObjectMapper objectMapper = new ObjectMapper();
+        var startTime = new SimpleDateFormat("hh:mm:ss").parse("09:00:00");
+        var endTime = new SimpleDateFormat("hh:mm:ss").parse("18:30:00");
+
         PublicData data = objectMapper.readValue(json, PublicData.class);
+        var records = data.result.records;
 
+        var newVets = new ArrayList<Vet>();
+        for (Record record : records) {
+            Vet newVet = new Vet();
+            newVet.setVetName(record.name);
+            newVet.setVetAddress(record.address);
+            newVet.setOperatingHourStart(startTime);
+            newVet.setOperatingHourEnd(endTime);
+            newVet.setPostal_code(record.postal_code);
+            newVet.setTel_office_1(record.tel_office_1);
+            newVet.setTel_office_2(record.tel_office_2);
+            newVets.add(newVet);
+        }
+        vetDAO.saveAll(newVets);
 
-
+        return newVets;
     }
-    public List<Vet> getByLocationID(Integer locationid){
+
+    public List<Vet> getByLocationID(Integer locationid) {
 
         return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);
+    }
+
+    public List<Vet> updateVetLocation(List<VetLocationRegister> info) {
+        var allVets = vetDAO.findAll();
+        var updateVets = new ArrayList<Vet>();
+
+        for (VetLocationRegister vet : info) {
+            var matchVet = allVets.stream().filter(v -> v.getVetId() == vet.VetID).findAny().get();
+            matchVet.setLocationID(vet.LocationID);
+            matchVet.setCoordinate(vet.Coordinate);
+            updateVets.add(matchVet);
+        }
+        vetDAO.saveAll(updateVets);
+
+        return updateVets;
     }
 }

@@ -43,6 +43,9 @@ public class Vet extends BaseEntity {
     @Column(name = "postal_code")
     private String postal_code;
 
+    @Column(name = "coordinate")
+    private String coordinate;
+
     @Column(name = "locationID")
     private int locationID;
 
@@ -146,6 +149,14 @@ public class Vet extends BaseEntity {
 
     public void setLocationID(int locationID) {
         this.locationID = locationID;
+    }
+
+    public String getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(String coordinate) {
+        this.coordinate = coordinate;
     }
 //    public List<Treatment> getTreatmentList() {
 //        return treatmentList;
