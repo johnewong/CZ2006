@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.Appointment;
 import com.example.demo.service.AppointmentService;
 import com.example.demo.viewmodel.AppointmentInfo;
+import com.example.demo.viewmodel.VetSlot;
 import com.example.demo.viewmodel.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,8 +32,8 @@ public class AppointmentController {
      * @param userid user ID.
      * @return the appointment list.
      */
-    public  List<AppointmentInfo>   getByCustomerIDAndMoreThanNow(@PathVariable("userid") Integer userid) throws Exception {
-        return  appointmentService.getByCustomerIDAndMoreThanNow(userid);
+    public  List<AppointmentInfo>  getByCustomerIDAndMoreThanNow(@PathVariable("customerid") Integer customerid) throws Exception {
+        return  appointmentService.getByCustomerIDAndMoreThanNow(customerid);
     }
 
     @ApiOperation(value = "api to get an appointment by appointmentid", notes = "", response = Appointment.class)
@@ -62,6 +63,17 @@ public class AppointmentController {
         Date formatdate = format.parse(date);
         List<VeterSlot> veterSlots = appointmentService.getAvailableSlotByVetIDAndTreatmentID(vetid,treatmentid,formatdate);
         return veterSlots;
+    }
+
+    @ApiOperation(value = "api to search Vet by location and Appointment date and treatment", notes = "", response = Appointment.class)
+    @GetMapping("/search/{locationid}/{date}/{treatmentid}")
+    public Object getVetByLocationAndDateAndTreatment(@PathVariable("locationid") Integer locationid, @PathVariable("date") String date, @PathVariable("treatmentid") Integer treatmentid) throws Exception{
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        Date formatdate = format.parse(date);
+        List<VetSlot> vetSlots = appointmentService.getVetByLocationAndDateAndTreatment(locationid,treatmentid,formatdate);
+        
+        return vetSlots;
     }
 
     @ApiOperation(value = "api to cancel an appointment by appointmentid", notes = "", response = Appointment.class)
@@ -96,7 +108,6 @@ public class AppointmentController {
         return new ResponseEntity("Appointment slot is not available", HttpStatus.BAD_REQUEST);
 
     }
-
 
 
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 public class BaseEntity {
 
     @Column(name = "createdby")
-    private Integer createdBy;
+    private Integer createdBy = 0;
 
     @CreatedDate
     @Column(name = "createddate")
