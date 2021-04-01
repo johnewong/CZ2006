@@ -31,6 +31,42 @@ public enum LocationMapper {
             return Keppel.value;
         if(number == SouthWest.number)
             return SouthWest.value;
+        if(number == LittleIndia.number)
+            return LittleIndia.value;
+        if(number == Tanglin.number)
+            return Tanglin.value;
+        if(number == Newton.number)
+            return Newton.value;
+        if(number == ToaPayoh.number)
+            return ToaPayoh.value;
+        if(number == CentralEast.number)
+            return CentralEast.value;
+        if(number == Eunos.number)
+            return Eunos.value;
+        if(number == EastCoast.number)
+            return EastCoast.value;
+        if(number == UpperEastCoast.number)
+            return UpperEastCoast.value;
+        if(number == FarEast.number)
+            return FarEast.value;
+        if(number == Tampines.number)
+            return Tampines.value;
+        if(number == NorthEast.number)
+            return NorthEast.value;
+        if(number == AngMoKio.number)
+            return AngMoKio.value;
+        if(number == CentralWest.number)
+            return CentralWest.value;
+        if(number == FarWest.number)
+            return FarWest.value;
+        if(number == NorthWest.number)
+            return NorthWest.value;
+        if(number == FarNorthWest.number)
+            return FarNorthWest.value;
+        if(number == FarNorth.number)
+            return FarNorth.value;
+        if(number == FarNorthEast.number)
+            return FarNorthEast.value;
 
         return "";
     }
