@@ -3,8 +3,7 @@ package com.example.demo.pojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-import java.util.Date;
-
+import java.sql.Timestamp;
 @Entity
 @Table(name = "appointment")
 @JsonIgnoreProperties({ "handler","hibernateLazyInitializer" })
@@ -18,13 +17,13 @@ public class Appointment extends BaseEntity{
     private String appointmentNumber;
 
     @Column(name = "appointmentdate")
-    private Date appointmentDate;
+    private Timestamp appointmentDate;
 
     @Column(name = "appointmentstarttime")
-    private Date appointmentStartTime;
+    private Timestamp appointmentStartTime;
 
     @Column(name = "appointmentendtime")
-    private Date appointmentEndTime;
+    private Timestamp appointmentEndTime;
 
     @Column(name = "customerid")
     private Integer customerID;
@@ -60,27 +59,27 @@ public class Appointment extends BaseEntity{
         this.appointmentNumber = appointmentNumber;
     }
 
-    public Date getAppointmentDate() {
+    public Timestamp getAppointmentDate() {
         return this.appointmentDate;
     }
 
-    public void setAppointmentDate(Date appointmentDate) {
+    public void setAppointmentDate(Timestamp appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 
-    public Date getAppointmentStartTime() {
+    public Timestamp getAppointmentStartTime() {
         return this.appointmentStartTime;
     }
 
-    public void setAppointmentStartTime(Date appointmentStartTime) {
+    public void setAppointmentStartTime(Timestamp appointmentStartTime) {
         this.appointmentStartTime = appointmentStartTime;
     }
 
-    public Date getAppointmentEndTime() {
+    public Timestamp getAppointmentEndTime() {
         return this.appointmentEndTime;
     }
 
-    public void setAppointmentEndTime(Date appointmentEndTime) {
+    public void setAppointmentEndTime(Timestamp appointmentEndTime) {
         this.appointmentEndTime = appointmentEndTime;
     }
 

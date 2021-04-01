@@ -29,7 +29,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             "and a.veterID = :VeterID " +
             "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate " +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
-            "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime))", nativeQuery = true)
+            "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime and a.appointmentEndTime <= :EndTime))", nativeQuery = true)
     List<Appointment> findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(
             @Param("VetID") Integer vetid,
             @Param("VeterID") Integer veterID ,
@@ -42,7 +42,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             "and a.veterID = :VeterID and a.appointmentID != :AppointmentID " +
             "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate " +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
-            "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime))", nativeQuery = true)
+            "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime and a.appointmentEndTime <= :EndTime)))", nativeQuery = true)
     List<Appointment> findByVetIDAndVeterIDAndPeriodAndIsDeletedFalseAndNotInID(
             @Param("VetID") Integer vetid,
             @Param("VeterID") Integer veterID ,
