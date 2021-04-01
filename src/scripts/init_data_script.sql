@@ -14,7 +14,6 @@ insert into treatment values('2', 'Vaccine','1','2021-01-01',null,null
 insert into treatment values('3', 'Hairdressing','1','2021-01-01',null,null
                             ,0);
 
-
 insert into vet_treatment values(1, 1,1,2,0,Now(),null,null,0);
 insert into vet_treatment values(2, 1,2,2,0,Now(),null,null,0);
 insert into vet_treatment values(3, 2,1,2,0,Now(),null,null,0);
@@ -66,15 +65,11 @@ insert into veter_working_schedule values('14', '3','4','1970-01-01 08:00:00','1
 insert into veter_working_schedule values('15', '3','5','1970-01-01 08:00:00','1970-01-01 18:00:00'
                                          ,'1','2021-01-01 00:00:00',null,null,'0');
 
-
-insert into vet values('1', 'testVetName01','Test Vet Description','50 Nanyang Ave, 639798','1970-01-01 08:00:00'
-                      ,'1970-01-01 18:00:00','750231',1,1,'8210000','8210000','1','2021-01-01 00:00:00',null,null,'0');
-insert into vet values('2', 'testVetName02','Test Vet Description','05 Nanyang Ave, 639798','1970-01-01 08:00:00'
-                      ,'1970-01-01 18:00:00','750123',1,1,'8210000','8210000','1','2021-01-01 00:00:00',null,null,'0');
-
 insert into veter values('1', 'Doctor Wang','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
 insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
 insert into veter values('3', 'Doctor Ma','2','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+insert into veter values('4', 'Doctor Wang','65','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+insert into veter values('5', 'Doctor Huang','71','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
 
 insert into appointment values('1', 'APPOINT00000001','2021-03-03','1970-01-01 14:00:00','1970-01-01 16:00:00'
                               ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
