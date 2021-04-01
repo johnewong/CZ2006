@@ -266,8 +266,7 @@ public class AppointmentService {
         List<VetSlot> vetSlotList = new ArrayList<>();
 
         List<Vet> vetlist = vetService.getByLocationID(locationid);
-        for (Vet vet:
-             vetlist) {
+        for (Vet vet : vetlist) {
             List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(),treatmentid,date);
 
             if(veterSlots.size() > 0){
@@ -390,11 +389,14 @@ public class AppointmentService {
             return false;
         }
         else {
+
             Appointment appointmentModel = new Appointment();
+            appointmentModel.setAppointmentNumber(findAppointmentNumber());
+            appointmentModel.setStatus(appointment.getStatus());
+
             appointmentModel.setAppointmentEndTime(appointment.getAppointmentEndTime());
             appointmentModel.setAppointmentDate(appointment.getAppointmentDate());
             appointmentModel.setAppointmentStartTime(appointment.getAppointmentStartTime());
-            appointmentModel.setAppointmentNumber(appointment.getAppointmentNumber());
             appointmentModel.setVetID(appointment.getVetID());
             appointmentModel.setVeterID(appointment.getVeterID());
             appointmentModel.setVetID(appointment.getVetID());
@@ -411,5 +413,16 @@ public class AppointmentService {
         }
 
     }
+    public String findAppointmentNumber() {
+        Appointment lastapp = appointmentDAO.findLastAppointment();
+        String newNumber = "APPOINT00000001";
+        if(lastapp != null){
+            Integer number = Integer.parseInt(lastapp.getAppointmentNumber().replace("APPOINT",""));
+            number = number +1;
+            newNumber = "APPOINT"  + String.format("%08d", number);
+        }
+        return newNumber;
+    }
+
 
 }

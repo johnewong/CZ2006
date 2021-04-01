@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Vet;
 import com.example.demo.service.AppointmentService;
+import com.example.demo.service.LocationData;
 import com.example.demo.service.VetService;
 import com.example.demo.viewmodel.LoginInfo;
 import com.example.demo.viewmodel.VetLocationRegister;
@@ -44,6 +45,16 @@ public class VetController {
     public List<Vet> getAll() throws Exception {
         List<Vet> vets = vetService.list();
         return vets;
+    }
+
+    @ApiOperation(value = "api to get all locations")
+    @GetMapping("/locations")
+    /**
+     * This method gets all locations.
+     * @return int list.
+     */
+    public List<LocationData> getAllLocation(){
+       return vetService.getAllLocation();
     }
 
     @ApiOperation(value = "api to get public data")

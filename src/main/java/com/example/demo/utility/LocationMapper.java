@@ -1,7 +1,7 @@
 package com.example.demo.utility;
 
 public enum LocationMapper {
-    JurongWest(0, "Jurong West"), BoonLay(1, "BoonLay"), Others(3, "Others");
+    CentralSouth(3, "Central South"), Keppel(4, "Keppel"), SouthWest(5, "South West");
 
     private int number;
     private String value;
@@ -19,13 +19,13 @@ public enum LocationMapper {
         return value;
     }
     public static String getValue(int number){
-        if(number == JurongWest.number)
-            return JurongWest.value;
-        if(number == BoonLay.number)
-            return BoonLay.value;
-        if(number == Others.number)
-            return Others.value;
+        if(number == CentralSouth.number)
+            return CentralSouth.value;
+        if(number == Keppel.number)
+            return Keppel.value;
+        if(number == SouthWest.number)
+            return SouthWest.value;
 
-        return "Not found";
+        return "";
     }
 }

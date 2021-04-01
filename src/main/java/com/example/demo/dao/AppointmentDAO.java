@@ -51,4 +51,6 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             @Param("EndTime")  Date EndTime,
             @Param("AppointmentID")  Integer AppointmentID);
 
+    @Query(value = "select * from Appointment a order by AppointmentNumber desc limit 1", nativeQuery = true)
+    Appointment findLastAppointment();
 }

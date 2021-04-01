@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
 public class AccountService {
 
@@ -63,13 +64,14 @@ public class AccountService {
 
         return password;
     }
+
     /**
      * Method to generate a random string with
      * lower case and upper case letter, number
      * and special characters
      *
      * @param input different cases of characters
-     * @param size number of characters (at least 2 char)
+     * @param size  number of characters (at least 2 char)
      * @return result string for different cases
      */
     private static String generateRandomString(String input, int size) {
@@ -108,30 +110,30 @@ public class AccountService {
      * @param loginType (admin or student)
      * @return user object is credential is entered correctly
      */
-    public User login(String username, String password,String loginType){
+    public User login(String username, String password, String loginType) {
         User user = new User();
 
 
-        if(loginType.equals(RoleType.Admin.name())){
-            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Admin.toInt());
+        if (loginType.equals(RoleType.Admin.name())) {
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username, RoleType.Admin.toInt());
 
-        }else if(loginType.equals(RoleType.Customer.name())){
-            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username,RoleType.Customer.toInt());
+        } else if (loginType.equals(RoleType.Customer.name())) {
+            user = userDAO.findByUserNameAndUserTypeAndIsDeletedFalse(username, RoleType.Customer.toInt());
 
         }
-        if (user == null){
+        if (user == null) {
             return null;
         }
         String encryptedPwd = EncryptionUtil.encryptPassword(password);
 
-        if (user.getPassword().equals(encryptedPwd)){
+        if (user.getPassword().equals(encryptedPwd)) {
             return user;
         }
 
         return null;
     }
 
-    public boolean resetpwd(String oldpwd, String newpwd){
+    public boolean resetpwd(String oldpwd, String newpwd) {
         return false;
     }
 
@@ -163,8 +165,12 @@ public class AccountService {
      * @param icNumber
      * @return specific user
      */
-    public User getByUserNameOrEmailAddressOrContactNumberOrIcNumber(String userName, String emailAddress, String contactNUmber, String icNumber){
-        return  userDAO.findByUserNameOrEmailAddressOrContactNumberOrIcNumberAndIsDeletedFalse(userName, emailAddress, contactNUmber, icNumber);
+    public User getByUserNameOrEmailAddressOrContactNumberOrIcNumber(String userName, String emailAddress, String contactNUmber, String icNumber) {
+        var user = userDAO.findByUserNameOrEmailAddressOrIcNumber(userName, emailAddress, icNumber);
+        if (user == null || user.getIsDeleted()) {
+            return null;
+        }
+        return user;
     }
 
     /**
@@ -174,7 +180,7 @@ public class AccountService {
      * @param user
      * @return true if added to databse or false if not added to database
      */
-    public boolean add(User user){
+    public boolean add(User user) {
         Date createdDate = new Date();
 
         User isUserExisted = getByUserNameOrEmailAddressOrContactNumberOrIcNumber(user.getUserName(), user.getEmailAddress(), user.getContactNumber(), user.getIcNumber());
@@ -195,10 +201,7 @@ public class AccountService {
             //userModel.setCreatedDate(createdDate);
             userDAO.save(userModel);
             return true;
-        }
-
-
-        else return false;
+        } else return false;
     }
 
     /**
