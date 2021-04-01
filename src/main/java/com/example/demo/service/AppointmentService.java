@@ -266,8 +266,7 @@ public class AppointmentService {
         List<VetSlot> vetSlotList = new ArrayList<>();
 
         List<Vet> vetlist = vetService.getByLocationID(locationid);
-        for (Vet vet:
-             vetlist) {
+        for (Vet vet : vetlist) {
             List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(),treatmentid,date);
 
             if(veterSlots.size() > 0){
