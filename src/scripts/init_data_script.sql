@@ -19,6 +19,8 @@ insert into vet_treatment values(1, 1,1,2,0,Now(),null,null,0);
 insert into vet_treatment values(2, 1,2,2,0,Now(),null,null,0);
 insert into vet_treatment values(3, 2,1,2,0,Now(),null,null,0);
 insert into vet_treatment values(4, 2,3,2,0,Now(),null,null,0);
+insert into vet_treatment values(5, 65,1,2,0,Now(),null,null,0);
+insert into vet_treatment values(6, 71,2,2,0,Now(),null,null,0);
 
 insert into veter_working_schedule values('1', '1','1','1970-01-01 08:00:00','1970-01-01 18:00:00'
                                          ,'1','2021-01-01 00:00:00',null,null,'0');

@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.VetDAO;
 import com.example.demo.pojo.Vet;
+import com.example.demo.utility.LocationMapper;
 import com.example.demo.viewmodel.VetLocationRegister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -98,8 +99,21 @@ public class VetService {
     }
 
     public List<Vet> getByLocationID(Integer locationid) {
-
         return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);
+    }
+
+    public List<LocationData> getAllLocation() {
+        var locationIDs=vetDAO.findGroupByLocationID();
+        var locations = new ArrayList<LocationData>();
+
+        for(int locationID : locationIDs){
+           var location = new LocationData();
+           location.LocationID=locationID;
+           location.Name =  LocationMapper.getValue(locationID);
+           locations.add(location);
+        }
+
+        return locations;
     }
 
     public List<Vet> updateVetLocation(List<VetLocationRegister> info) {
