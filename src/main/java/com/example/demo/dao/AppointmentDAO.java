@@ -27,7 +27,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
 
     @Query(value = "select * from Appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID " +
-            "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate " +
+            "and a.isDeleted = false and a.status != 2 and (a.appointmentDate = :AppointDate or :AppointDate is null)" +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
             "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime))", nativeQuery = true)
     List<Appointment> findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(

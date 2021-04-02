@@ -140,7 +140,7 @@ public class AppointmentService {
      * @return appointments
      */
     public List<Appointment> getByVetIDAndVeterIDAndPeriod(Integer vetid, Integer veterid, Date AppointDate, Date StartTime, Date EndTime) {
-        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid, veterid, AppointDate, StartTime, EndTime);
+        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid, veterid, AppointDate,StartTime, EndTime);
 
     }
 
@@ -262,14 +262,14 @@ public class AppointmentService {
         return true;
     }
 
-    public List<VetSlot> getVetByLocationAndDateAndTreatment(Integer locationid, Integer treatmentid, Date date)  {
+    public List<VetSlot> getVetByLocationAndDateAndTreatment(Integer locationid, Integer treatmentid, Date date) {
         List<VetSlot> vetSlotList = new ArrayList<>();
 
         List<Vet> vetlist = vetService.getByLocationID(locationid);
         for (Vet vet : vetlist) {
-            List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(),treatmentid,date);
+            List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(), treatmentid, date);
 
-            if(veterSlots.size() > 0){
+            if (veterSlots.size() > 0) {
 
                 VetSlot vetSlot = new VetSlot();
                 vetSlot.setVet(vet);
@@ -280,38 +280,40 @@ public class AppointmentService {
         }
         return vetSlotList;
     }
+
     /**
      * Method to get available slot by vetid, treatmentid and date
+     *
      * @param vetid
      * @param treatmentid
      * @param date
      * @return available veter slot
      */
-    public List<VeterSlot> getAvailableSlotByVetIDAndTreatmentID(Integer vetid, Integer treatmentid, Date date)  {
+    public List<VeterSlot> getAvailableSlotByVetIDAndTreatmentID(Integer vetid, Integer treatmentid, Date date) {
 
         Integer dateofweek = date.getDay();
 
-      //  Integer dateofweek = date.getDay();
+        //  Integer dateofweek = date.getDay();
         Vet vetModel = vetService.getByVetID(vetid);
         Set<Veter> veterList = vetModel.getVeterList();
         Set<VetTreatment> vetTreatment = vetModel.getVetTreatmentList();
 
         float TreatmentDuration = 0.5f;
-        for(VetTreatment element: vetTreatment){
-            if(element.getTreatmentID() == treatmentid){
+        for (VetTreatment element : vetTreatment) {
+            if (element.getTreatmentID() == treatmentid) {
                 TreatmentDuration = element.getPerSeccionDuration();
                 break;
             }
         }
 
         List<VeterSlot> veterSlots = new ArrayList<VeterSlot>();
-        for(Veter veter : veterList){
+        for (Veter veter : veterList) {
 
-            if(veter.getLeaveStartDate() != null && veter.getLeaveEndDate()  != null){
-                if(date.compareTo(veter.getLeaveStartDate()) == 0
+            if (veter.getLeaveStartDate() != null && veter.getLeaveEndDate() != null) {
+                if (date.compareTo(veter.getLeaveStartDate()) == 0
                         || date.compareTo(veter.getLeaveEndDate()) == 0
                         || (date.compareTo(veter.getLeaveStartDate()) > 0
-                        && date.compareTo(veter.getLeaveEndDate()) <= 0)){
+                        && date.compareTo(veter.getLeaveEndDate()) <= 0)) {
                     continue;
                 }
             }
@@ -322,13 +324,13 @@ public class AppointmentService {
 
             Set<Schedule> scheduleList = veter.getScheduleList();
             Schedule scheduleModel = null;
-            for(Schedule schedule: scheduleList){
-                if(schedule.getDayOfWeek() == dateofweek){
+            for (Schedule schedule : scheduleList) {
+                if (schedule.getDayOfWeek() == dateofweek) {
                     scheduleModel = schedule;
                     break;
                 }
             }
-            if(scheduleModel != null){
+            if (scheduleModel != null) {
 
                 long timediff = scheduleModel.getEndTime().getTime() - scheduleModel.getStartTime().getTime();
                 long difference_In_Hours
@@ -340,10 +342,10 @@ public class AppointmentService {
 
                 Date StartTime = scheduleModel.getStartTime();
                 List<AvailableSlot> slots = new ArrayList<AvailableSlot>();
-                for(int i=0; i< (int)countSection; i++){
+                for (int i = 0; i < (int) countSection; i++) {
 
-                    long t= StartTime.getTime();
-                    Date afterAdding= new Date((long) (t + (TreatmentDuration * 60 * 60000)));
+                    long t = StartTime.getTime();
+                    Date afterAdding = new Date((long) (t + (TreatmentDuration * 60 * 60000)));
 
                     AvailableSlot slot = new AvailableSlot();
                     slot.setStartTime(StartTime);
@@ -359,11 +361,11 @@ public class AppointmentService {
             veterSlots.add(veterSlot);
         }
 
-        for(VeterSlot veterSlot : veterSlots){
-            if(veterSlot.getAvailableSlots() != null){
-                for(AvailableSlot ava: veterSlot.getAvailableSlots()){
-                    List<Appointment> list = getByVetIDAndVeterIDAndPeriod(vetid, veterSlot.getVeter().getVeterID(),date, ava.getStartTime(),ava.getEndTime());
-                    if(list.size()>0){
+        for (VeterSlot veterSlot : veterSlots) {
+            if (veterSlot.getAvailableSlots() != null) {
+                for (AvailableSlot ava : veterSlot.getAvailableSlots()) {
+                    List<Appointment> list = getByVetIDAndVeterIDAndPeriod(vetid, veterSlot.getVeter().getVeterID(), date, ava.getStartTime(), ava.getEndTime());
+                    if (list.size() > 0) {
                         ava.setAvailable(false);
                     }
                 }
@@ -382,13 +384,12 @@ public class AppointmentService {
      * @param appointment
      * @return true if added successfully, false if failed
      */
-    public boolean addAppointment(Appointment appointment){
+    public Appointment addAppointment(Appointment appointment) {
 
-        List<Appointment> list = getByVetIDAndVeterIDAndPeriod(appointment.getVetID(),appointment.getVeterID(),appointment.getAppointmentDate(), appointment.getAppointmentStartTime(),appointment.getAppointmentEndTime());
-        if(list.size()>0){
-            return false;
-        }
-        else {
+        List<Appointment> list = getByVetIDAndVeterIDAndPeriod(appointment.getVetID(), appointment.getVeterID(), null, appointment.getAppointmentStartTime(), appointment.getAppointmentEndTime());
+        if (list.size() > 0) {
+            return null;
+        } else {
 
             Appointment appointmentModel = new Appointment();
             appointmentModel.setAppointmentNumber(findAppointmentNumber());
@@ -406,20 +407,17 @@ public class AppointmentService {
             appointmentModel.setCreatedDate(appointment.getCreatedDate());
             appointmentModel.setTreatmentID(appointment.getTreatmentID());
 
-            appointmentDAO.save(appointmentModel);
-
-            return true;
-
+            return appointmentDAO.save(appointmentModel);
         }
-
     }
+
     public String findAppointmentNumber() {
         Appointment lastapp = appointmentDAO.findLastAppointment();
         String newNumber = "APPOINT00000001";
-        if(lastapp != null){
-            Integer number = Integer.parseInt(lastapp.getAppointmentNumber().replace("APPOINT",""));
-            number = number +1;
-            newNumber = "APPOINT"  + String.format("%08d", number);
+        if (lastapp != null) {
+            Integer number = Integer.parseInt(lastapp.getAppointmentNumber().replace("APPOINT", ""));
+            number = number + 1;
+            newNumber = "APPOINT" + String.format("%08d", number);
         }
         return newNumber;
     }

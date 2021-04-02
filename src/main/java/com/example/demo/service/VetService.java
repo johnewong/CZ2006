@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class VetService {
@@ -75,8 +77,11 @@ public class VetService {
 
     public List<Vet> dataProcess(String json) throws JsonProcessingException, ParseException {
         ObjectMapper objectMapper = new ObjectMapper();
-        var startTime = new SimpleDateFormat("hh:mm:ss").parse("09:00:00");
-        var endTime = new SimpleDateFormat("hh:mm:ss").parse("18:30:00");
+
+        DateFormat format = new SimpleDateFormat("hh:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        Date startTime = format.parse("09:00:00");
+        Date endTime = format.parse("18:30:00");
 
         PublicData data = objectMapper.readValue(json, PublicData.class);
         var records = data.result.records;
