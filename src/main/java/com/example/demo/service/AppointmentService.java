@@ -267,15 +267,23 @@ public class AppointmentService {
 
         List<Vet> vetlist = vetService.getByLocationID(locationid);
         for (Vet vet : vetlist) {
-            List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(), treatmentid, date);
 
-            if (veterSlots.size() > 0) {
+            Set<VetTreatment> vt = vet.getVetTreatmentList();
+            for(VetTreatment vtitem: vt){
+                if(vtitem.getTreatmentID() == treatmentid){
+                    List<VeterSlot> veterSlots = getAvailableSlotByVetIDAndTreatmentID(vet.getVetId(), treatmentid, date);
 
-                VetSlot vetSlot = new VetSlot();
-                vetSlot.setVet(vet);
-                vetSlot.setVeterSlot(veterSlots);
-                vetSlotList.add(vetSlot);
+                    if (veterSlots.size() > 0) {
+
+                        VetSlot vetSlot = new VetSlot();
+                        vetSlot.setVet(vet);
+                        vetSlot.setVeterSlot(veterSlots);
+                        vetSlotList.add(vetSlot);
+                    }
+                    break;
+                }
             }
+
 
         }
         return vetSlotList;
@@ -298,7 +306,7 @@ public class AppointmentService {
         Set<Veter> veterList = vetModel.getVeterList();
         Set<VetTreatment> vetTreatment = vetModel.getVetTreatmentList();
 
-        float TreatmentDuration = 0.5f;
+        float TreatmentDuration = 1;
         for (VetTreatment element : vetTreatment) {
             if (element.getTreatmentID() == treatmentid) {
                 TreatmentDuration = element.getPerSeccionDuration();
@@ -362,7 +370,7 @@ public class AppointmentService {
                 for (int i = 0; i < (int) countSection; i++) {
 
                     long t = StartTime.getTime();
-                    long t1 = (int) TreatmentDuration * 60 * 60000;
+                    long t1 = (long) TreatmentDuration * 60 * 60000;
                     long t2 = (long) (t + t1);
                     Date afterAdding = new Date(t2);
 
