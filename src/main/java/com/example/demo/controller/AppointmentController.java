@@ -98,11 +98,10 @@ public class AppointmentController {
      */
     public Object addAppointmnet(@RequestBody Appointment appointment) throws Exception {
 
-        boolean status = appointmentService.addAppointment(appointment);
+        Appointment savedAppointment = appointmentService.addAppointment(appointment);
 
-        if(status){
-
-            return new ResponseEntity("Appointment added successfully", HttpStatus.OK);
+        if(savedAppointment!=null){
+            return new ResponseEntity(savedAppointment,HttpStatus.OK);
         }
 
         return new ResponseEntity("Appointment slot is not available", HttpStatus.BAD_REQUEST);

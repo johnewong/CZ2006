@@ -1,28 +1,21 @@
 package com.example.demo.viewmodel;
 
-import com.example.demo.pojo.Appointment;
-import com.example.demo.pojo.Veter;
-import com.example.demo.pojo.Treatment;
-import com.example.demo.pojo.User;
+import com.example.demo.pojo.*;
 
 public class AppointmentInfo {
 
-     User customer;
-     Appointment appointment;
-     Veter veter;
-     Treatment treatment;
-
-     String startTimeFormat;
-     String endTimeFormat;
-     String appointmentDateFormat;
-
+    User customer;
+    Appointment appointment;
+    Vet vet;
+    Veter veter;
+    Treatment treatment;
+    String startTimeFormat;
+    String endTimeFormat;
+    String appointmentDateFormat;
     String appointmentStatusFormat;
-
     String appointmentStartTimeFormat;
-
-
-
     String appointmentEndTimeFormat;
+
     public String getAppointmentStartTimeFormat() {
         return appointmentStartTimeFormat;
     }
@@ -47,7 +40,13 @@ public class AppointmentInfo {
         this.appointmentStatusFormat = appointmentStatusFormat;
     }
 
+    public Vet getVet() {
+        return vet;
+    }
 
+    public void setVet(Vet vet) {
+        this.vet = vet;
+    }
 
     public Treatment getTreatment() {
         return treatment;

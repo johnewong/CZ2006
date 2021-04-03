@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.dao.VetDAO;
 import com.example.demo.pojo.Vet;
+import com.example.demo.utility.LocationMapper;
 import com.example.demo.viewmodel.VetLocationRegister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 public class VetService {
@@ -74,8 +77,11 @@ public class VetService {
 
     public List<Vet> dataProcess(String json) throws JsonProcessingException, ParseException {
         ObjectMapper objectMapper = new ObjectMapper();
-        var startTime = new SimpleDateFormat("hh:mm:ss").parse("09:00:00");
-        var endTime = new SimpleDateFormat("hh:mm:ss").parse("18:30:00");
+
+        DateFormat format = new SimpleDateFormat("hh:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        Date startTime = format.parse("09:00:00");
+        Date endTime = format.parse("18:30:00");
 
         PublicData data = objectMapper.readValue(json, PublicData.class);
         var records = data.result.records;
@@ -98,8 +104,21 @@ public class VetService {
     }
 
     public List<Vet> getByLocationID(Integer locationid) {
-
         return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);
+    }
+
+    public List<LocationData> getAllLocation() {
+        var locationIDs=vetDAO.findGroupByLocationID();
+        var locations = new ArrayList<LocationData>();
+
+        for(int locationID : locationIDs){
+           var location = new LocationData();
+           location.LocationID=locationID;
+           location.Name =  LocationMapper.getValue(locationID);
+           locations.add(location);
+        }
+
+        return locations;
     }
 
     public List<Vet> updateVetLocation(List<VetLocationRegister> info) {
