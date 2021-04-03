@@ -17,7 +17,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
     List<Appointment> findByVetIDAndIsDeletedFalse(Integer vetID,Sort sort);
     List<Appointment> findByVetIDAndAppointmentDateAndIsDeletedFalse(Integer vetID, Date appointmentDate, Sort sort);
 
-    @Query(value = "select * from Appointment a where " +
+    @Query(value = "select * from appointment a where " +
             "a.customerID = :custID " +
             "and a.isDeleted = false and a.status != 2 and a.status !=3 and a.appointmentDate > :Now " +
             "order by a.appointmentDate desc"
@@ -25,7 +25,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
     List<Appointment> findByCustomerIDAndMoreThanNowAndIsDeletedFalse(@Param("custID") Integer custid,
                                                                       @Param("Now") String Now);
 
-    @Query(value = "select * from Appointment a where a.vetID = :VetID " +
+    @Query(value = "select * from appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID " +
             "and a.isDeleted = false and a.status != 2 and (a.appointmentDate = :AppointDate or :AppointDate is null)" +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
@@ -38,7 +38,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             @Param("EndTime")  Date EndTime);
 
 
-    @Query(value = "select * from Appointment a where a.vetID = :VetID " +
+    @Query(value = "select * from appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID and a.appointmentID != :AppointmentID " +
             "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate " +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
@@ -51,6 +51,6 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             @Param("EndTime")  Date EndTime,
             @Param("AppointmentID")  Integer AppointmentID);
 
-    @Query(value = "select * from Appointment a order by AppointmentNumber desc limit 1", nativeQuery = true)
+    @Query(value = "select * from appointment a order by AppointmentNumber desc limit 1", nativeQuery = true)
     Appointment findLastAppointment();
 }
