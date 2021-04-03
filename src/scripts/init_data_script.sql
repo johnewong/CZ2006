@@ -70,10 +70,19 @@ insert into vet values('1', 'testVetName01','Test Vet Description','50 Nanyang A
 insert into vet values('2', 'testVetName02','Test Vet Description','05 Nanyang Ave, 639798','1970-01-01 08:00:00'
                       ,'1970-01-01 18:00:00','750123',1,1,'8210000','8210000','1','2021-01-01 00:00:00',null,null,'0');
 
-insert into veter values('1', 'Doctor Wang','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('3', 'Doctor Ma','2','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+delimiter $$
+drop procedure if exists wk;
+create procedure wk();
+begin
+declare i, j int;
 
+set i =0;
+set j=0;
+while i <11 do
+insert into veter values(i, 'Doctor Wang','j','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+set i = i+1;
+end while;
+end $$
 insert into appointment values('1', 'APPOINT00000001','2021-03-03','1970-01-01 14:00:00','1970-01-01 16:00:00'
                               ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
 insert into appointment values('2', 'APPOINT00000002','2021-03-04','1970-01-01 14:00:00','1970-01-01 16:00:00'

@@ -65,7 +65,7 @@ CREATE TABLE `veter` (
                          `VeterName` varchar(255) NOT NULL,
                          `VetID` bigint(20) NOT NULL,
                          `VeterDescription` varchar(3000) DEFAULT NULL,
-                         `Gender` tinyint(1) NOT NULL,
+                         `Gender` varchar(50) date DEFAULT NULL,
                          `IsOnLeave` tinyint(4) DEFAULT NULL,
                          `LeaveStartDate` date DEFAULT NULL,
                          `LeaveEndDate` date DEFAULT NULL,
