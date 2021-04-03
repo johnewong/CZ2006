@@ -99,6 +99,7 @@ public class VetService {
             newVet.setTel_office_2(record.tel_office_2);
             newVets.add(newVet);
         }
+        vetDAO.truncateTable();
         vetDAO.saveAll(newVets);
 
         return newVets;
@@ -130,11 +131,11 @@ public class VetService {
                 veterModel.setIsDeleted(false);
 
                 vetterList.add(veterModel);
-                //veterService.addVeter(veterModel, vet);
                 j++;
             }
             i++;
         }
+        veterDAO.truncateTable();
         veterDAO.saveAll(vetterList);
     }
 
