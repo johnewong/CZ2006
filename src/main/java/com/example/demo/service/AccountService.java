@@ -225,5 +225,6 @@ public class AccountService {
         return userDAO.findByUserIDAndIsDeletedFalse(userid);
     }
 
+    public User getByEmailAndType(String email, Integer type) { return userDAO.findByEmailAddressAndUserTypeAndIsDeletedFalse(email,type);}
 }
 

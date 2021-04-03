@@ -37,7 +37,6 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             @Param("StartTime")  Date StartTime,
             @Param("EndTime")  Date EndTime);
 
-
     @Query(value = "select * from appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID and a.appointmentID != :AppointmentID " +
             "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate " +
@@ -53,4 +52,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
 
     @Query(value = "select * from appointment a order by AppointmentNumber desc limit 1", nativeQuery = true)
     Appointment findLastAppointment();
+
+
+
 }
