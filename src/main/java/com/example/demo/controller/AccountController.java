@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.User;
 import com.example.demo.service.AccountService;
 import com.example.demo.service.EmailService;
+import com.example.demo.utility.EncryptionUtil;
 import com.example.demo.utility.RoleType;
 import com.example.demo.viewmodel.EmailInfo;
 import com.example.demo.viewmodel.LoginInfo;
@@ -109,11 +110,24 @@ public class AccountController {
 
     public Object forgetpassword(@RequestBody EmailInfo email) throws Exception {
         String emailaddress = email.getEmailaddress();
-        String newpassword = accountService.generateStrongPassword();
-        String subject = "AppName";
-        String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
-        emailService.send(emailaddress, subject, body);
-        return new ResponseEntity("Sent", HttpStatus.OK);
+        User user = accountService.getByEmailAndType(emailaddress, RoleType.Customer.toInt());
+        if(user == null){
+
+            return new ResponseEntity("user not exist", HttpStatus.BAD_REQUEST);
+        }else{
+
+            String newpassword = accountService.generateStrongPassword();
+            newpassword = EncryptionUtil.encryptPassword(newpassword);
+
+            user.setPassword(newpassword);
+            accountService.save(user);
+
+            String subject = "AppName";
+            String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
+            emailService.send(emailaddress, subject, body);
+            return new ResponseEntity("Sent", HttpStatus.OK);
+        }
+
     }
 
     
