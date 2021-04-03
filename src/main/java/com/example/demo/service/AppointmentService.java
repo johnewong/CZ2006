@@ -337,16 +337,31 @@ public class AppointmentService {
 
                 float countSection = difference_In_Hours / TreatmentDuration;
 
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(date);
 
-                Date StartTime = new Date((long) scheduleModel.getStartTime().getTime());
-                StartTime.setDate(date.getDate());
-                StartTime.setMonth(date.getMonth());
-                StartTime.setYear(date.getYear());
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+
+                Calendar cal2 = Calendar.getInstance();
+                cal2.setTime(scheduleModel.getStartTime());
+
+                cal2.set(year,month,day);
+                Date StartTime = cal2.getTime();
+           //     Date StartTime = scheduleModel.getStartTime();
+            //    StartTime.setYear(year);
+            //    StartTime.setMonth(month);
+            //    StartTime.setDate(day);
+
                 List<AvailableSlot> slots = new ArrayList<AvailableSlot>();
                 for (int i = 0; i < (int) countSection; i++) {
 
                     long t = StartTime.getTime();
-                    Date afterAdding = new Date((long) (t + (TreatmentDuration * 60 * 60000)));
+                    long t1 = (int) TreatmentDuration * 60 * 60000;
+                    long t2 = (long) (t + t1);
+                    Date afterAdding = new Date(t2);
 
                     AvailableSlot slot = new AvailableSlot();
                     slot.setStartTime(StartTime);
