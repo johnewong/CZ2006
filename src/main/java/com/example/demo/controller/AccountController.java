@@ -53,8 +53,8 @@ public class AccountController {
      * @return message "User profile updated successfully".
      */
     public Object editProfile(@RequestBody User user) throws Exception {
-        accountService.save(user);
-        return new ResponseEntity("User profile updated successfully", HttpStatus.OK);
+        var message = accountService.save(user);
+        return new ResponseEntity(message, HttpStatus.OK);
     }
 
     @ApiOperation(value = "api to get all users")

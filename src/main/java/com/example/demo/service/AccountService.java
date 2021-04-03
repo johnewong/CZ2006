@@ -145,8 +145,35 @@ public class AccountService {
      * @param user
      * @return object to userDAO
      */
-    public User save(User user) {
-        return userDAO.save(user);
+    public String save(User user) {
+        var userModel = getByUserID(user.getUserID());
+        var email = user.getEmailAddress();
+        var contactNumber = user.getContactNumber();
+        var password = user.getPassword();
+        userModel.setDisplayName(user.getDisplayName());
+        userModel.setBirthDate(user.getBirthDate());
+
+        if(!password.equals(userModel.getPassword())) {
+            userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
+        }
+
+        if(!email.equals(userModel.getEmailAddress())) {
+            if (userDAO.findByEmailAddressAndIsDeletedFalse(email) == null) {
+                userModel.setDisplayName(email);
+            } else {
+                return "User Email Address exited";
+            }
+        }
+
+        if (!contactNumber.equals(userModel.getContactNumber())){
+            if (userDAO.findByContactNumberAndIsDeletedFalse(contactNumber)==null){
+                userModel.setContactNumber(contactNumber);
+            }
+            else{return "User Contact Number exited";}
+        }
+
+        userDAO.save(userModel);
+        return "User profile updated successfully";
     }
 
     /**
