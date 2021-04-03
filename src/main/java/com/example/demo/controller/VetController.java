@@ -4,6 +4,7 @@ import com.example.demo.pojo.Vet;
 import com.example.demo.service.AppointmentService;
 import com.example.demo.service.LocationData;
 import com.example.demo.service.VetService;
+import com.example.demo.service.VeterService;
 import com.example.demo.viewmodel.LoginInfo;
 import com.example.demo.viewmodel.VetLocationRegister;
 import com.example.demo.viewmodel.VeterSlot;
@@ -20,6 +21,8 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "vet")
 public class VetController {
+    @Autowired
+    VeterService veterService;
     @Autowired
     VetService vetService;
     AppointmentService appointmentService;
@@ -45,6 +48,7 @@ public class VetController {
     public List<Vet> getAll() throws Exception {
         List<Vet> vets = vetService.list();
         return vets;
+
     }
 
     @ApiOperation(value = "api to get all locations")
@@ -63,11 +67,18 @@ public class VetController {
      * This method gets a public data from gov api
      */
     public List<Vet> getPublicData() throws Exception {
+
+
+
+
+
         final String uri = "https://data.gov.sg/api/action/datastore_search?resource_id=b2871270-4eef-44a3-be98-908e2a73b19f";
         RestTemplate restTemplate = new RestTemplate();
         String result = restTemplate.getForObject(uri, String.class);
+        vetService.dataProcess(result);
+        vetService.generateVetter();
 
-        return vetService.dataProcess(result);
+        return null;
     }
 
     @ApiOperation(value = "api to register vet location  \"Coordinate\": \"lat:40, lng:2\" ")
