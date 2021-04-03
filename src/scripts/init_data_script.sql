@@ -18,6 +18,7 @@ insert into treatment values('8', 'Oxygen therapy','1','2021-01-01',null,null,0)
 insert into treatment values('9', 'Blood pressure evaluation','1','2021-01-01',null,null,0);
 insert into treatment values('10', 'Behavioral modification treatments','1','2021-01-01',null,null,0);
 
+------------------------------------------------------------------------------
 insert into vet_treatment values( 1 , 1 , 1 , 1 ,0,Now(),null,null,0);
 insert into vet_treatment values( 2 , 1 , 2 , 1 ,0,Now(),null,null,0);
 insert into vet_treatment values( 3 , 1 , 3 , 2 ,0,Now(),null,null,0);
@@ -255,6 +256,7 @@ insert into vet_treatment values( 234 , 78 , 4 , 1 ,0,Now(),null,null,0);
 insert into vet_treatment values( 235 , 79 , 5 , 1 ,0,Now(),null,null,0);
 insert into vet_treatment values( 236 , 79 , 6 , 2 ,0,Now(),null,null,0);
 insert into vet_treatment values( 237 , 79 , 7 , 2 ,0,Now(),null,null,0);
+--------------------------------------------------------------------------------------------
 
 insert into veter_working_schedule values('1', '1','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
                                          ,'1','2021-01-01 00:00:00',null,null,'0');
