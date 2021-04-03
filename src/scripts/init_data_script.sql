@@ -7,12 +7,16 @@ insert into user values('2', 'admin01','admin 01','ef797c8118f02dfb649607dd5d3f8
 insert into user values('3', 'user02','user 02','76431fac8a187241af8f3f37156deb94732f52fb45eb07ec4f462051bd82f183','2021-01-01','12345@email.com','820000'
                        ,1,'G140022P','0','1',2,'2021-01-01',null,null,0);
 
-insert into treatment values('1', 'Extractions','1','2021-01-01',null,null
-                            ,0);
-insert into treatment values('2', 'Vaccine','1','2021-01-01',null,null
-                            ,0);
-insert into treatment values('3', 'Hairdressing','1','2021-01-01',null,null
-                            ,0);
+insert into treatment values('1', 'Extractions','1','2021-01-01',null,null,0);
+insert into treatment values('2', 'Vaccine','1','2021-01-01',null,null,0);
+insert into treatment values('3', 'Hairdressing','1','2021-01-01',null,null,0);
+insert into treatment values('4', 'Hormone medications','1','2021-01-01',null,null,0);
+insert into treatment values('5', 'Flea and tick infestation','1','2021-01-01',null,null,0);
+insert into treatment values('6', 'Ear infection','1','2021-01-01',null,null,0);
+insert into treatment values('7', 'Skin cancer','1','2021-01-01',null,null,0);
+insert into treatment values('8', 'Oxygen therapy','1','2021-01-01',null,null,0);
+insert into treatment values('9', 'Blood pressure evaluation','1','2021-01-01',null,null,0);
+insert into treatment values('10', 'Behavioral modification treatments','1','2021-01-01',null,null,0);
 
 insert into vet_treatment values(1, 1,1,2,0,Now(),null,null,0);
 insert into vet_treatment values(2, 1,2,2,0,Now(),null,null,0);
