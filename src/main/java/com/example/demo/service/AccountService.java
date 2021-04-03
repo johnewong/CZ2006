@@ -199,6 +199,7 @@ public class AccountService {
             userModel.setIcNumber(user.getIcNumber());
             userModel.setCreatedBy(0);
             //userModel.setCreatedDate(createdDate);
+            userModel.setVetID(user.getVetID());
             userDAO.save(userModel);
             return true;
         } else return false;
