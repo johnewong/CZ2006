@@ -86,14 +86,3 @@ insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2
 insert into veter values('3', 'Doctor Ma','2','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
 insert into veter values('4', 'Doctor Wang','65','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
 insert into veter values('5', 'Doctor Huang','71','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-
-insert into appointment values('1', 'APPOINT00000001','2021-03-03','1970-01-01 06:30:00','1970-01-01 08:30:00'
-                              ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
-insert into appointment values('2', 'APPOINT00000002','2021-03-04','1970-01-01 06:30:00','1970-01-01 08:30:00'
-                              ,'1'  ,'user02','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
-insert into appointment values('3', 'APPOINT00000003','2021-03-30','1970-01-01 06:30:00','1970-01-01 08:30:00'
-                              ,'1'  ,'user01','1','1','1','1','1','2021-03-03 00:00:00',null,null,0);
-insert into appointment values('4', 'APPOINT00000004','2021-04-06','1970-01-01 06:30:00','1970-01-01 08:30:00'
-                              ,'2'  ,'user02','1','3','2','3','1','2021-03-31 00:00:00',null,null,0);
-insert into appointment values('5', 'APPOINT00000005','2021-04-07','1970-01-01 06:30:00','1970-01-01 08:30:00'
-                              ,'2'  ,'user02','1','3','2','1','1','2021-03-31 00:00:00',null,null,0);

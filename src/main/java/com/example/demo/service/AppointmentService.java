@@ -12,10 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class AppointmentService {
@@ -340,7 +337,11 @@ public class AppointmentService {
 
                 float countSection = difference_In_Hours / TreatmentDuration;
 
-                Date StartTime = scheduleModel.getStartTime();
+
+                Date StartTime = new Date((long) scheduleModel.getStartTime().getTime());
+                StartTime.setDate(date.getDate());
+                StartTime.setMonth(date.getMonth());
+                StartTime.setYear(date.getYear());
                 List<AvailableSlot> slots = new ArrayList<AvailableSlot>();
                 for (int i = 0; i < (int) countSection; i++) {
 
@@ -364,7 +365,7 @@ public class AppointmentService {
         for (VeterSlot veterSlot : veterSlots) {
             if (veterSlot.getAvailableSlots() != null) {
                 for (AvailableSlot ava : veterSlot.getAvailableSlots()) {
-                    List<Appointment> list = getByVetIDAndVeterIDAndPeriod(vetid, veterSlot.getVeter().getVeterID(), date, ava.getStartTime(), ava.getEndTime());
+                    List<Appointment> list = getByVetIDAndVeterIDAndPeriod(vetid, veterSlot.getVeter().getVeterID(), null, ava.getStartTime(), ava.getEndTime());
                     if (list.size() > 0) {
                         ava.setAvailable(false);
                     }
