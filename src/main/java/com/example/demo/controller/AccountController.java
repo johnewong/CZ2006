@@ -117,13 +117,15 @@ public class AccountController {
         }else{
 
             String newpassword = accountService.generateStrongPassword();
+
+            String subject = "AppName";
+            String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
+
             newpassword = EncryptionUtil.encryptPassword(newpassword);
 
             user.setPassword(newpassword);
             accountService.save(user);
 
-            String subject = "AppName";
-            String body = "Dear customer, \n\nLogin with the new password: " + newpassword;
             emailService.send(emailaddress, subject, body);
             return new ResponseEntity("Sent", HttpStatus.OK);
         }
