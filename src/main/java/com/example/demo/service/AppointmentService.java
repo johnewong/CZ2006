@@ -68,29 +68,32 @@ public class AppointmentService {
         List<AppointmentInfo> AppointInfoList = new ArrayList<>();
         for (Appointment aitem : appointmentList) {
 
-            AppointmentInfo Info = new AppointmentInfo();
-            Info.setAppointment(aitem);
+            AppointmentInfo info = new AppointmentInfo();
+            info.setAppointment(aitem);
 
             SimpleDateFormat localDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Info.setAppointmentDateFormat(localDateFormat.format(aitem.getAppointmentDate()));
+            info.setAppointmentDateFormat(localDateFormat.format(aitem.getAppointmentDate()));
 
             SimpleDateFormat localTimeFormat = new SimpleDateFormat("HH:mm");
-            Info.setAppointmentStartTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()));
-            Info.setAppointmentEndTimeFormat(localTimeFormat.format(aitem.getAppointmentEndTime()));
+            info.setAppointmentStartTimeFormat(localTimeFormat.format(aitem.getAppointmentStartTime()));
+            info.setAppointmentEndTimeFormat(localTimeFormat.format(aitem.getAppointmentEndTime()));
 
-            Info.setAppointmentStatusFormat(StatusType.getValue(aitem.getStatus()));
+            info.setAppointmentStatusFormat(StatusType.getValue(aitem.getStatus()));
 
             User user = accountService.getByUserID(aitem.getCustomerID());
-            Info.setCustomer(user);
+            info.setCustomer(user);
+
+            Vet vet = vetService.getByVetID(aitem.getVetID());
+            info.setVet(vet);
 
             Veter veter = veterService.getByVeterID(aitem.getVeterID());
             veter.setScheduleList(null);
-            Info.setVeter(veter);
+            info.setVeter(veter);
 
             Treatment treatment = treatmentService.getByTreatmentID(aitem.getTreatmentID());
-            Info.setTreatment(treatment);
+            info.setTreatment(treatment);
 
-            AppointInfoList.add(Info);
+            AppointInfoList.add(info);
         }
 
         return AppointInfoList;
@@ -137,7 +140,7 @@ public class AppointmentService {
      * @return appointments
      */
     public List<Appointment> getByVetIDAndVeterIDAndPeriod(Integer vetid, Integer veterid, Date AppointDate, Date StartTime, Date EndTime) {
-        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid, veterid, AppointDate,StartTime, EndTime);
+        return appointmentDAO.findByVetIDAndVeterIDAndPeriodAndIsDeletedFalse(vetid, veterid, AppointDate, StartTime, EndTime);
 
     }
 
