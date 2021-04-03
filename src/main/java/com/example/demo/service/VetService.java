@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.dao.ScheduleDAO;
 import com.example.demo.dao.VetDAO;
 import com.example.demo.dao.VeterDAO;
+import com.example.demo.pojo.Schedule;
 import com.example.demo.pojo.Vet;
 import com.example.demo.pojo.Veter;
 import com.example.demo.utility.LocationMapper;
@@ -23,6 +25,10 @@ public class VetService {
     VetDAO vetDAO;
     @Autowired
     VeterDAO veterDAO;
+    @Autowired
+    ScheduleDAO scheduleDAO;
+    @Autowired
+    VeterService veterService;
 
     /**
      * Method to get all vets
@@ -129,7 +135,6 @@ public class VetService {
                 veterModel.setGender(gender.get(num3));
                 veterModel.setUpdatedBy(vet.getUpdatedBy());
                 veterModel.setIsDeleted(false);
-
                 vetterList.add(veterModel);
                 j++;
             }
@@ -138,6 +143,36 @@ public class VetService {
         veterDAO.truncateTable();
         veterDAO.saveAll(vetterList);
     }
+
+    public void generateSchedule() throws ParseException {
+        var scheduleList = new ArrayList<Schedule>();
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("hh:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Singapore"));
+        Date startTime = format.parse("09:00:00");
+        Date endTime = format.parse("18:30:00");
+
+        for (int j =1; j<79*3+1;j++){
+            Veter veter = veterService.getByVeterID(j);
+            for (int i=1;i<6;i++) {
+                Schedule item = new Schedule();
+                item.setVeter(veter);
+                item.setDayOfWeek(i);
+                item.setStartTime(startTime);
+                item.setEndTime(endTime);
+                item.setCreatedBy(1);
+                item.setCreatedDate(date);
+                item.setIsDeleted(false);
+                scheduleList.add(item);
+            }
+        }
+        scheduleDAO.truncateTable();
+        scheduleDAO.saveAll(scheduleList);
+    }
+
+
+
+
 
     public List<Vet> getByLocationID(Integer locationid) {
         return vetDAO.findByLocationIDAndIsDeletedFalse(locationid);

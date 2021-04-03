@@ -77,6 +77,7 @@ public class VetController {
         String result = restTemplate.getForObject(uri, String.class);
         vetService.dataProcess(result);
         vetService.generateVetter();
+        vetService.generateSchedule();
 
         return null;
     }
