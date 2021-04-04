@@ -420,6 +420,7 @@ public class AppointmentService {
         if (list.size() > 0) {
             return null;
         } else {
+            Date appointDate = appointment.getAppointmentDate();
 
             Appointment appointmentModel = new Appointment();
             appointmentModel.setAppointmentNumber(findAppointmentNumber());
