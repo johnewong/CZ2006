@@ -20,7 +20,7 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
     @Query(value = "select * from appointment a where " +
             "a.customerID = :custID " +
             "and a.isDeleted = false and a.status != 2 and a.status !=3 and a.appointmentDate > :Now " +
-            "order by a.appointmentDate desc"
+            "order by a.AppointmentStartTime asc"
             , nativeQuery = true)
     List<Appointment> findByCustomerIDAndMoreThanNowAndIsDeletedFalse(@Param("custID") Integer custid,
                                                                       @Param("Now") String Now);

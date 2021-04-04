@@ -374,16 +374,19 @@ public class AppointmentService {
                     long t2 = (long) (t + t1);
                     Date afterAdding = new Date(t2);
 
-                    AvailableSlot slot = new AvailableSlot();
-                    slot.setStartTime(StartTime);
-                    slot.setEndTime(afterAdding);
-                    slot.setAvailable(true);
-                    slots.add(slot);
+                    Date now = new Date();
+                    if(now.before(StartTime)){
+                        AvailableSlot slot = new AvailableSlot();
+                        slot.setStartTime(StartTime);
+                        slot.setEndTime(afterAdding);
+                        slot.setAvailable(true);
+                        slots.add(slot);
+                    }
+
                     StartTime = afterAdding;
                 }
 
                 veterSlot.setAvailableSlots(slots);
-
             }
             veterSlots.add(veterSlot);
         }

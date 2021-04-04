@@ -257,65 +257,72 @@ insert into vet_treatment values( 235 , 79 , 5 , 1 ,0,Now(),null,null,0);
 insert into vet_treatment values( 236 , 79 , 6 , 2 ,0,Now(),null,null,0);
 insert into vet_treatment values( 237 , 79 , 7 , 2 ,0,Now(),null,null,0);
 --------------------------------------------------------------------------------------------
+insert into veter_working_schedule
+values (null, 194, 6, '1970-01-01 08:00:00', '1970-01-01 18:00:00', 1, Now(), null, null, '0');
+insert into veter_working_schedule
+values (null, 194, 7, '1970-01-01 08:00:00', '1970-01-01 18:00:00', 1, Now(), null, null, '0');
 
-insert into veter_working_schedule values('1', '1','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
 
-insert into veter_working_schedule values('2', '1','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
 
-insert into veter_working_schedule values('3', '1','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('4', '1','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('5', '1','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('6', '2','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('7', '2','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('8', '2','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('9', '2','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('10', '2','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-insert into veter_working_schedule values('11', '3','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('12', '3','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('13', '3','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('14', '3','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('15', '3','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('16', '4','5','1970-01-01 01:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('17', '4','6','1970-01-01 01:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('18', '4','7','1970-01-01 01:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter_working_schedule values('19', '4','1','1970-01-01 01:30:00','1970-01-01 10:30:00'
-                                         ,'1','2021-01-01 00:00:00',null,null,'0');
-
-insert into veter values('1', 'Doctor Wang','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('3', 'Doctor Ma','2','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('4', 'Doctor Wang','65','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
-insert into veter values('5', 'Doctor Huang','71','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+--
+-- insert into veter_working_schedule values('1', '1','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('2', '1','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('3', '1','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('4', '1','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('5', '1','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('6', '2','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('7', '2','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('8', '2','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('9', '2','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('10', '2','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+-- insert into veter_working_schedule values('11', '3','1','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('12', '3','2','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('13', '3','3','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('14', '3','4','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('15', '3','5','1970-01-01 00:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('16', '4','5','1970-01-01 01:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('17', '4','6','1970-01-01 01:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('18', '4','7','1970-01-01 01:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter_working_schedule values('19', '4','1','1970-01-01 01:30:00','1970-01-01 10:30:00'
+--                                          ,'1','2021-01-01 00:00:00',null,null,'0');
+--
+-- insert into veter values('1', 'Doctor Wang','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+-- insert into veter values('2', 'Doctor Tan','1','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+-- insert into veter values('3', 'Doctor Ma','2','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+-- insert into veter values('4', 'Doctor Wang','65','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
+-- insert into veter values('5', 'Doctor Huang','71','desc', true,false,null,null,0,'2021-01-01 00:00:00',null,null,false);
