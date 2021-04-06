@@ -38,6 +38,17 @@ public interface AppointmentDAO extends JpaRepository<Appointment,Integer> {
             @Param("EndTime")  Date EndTime);
 
     @Query(value = "select * from appointment a where a.vetID = :VetID " +
+            "and a.isDeleted = false and a.status != 2 and (a.appointmentDate = :AppointDate or :AppointDate is null)" +
+            "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +
+            "or (a.appointmentStartTime <= :StartTime and a.appointmentEndTime > :StartTime and a.appointmentEndTime <= :EndTime))", nativeQuery = true)
+    List<Appointment> findByVetIDAndPeriodAndIsDeletedFalse(
+            @Param("VetID") Integer vetid,
+            @Param("AppointDate") Date AppointDate,
+            @Param("StartTime")  Date StartTime,
+            @Param("EndTime")  Date EndTime);
+
+
+    @Query(value = "select * from appointment a where a.vetID = :VetID " +
             "and a.veterID = :VeterID and a.appointmentID != :AppointmentID " +
             "and a.isDeleted = false and a.status != 2 and a.appointmentDate = :AppointDate or :AppointDate is null " +
             "and ((a.appointmentStartTime < :EndTime and a.appointmentEndTime >= :EndTime)" +

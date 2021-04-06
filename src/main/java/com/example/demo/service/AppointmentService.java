@@ -144,6 +144,10 @@ public class AppointmentService {
 
     }
 
+    public List<Appointment> getByVetIDAndPeriod(Integer vetid, Date AppointDate, Date StartTime, Date EndTime) {
+        return appointmentDAO.findByVetIDAndPeriodAndIsDeletedFalse(vetid, AppointDate, StartTime, EndTime);
+
+    }
     /**
      * Method to get appointments other than appointments
      * by vetid, veterid and appointment date and time
@@ -416,7 +420,8 @@ public class AppointmentService {
      */
     public Appointment addAppointment(Appointment appointment) {
 
-        List<Appointment> list = getByVetIDAndVeterIDAndPeriod(appointment.getVetID(), appointment.getVeterID(), null, appointment.getAppointmentStartTime(), appointment.getAppointmentEndTime());
+        List<Appointment> list = getByVetIDAndPeriod(appointment.getVetID(), null, appointment.getAppointmentStartTime(), appointment.getAppointmentEndTime());
+
         if (list.size() > 0) {
             return null;
         } else {
