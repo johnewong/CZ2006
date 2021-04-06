@@ -150,9 +150,10 @@ public class AccountService {
         var email = user.getEmailAddress();
         var contactNumber = user.getContactNumber();
         var password = user.getPassword();
+
         userModel.setDisplayName(user.getDisplayName());
         userModel.setBirthDate(user.getBirthDate());
-
+        userModel.setContactNumber(user.getContactNumber());
         if(!password.equals(userModel.getPassword())) {
             userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
         }
@@ -165,12 +166,12 @@ public class AccountService {
             }
         }
 
-        if (!contactNumber.equals(userModel.getContactNumber())){
-            if (userDAO.findByContactNumberAndIsDeletedFalse(contactNumber)==null){
-                userModel.setContactNumber(contactNumber);
-            }
-            else{return "User Contact Number exited";}
-        }
+//        if (!contactNumber.equals(userModel.getContactNumber())){
+//            if (userDAO.findByContactNumberAndIsDeletedFalse(contactNumber)==null){
+//                userModel.setContactNumber(contactNumber);
+//            }
+//            else{return "User Contact Number exited";}
+//        }
 
         userDAO.save(userModel);
         return "User profile updated successfully";
