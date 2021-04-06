@@ -47,6 +47,12 @@ public class VeterService {
 
         veterDAO.save(veterModel);
 
+        for(Schedule sitem : veter.getScheduleList()){
+            sitem.setVeter(veterModel);
+            scheduleDAO.save(sitem);
+        }
+
+
     }
 
     /**

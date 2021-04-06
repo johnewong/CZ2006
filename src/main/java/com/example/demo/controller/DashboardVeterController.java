@@ -12,8 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Api(tags = "Dashboard Veter management")
@@ -51,14 +49,14 @@ public class DashboardVeterController {
     }
 
     @ApiOperation(value = "api to add veter")
-    @PostMapping("/add")
+    @PostMapping("/add/{vetid}")
     /**
      * This method adds an veter;
      * @param veter veter information;
      * @param vetId vet ID;
      * @return message "Veter added successfully".
      */
-    public Object addVeter(@RequestBody Veter veter, @RequestParam Integer vetId ) throws Exception {
+    public Object addVeter(@RequestBody Veter veter, @PathVariable("vetid") Integer vetId ) throws Exception {
         Vet vet = vetService.getByVetID(vetId);
         veterService.addVeter(veter, vet);
         return new ResponseEntity("Veter added successfully", HttpStatus.OK);
