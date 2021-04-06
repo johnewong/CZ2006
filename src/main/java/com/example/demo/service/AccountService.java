@@ -17,6 +17,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AccountService {
+    @Autowired
+    UserDAO userDAO;
 
     private static final String CHAR_LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPERCASE = CHAR_LOWERCASE.toUpperCase();
@@ -98,11 +100,6 @@ public class AccountService {
     }
 
 
-
-
-    @Autowired
-    UserDAO userDAO;
-
     /**
      * Method to determine user group(admin or student)
      * and verify if correct user credential is entered
@@ -154,11 +151,11 @@ public class AccountService {
         userModel.setDisplayName(user.getDisplayName());
         userModel.setBirthDate(user.getBirthDate());
         userModel.setContactNumber(user.getContactNumber());
-        if(!password.equals(userModel.getPassword())) {
+        if (!password.equals(userModel.getPassword())) {
             userModel.setPassword(EncryptionUtil.encryptPassword(user.getPassword()));
         }
 
-        if(!email.equals(userModel.getEmailAddress())) {
+        if (!email.equals(userModel.getEmailAddress())) {
             if (userDAO.findByEmailAddressAndIsDeletedFalse(email) == null) {
                 userModel.setDisplayName(email);
             } else {
@@ -255,6 +252,8 @@ public class AccountService {
         return userDAO.findByUserIDAndIsDeletedFalse(userid);
     }
 
-    public User getByEmailAndType(String email, Integer type) { return userDAO.findByEmailAddressAndUserTypeAndIsDeletedFalse(email,type);}
+    public User getByEmailAndType(String email, Integer type) {
+        return userDAO.findByEmailAddressAndUserTypeAndIsDeletedFalse(email, type);
+    }
 }
 

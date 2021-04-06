@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.pojo.User;
 import com.example.demo.service.AccountService;
 import com.example.demo.utility.RoleType;
-import com.example.demo.viewmodel.LoginInfo;
+import com.example.demo.model.LoginInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

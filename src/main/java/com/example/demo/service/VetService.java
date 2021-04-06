@@ -7,7 +7,7 @@ import com.example.demo.pojo.Schedule;
 import com.example.demo.pojo.Vet;
 import com.example.demo.pojo.Veter;
 import com.example.demo.utility.LocationMapper;
-import com.example.demo.viewmodel.VetLocationRegister;
+import com.example.demo.model.VetLocationRegister;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,9 +2,9 @@ package com.example.demo.controller;
 
 import com.example.demo.pojo.Appointment;
 import com.example.demo.service.AppointmentService;
-import com.example.demo.viewmodel.AppointmentInfo;
-import com.example.demo.viewmodel.VetSlot;
-import com.example.demo.viewmodel.VeterSlot;
+import com.example.demo.model.AppointmentInfo;
+import com.example.demo.model.VetSlot;
+import com.example.demo.model.VeterSlot;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

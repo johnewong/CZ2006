@@ -1,4 +1,4 @@
-package com.example.demo.viewmodel;
+package com.example.demo.model;
 
 import com.example.demo.pojo.*;
 

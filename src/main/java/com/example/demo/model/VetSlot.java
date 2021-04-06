@@ -1,4 +1,4 @@
-package com.example.demo.viewmodel;
+package com.example.demo.model;
 
 import com.example.demo.pojo.Vet;
 
@@ -15,11 +15,11 @@ public class VetSlot {
         Vet = vet;
     }
 
-    public List<com.example.demo.viewmodel.VeterSlot> getVeterSlot() {
+    public List<com.example.demo.model.VeterSlot> getVeterSlot() {
         return VeterSlot;
     }
 
-    public void setVeterSlot(List<com.example.demo.viewmodel.VeterSlot> veterSlot) {
+    public void setVeterSlot(List<com.example.demo.model.VeterSlot> veterSlot) {
         VeterSlot = veterSlot;
     }
 }
